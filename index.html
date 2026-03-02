@@ -391,7 +391,7 @@ section{padding:7rem 0;position:relative}
 .faq-a{
   max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;
 }
-.faq-item.open .faq-a{max-height:300px;padding-bottom:1.5rem}
+.faq-item.open .faq-a{max-height:500px;padding-bottom:1.5rem}
 .faq-a p{color:var(--text-secondary);font-size:.95rem;line-height:1.7}
 
 /* --- FINAL CTA --- */
@@ -435,6 +435,155 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .compare-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr;max-width:480px}
 }
+/* --- VALUE MATH --- */
+.value-math{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.math-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
+}
+.math-block{
+  background:var(--bg-card);border:1px solid var(--border);
+  padding:2.5rem 2rem;text-align:center;
+  transition:all .35s ease;
+}
+.math-block:hover{
+  border-color:var(--accent);transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.math-number{
+  font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);
+  color:var(--accent);line-height:1;margin-bottom:.75rem;
+}
+.math-label{
+  font-size:.9rem;color:var(--text-secondary);line-height:1.55;
+}
+
+/* --- EMAIL CAPTURE --- */
+.email-capture{
+  border-top:1px solid var(--border);
+  background:var(--bg);
+  text-align:center;
+}
+.email-capture-inner{max-width:600px;margin:0 auto}
+.email-capture h2{
+  font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:400;line-height:1.15;margin-bottom:1rem;letter-spacing:-.01em;
+}
+.email-capture h2 em{font-style:italic;color:var(--accent)}
+.email-capture .capture-sub{
+  font-size:1rem;color:var(--text-secondary);line-height:1.7;
+  margin-bottom:2rem;
+}
+.email-form{
+  display:flex;gap:.75rem;max-width:500px;margin:0 auto;
+}
+.email-form input[type="email"]{
+  flex:1;padding:1rem 1.25rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text);font-family:var(--font-body);font-size:.95rem;
+  outline:none;transition:border-color .25s ease;
+}
+.email-form input[type="email"]::placeholder{color:var(--text-muted)}
+.email-form input[type="email"]:focus{border-color:var(--accent)}
+.email-form button{
+  padding:1rem 1.75rem;
+  background:var(--accent);color:var(--bg);
+  font-family:var(--font-body);font-weight:600;font-size:.9rem;
+  border:none;cursor:pointer;white-space:nowrap;
+  transition:all .3s ease;
+}
+.email-form button:hover{box-shadow:0 8px 30px var(--accent-glow);transform:translateY(-2px)}
+
+/* --- GUARANTEE --- */
+.guarantee{
+  max-width:700px;margin:3rem auto 0;
+  text-align:center;padding:2.5rem 2rem;
+  border:1px solid var(--border);
+  background:var(--bg-card);
+}
+.guarantee-icon{
+  font-size:2rem;margin-bottom:1rem;line-height:1;
+  color:var(--green);
+}
+.guarantee h3{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:400;
+  margin-bottom:1rem;
+}
+.guarantee p{
+  font-size:.95rem;color:var(--text-secondary);line-height:1.7;
+  max-width:560px;margin:0 auto;
+}
+
+/* --- BUILT BY --- */
+.built-by{
+  border-top:1px solid var(--border);
+  background:var(--bg-elevated);
+}
+.built-by-inner{
+  max-width:720px;margin:0 auto;
+}
+.built-by blockquote{
+  border-left:3px solid var(--accent);
+  padding-left:1.75rem;
+  margin-bottom:2rem;
+}
+.built-by blockquote p{
+  font-family:var(--font-display);font-size:1.5rem;
+  font-style:italic;font-weight:400;line-height:1.5;
+  color:var(--text);margin-bottom:1rem;
+}
+.built-by .built-by-details p{
+  font-size:1rem;color:var(--text-secondary);line-height:1.8;
+  margin-bottom:.75rem;
+}
+.built-by .built-by-details p:last-child{margin-bottom:0}
+.built-by .built-by-sig{
+  margin-top:2rem;
+  font-family:var(--font-mono);font-size:.8rem;
+  color:var(--text-muted);letter-spacing:.05em;
+}
+
+/* --- VSL PLACEHOLDER --- */
+.vsl-container{
+  max-width:720px;margin:2.5rem auto 0;
+  position:relative;z-index:2;
+}
+.vsl-wrapper{
+  position:relative;width:100%;padding-bottom:56.25%; /* 16:9 */
+  background:var(--bg-elevated);border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;
+}
+.vsl-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s ease;
+}
+.vsl-overlay:hover .vsl-play{
+  transform:scale(1.1);box-shadow:0 0 40px var(--accent-glow);
+}
+.vsl-play{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;transition:all .3s ease;
+}
+.vsl-play svg{
+  width:28px;height:28px;fill:var(--bg);margin-left:4px;
+}
+.vsl-text{
+  font-family:var(--font-mono);font-size:.8rem;
+  color:var(--text-secondary);letter-spacing:.05em;
+}
+
+@media(max-width:968px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem}
+  .hero-terminal{max-width:500px}
+  .problem-grid{grid-template-columns:1fr;gap:3rem}
+  .package-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr;max-width:480px}
+  .math-grid{grid-template-columns:1fr 1fr}
+}
 @media(max-width:640px){
   nav{padding:1rem 1.25rem}
   .container{padding:0 1.25rem}
@@ -445,6 +594,9 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .hero-buttons{flex-direction:column}
   .btn-primary,.btn-secondary{width:100%;justify-content:center}
   .final-buttons{flex-direction:column;align-items:center}
+  .math-grid{grid-template-columns:1fr}
+  .email-form{flex-direction:column}
+  .email-form button{width:100%}
 }
 </style>
 </head>
@@ -468,6 +620,15 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       <div class="hero-buttons reveal reveal-delay-3">
         <a href="#pricing" class="btn-primary">Get the Blueprint — $497</a>
         <a href="#pricing" class="btn-secondary">Blueprint + Mobile Agent — $1,497</a>
+      </div>
+      <!-- Unhide this section and add Loom embed URL when video is recorded -->
+      <div id="vsl-container" class="vsl-container hidden" style="display:none">
+        <div class="vsl-wrapper">
+          <div class="vsl-overlay">
+            <div class="vsl-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+            <span class="vsl-text">Watch the 5-minute walkthrough &rarr;</span>
+          </div>
+        </div>
       </div>
       <p class="hero-trust reveal reveal-delay-4">Built by an entrepreneur who runs his entire business with this system.</p>
     </div>
@@ -518,6 +679,34 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>You know AI could transform your business. You just can't make it <em>work</em>.</li>
         </ul>
         <p style="margin-top:2rem;color:var(--text);font-size:1.05rem">The gap isn't knowledge. It's <strong>infrastructure</strong>. You need a <em>system</em> — not a prompt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MATH — VALUE QUANTIFICATION -->
+<section class="value-math">
+  <div class="container">
+    <div class="section-tag reveal">The Math</div>
+    <h2 class="section-title reveal reveal-delay-1">The numbers speak <em>for themselves.</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Here's what you're actually getting when you install the AI OS Blueprint.</p>
+
+    <div class="math-grid">
+      <div class="math-block reveal">
+        <div class="math-number">80+ Hours</div>
+        <div class="math-label">of AI-powered work, ready on Day 1</div>
+      </div>
+      <div class="math-block reveal reveal-delay-1">
+        <div class="math-number">$7,000+</div>
+        <div class="math-label">worth of automation engineering, packaged for you</div>
+      </div>
+      <div class="math-block reveal reveal-delay-2">
+        <div class="math-number">$4,000/mo</div>
+        <div class="math-label">what a virtual assistant costs. Your AI OS costs $497 once.</div>
+      </div>
+      <div class="math-block reveal reveal-delay-3">
+        <div class="math-number">60 Seconds</div>
+        <div class="math-label">to install. One prompt. Claude does the rest.</div>
       </div>
     </div>
   </div>
@@ -664,6 +853,39 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   </div>
 </section>
 
+<!-- BUILT BY -->
+<section class="built-by">
+  <div class="container">
+    <div class="built-by-inner">
+      <div class="section-tag reveal">Who Built This</div>
+      <blockquote class="reveal reveal-delay-1">
+        <p>Built by an entrepreneur who runs his entire business on this system.</p>
+      </blockquote>
+      <div class="built-by-details">
+        <p class="reveal reveal-delay-2">Creator of the T.O.P. Method &mdash; a framework trusted by hundreds of real estate investors. 4 active businesses. One AI operating system. This isn't a course about AI. This is the actual system.</p>
+        <p class="reveal reveal-delay-3">I wake up every morning and talk to my AI. It knows my goals, my deals, my contacts, and my schedule. Now you can have the same thing.</p>
+      </div>
+      <div class="built-by-sig reveal reveal-delay-4">&mdash; Mike Davis, Founder of SellFi</div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-capture">
+  <div class="container">
+    <div class="email-capture-inner">
+      <div class="section-tag reveal" style="justify-content:center">Free Preview</div>
+      <h2 class="reveal reveal-delay-1">Not ready to commit? Try <em>5 skills free.</em></h2>
+      <p class="capture-sub reveal reveal-delay-2">Get a preview of the AI OS Blueprint &mdash; 5 working skills, the brain template, and the quick-start guide. Free, no credit card.</p>
+      <form class="email-form reveal reveal-delay-3" action="https://app.kit.com/forms/PLACEHOLDER" method="POST">
+        <input type="hidden" name="form_id" value="PLACEHOLDER">
+        <input type="email" name="email_address" placeholder="Your email address" required>
+        <button type="submit">Send Me The Free Skills</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="container">
@@ -686,7 +908,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>HOW-TO-ADD-SKILLS extension guide</li>
           <li>Loom video walkthroughs</li>
         </ul>
-        <a href="#" class="price-btn secondary">Get the Blueprint</a>
+        <a href="https://LEMON_SQUEEZY_CHECKOUT_URL_TIER1" class="price-btn secondary">Get the Blueprint</a>
       </div>
 
       <div class="price-card featured reveal reveal-delay-1">
@@ -702,8 +924,15 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>Full Claude Code capabilities — mobile</li>
           <li>Run research, build sites, manage deals — from anywhere</li>
         </ul>
-        <a href="#" class="price-btn primary">Get Blueprint + Mobile Agent</a>
+        <a href="https://LEMON_SQUEEZY_CHECKOUT_URL_TIER2" class="price-btn primary">Get Blueprint + Mobile Agent</a>
       </div>
+    </div>
+
+    <!-- MONEY-BACK GUARANTEE -->
+    <div class="guarantee reveal">
+      <div class="guarantee-icon">&#10003;</div>
+      <h3>30-Day Money-Back Guarantee</h3>
+      <p>Install the AI OS Blueprint. Follow the setup guide. If it doesn't transform how you run your business &mdash; full refund, no questions asked. I built this for myself first. It works.</p>
     </div>
   </div>
 </section>
@@ -716,27 +945,35 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <div class="faq-list" style="margin-top:2rem">
       <div class="faq-item reveal">
         <button class="faq-q">What do I need to run this?</button>
-        <div class="faq-a"><p>A computer (Mac, Windows, or Linux) and a Claude Pro subscription ($20/month). That's it. Node.js is needed for installation but it's free and takes 2 minutes.</p></div>
+        <div class="faq-a"><p>A computer (Mac, Windows, or Linux) and a Claude Pro subscription ($20/month). That's it. Node.js is needed for installation but it's free and takes 2 minutes. Total cost: $497 one-time + $20/month Claude Pro. That's it.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">I'm not technical. Can I really set this up?</button>
+        <div class="faq-a"><p>Yes. We built a Magic Install Prompt &mdash; you literally copy one block of text, paste it into Claude Code, and it installs everything in 60 seconds. No command line knowledge needed. If you can copy and paste, you can install this.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How is this different from just using ChatGPT?</button>
+        <div class="faq-a"><p>ChatGPT is a conversation that forgets you exist. Your AI OS is a system that remembers your goals, your projects, your contacts, your processes, and your preferences &mdash; permanently. It picks up where it left off. Every. Single. Time. ChatGPT gives you answers. Your AI OS runs your business.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">Is this a monthly subscription?</button>
-        <div class="faq-a"><p>No. One payment, yours forever. The only ongoing cost is your Claude Pro subscription ($20/month) which you pay directly to Anthropic — not to us.</p></div>
+        <div class="faq-a"><p>No. One payment. You own it forever. Updates are free. Your only ongoing cost is the $20/month Claude Pro subscription &mdash; that's the AI engine, not our product.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Can I add my own skills?</button>
-        <div class="faq-a"><p>Yes — that's the whole point. The HOW-TO-ADD-SKILLS guide walks you through creating custom skills for your specific business. Templates included. Most people build their first custom skill within a day.</p></div>
+        <button class="faq-q">What if AI tools change in 6 months?</button>
+        <div class="faq-a"><p>The skills and brain architecture you build are yours &mdash; they're markdown files on your computer. Even if Claude Code evolves, the system design transfers. You're not buying software that can be shut down. You're buying an architecture that works with any AI.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Does my data leave my computer?</button>
-        <div class="faq-a"><p>No. Everything runs locally on your machine. Your brain files, your skills, your data — it all stays on your computer. The only external communication is between Claude Code and Anthropic's API (same as any Claude usage).</p></div>
+        <button class="faq-q">What's the difference between Tier 1 and Tier 2?</button>
+        <div class="faq-a"><p>Tier 1 is the complete AI OS for your computer &mdash; brain, 20 skills, 20 commands, guides. Tier 2 adds mobile access through Telegram &mdash; your AI runs from your phone with the same power. Same brain, same skills, anywhere.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">I'm not technical. Can I still use this?</button>
-        <div class="faq-a"><p>If you can copy files and follow step-by-step instructions, you can install this. The installation guide is written for non-developers. The Loom videos show you exactly what to do. Once installed, you interact with your AI in plain English.</p></div>
+        <button class="faq-q">What kind of results can I expect?</button>
+        <div class="faq-a"><p>Most users report saving 15-40 hours per month within the first week. The /deep-research skill alone replaces hours of manual research. /content-batch generates a month of social posts in minutes. /weekly-review gives you a CEO-level business summary every Friday. The compound effect is massive.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">What if I need help setting up?</button>
-        <div class="faq-a"><p>You'll get access to our support channel where you can ask setup questions. We also offer done-for-you installation as an add-on if you want it handled completely.</p></div>
+        <button class="faq-q">What if I need help?</button>
+        <div class="faq-a"><p>The installation guide walks you through everything step by step. The First Week Checklist gives you a daily plan for your first 7 days. And if you're stuck, email support@aiosblueprint.com &mdash; we respond within 24 hours.</p></div>
       </div>
     </div>
   </div>

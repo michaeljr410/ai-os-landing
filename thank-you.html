@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to the AI OS — You're In</title>
+<meta name="description" content="Your AI OS Blueprint is ready. Follow these steps to install your AI operating system in 60 seconds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --bg-card-hover:#141c2b;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.1);
+  --red:#ff4757;
+  --green:#2ed573;
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* --- NOISE OVERLAY --- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+/* --- UTILITY --- */
+.container{max-width:800px;margin:0 auto;padding:0 2rem}
+
+/* --- GRID LINES (subtle background) --- */
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:.08;
+}
+
+/* --- HERO --- */
+.hero{
+  padding:8rem 2rem 4rem;
+  text-align:center;
+  position:relative;
+}
+.hero::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+  opacity:.15;pointer-events:none;filter:blur(80px);
+}
+.hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto}
+.hero-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-tag::after{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-check{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 2rem;
+  box-shadow:0 0 40px var(--accent-glow);
+}
+.hero-check svg{width:36px;height:36px;stroke:var(--bg);stroke-width:3;fill:none}
+.hero-h1{
+  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:400;line-height:1.1;margin-bottom:1rem;
+  letter-spacing:-.02em;
+}
+.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{
+  font-size:1.1rem;color:var(--text-secondary);line-height:1.7;
+  max-width:560px;margin:0 auto;
+}
+
+/* --- STEPS --- */
+.steps{padding:4rem 0 6rem}
+.step-block{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:2.5rem;
+  margin-bottom:1.5rem;
+  position:relative;
+  transition:all .35s ease;
+}
+.step-block:hover{
+  border-color:var(--border-bright);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+.step-number{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:500;
+  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.step-number::before{
+  content:'';width:24px;height:2px;background:var(--accent);
+}
+.step-block h2{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:400;
+  margin-bottom:.75rem;line-height:1.2;
+}
+.step-block p{
+  color:var(--text-secondary);font-size:1rem;line-height:1.7;
+}
+
+/* --- TERMINAL --- */
+.terminal{
+  background:var(--bg-elevated);
+  border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;
+  font-family:var(--font-mono);font-size:.8rem;
+  line-height:1.9;margin-top:1.5rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 0 1px var(--border);
+}
+.terminal-bar{
+  padding:.6rem 1rem;background:var(--bg-card);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.5rem;
+}
+.terminal-dot{width:10px;height:10px;border-radius:50%}
+.terminal-dot.r{background:#ff5f57}.terminal-dot.y{background:#febc2e}.terminal-dot.g{background:#28c840}
+.terminal-title{margin-left:.5rem;color:var(--text-muted);font-size:.7rem}
+.terminal-body{padding:1.25rem 1.5rem;color:var(--text-secondary)}
+.terminal-body .prompt{color:var(--accent)}
+.terminal-body .success{color:var(--green)}
+.terminal-body .info{color:var(--text)}
+.terminal-body .dim{color:var(--text-muted)}
+
+/* --- MAGIC INSTALL HINT --- */
+.magic-hint{
+  background:var(--accent-dim);
+  border:1px solid rgba(0,229,255,.2);
+  padding:1.25rem 1.5rem;
+  margin-top:1.25rem;
+  font-family:var(--font-mono);font-size:.82rem;
+  color:var(--accent);
+  display:flex;align-items:flex-start;gap:.75rem;
+}
+.magic-hint .arrow{flex-shrink:0;font-size:1rem}
+
+/* --- VIDEO PLACEHOLDER --- */
+.video-section{
+  display:none; /* Hidden by default until video is recorded */
+  padding:4rem 0;
+  border-top:1px solid var(--border);
+}
+.video-wrapper{
+  position:relative;width:100%;padding-bottom:56.25%;
+  background:var(--bg-elevated);border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;
+}
+.video-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.video-play{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;
+}
+.video-play svg{width:28px;height:28px;fill:var(--bg);margin-left:4px}
+.video-text{
+  font-family:var(--font-mono);font-size:.8rem;
+  color:var(--text-secondary);letter-spacing:.05em;
+}
+
+/* --- SUPPORT --- */
+.support{
+  padding:3rem 0;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+.support p{
+  font-size:.95rem;color:var(--text-secondary);line-height:1.7;
+}
+.support a{
+  color:var(--accent);text-decoration:none;
+}
+.support a:hover{text-decoration:underline}
+
+/* --- UPSELL --- */
+.upsell{
+  padding:3rem 0 4rem;
+  text-align:center;
+}
+.upsell-card{
+  max-width:600px;margin:0 auto;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:2.5rem;
+  transition:all .35s ease;
+}
+.upsell-card:hover{
+  border-color:var(--gold);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.upsell-tag{
+  font-family:var(--font-mono);font-size:.65rem;font-weight:500;
+  color:var(--gold);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.upsell-card h3{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:400;
+  margin-bottom:.75rem;
+}
+.upsell-card p{
+  color:var(--text-secondary);font-size:.95rem;line-height:1.7;
+  margin-bottom:1.5rem;
+}
+.upsell-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-body);font-weight:600;font-size:.9rem;
+  color:var(--gold);text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:all .25s ease;
+}
+.upsell-link:hover{border-bottom-color:var(--gold)}
+
+/* --- FOOTER --- */
+footer{
+  padding:3rem 2rem;border-top:1px solid var(--border);
+  text-align:center;
+}
+footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em}
+
+/* --- ANIMATIONS --- */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* --- RESPONSIVE --- */
+@media(max-width:640px){
+  .hero{padding:6rem 1.25rem 3rem}
+  .container{padding:0 1.25rem}
+  .steps{padding:3rem 0 4rem}
+  .step-block{padding:1.75rem}
+  .step-block h2{font-size:1.4rem}
+  .terminal-body{padding:1rem;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-check reveal">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="hero-tag reveal reveal-delay-1">Purchase Confirmed</div>
+    <h1 class="hero-h1 reveal reveal-delay-2">Welcome to the AI OS.<br><em>You're in.</em></h1>
+    <p class="hero-sub reveal reveal-delay-3">Your AI Operating System is ready to install. Follow the four steps below and you'll be running commands in under 5 minutes.</p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="container">
+
+    <!-- STEP 1 -->
+    <div class="step-block reveal">
+      <div class="step-number">Step 1</div>
+      <h2>Check your email</h2>
+      <p>Your download link is on its way. Check your inbox (and spam folder) for an email from Lemon Squeezy with your AI OS Blueprint files. The email contains a link to download the full zip package.</p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-block reveal reveal-delay-1">
+      <div class="step-number">Step 2</div>
+      <h2>Unzip the files</h2>
+      <p>Extract the zip file to your Desktop or wherever you keep your projects. You'll see folders for the brain, skills, commands, and guides &mdash; everything your AI needs to run your business.</p>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-block reveal reveal-delay-2">
+      <div class="step-number">Step 3</div>
+      <h2>Install in 60 seconds</h2>
+      <p>Open Claude Code, then copy and paste the prompt from <strong>MAGIC-INSTALL.md</strong>. Claude handles the rest. One paste, one enter, done.</p>
+
+      <div class="magic-hint">
+        <span class="arrow">&rarr;</span>
+        <span>Open MAGIC-INSTALL.md from your unzipped folder. Copy the entire install prompt. Paste it into Claude Code. That's the whole install.</span>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot r"></div>
+          <div class="terminal-dot y"></div>
+          <div class="terminal-dot g"></div>
+          <span class="terminal-title">claude-code</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="prompt">&gt;</span> <span class="info">Installing AI OS Blueprint...</span></div>
+          <div><span class="success">&#10003;</span> <span class="dim">Brain structure created (goals, projects, people, SOPs, daily)</span></div>
+          <div><span class="success">&#10003;</span> <span class="dim">20 skills installed</span></div>
+          <div><span class="success">&#10003;</span> <span class="dim">20 commands installed</span></div>
+          <div><span class="success">&#10003;</span> <span class="dim">Output directories created</span></div>
+          <div style="margin-top:.75rem"><span class="info">Your AI OS is ready.</span> <span class="dim">Open CLAUDE.md to set your identity.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-block reveal reveal-delay-3">
+      <div class="step-number">Step 4</div>
+      <h2>Follow the First Week Checklist</h2>
+      <p>Inside your files, open <strong>guides/FIRST-WEEK-CHECKLIST.md</strong>. It walks you through 7 days of setup &mdash; filling in your goals, adding your first contacts, running your first commands. By Day 7, your AI knows your business.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIDEO SECTION (hidden until video is recorded) -->
+<section class="video-section">
+  <div class="container">
+    <!-- Add Loom embed URL here when video is recorded -->
+    <div class="video-wrapper">
+      <div class="video-overlay">
+        <div class="video-play">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="video-text">Watch the setup walkthrough</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support">
+  <div class="container">
+    <p>Questions? Email <a href="mailto:support@aiosblueprint.com">support@aiosblueprint.com</a></p>
+  </div>
+</section>
+
+<!-- UPSELL (for Tier 1 buyers) -->
+<section class="upsell">
+  <div class="container">
+    <div class="upsell-card reveal">
+      <div class="upsell-tag">Upgrade Available</div>
+      <h3>Purchased the Blueprint?</h3>
+      <p>Upgrade to the Mobile Agent tier and control your AI from your phone. Build websites, run research, manage your entire business &mdash; all from a Telegram message. Anywhere.</p>
+      <a href="index.html#pricing" class="upsell-link">Learn more &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>AI OS Blueprint &mdash; Built with the system it sells. &copy; 2026</p>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

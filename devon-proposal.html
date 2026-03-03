@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI OS Blueprint — Devon Alexander | Custom Implementation Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.1);
+  --red:#ff4757;
+  --green:#2ed573;
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--bg)}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+
+/* HEADER */
+.proposal-header{
+  padding:60px 0 40px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:48px;
+}
+.proposal-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:100px;
+  background:var(--accent-dim);border:1px solid rgba(0,229,255,.2);
+  font-family:var(--font-mono);font-size:12px;color:var(--accent);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.proposal-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.proposal-for{
+  font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.2rem);
+  line-height:1.15;margin-bottom:8px;
+}
+.proposal-for span{color:var(--accent)}
+.proposal-sub{color:var(--text-secondary);font-size:1.05rem;margin-bottom:24px}
+.proposal-meta{
+  display:flex;gap:24px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:13px;color:var(--text-muted);
+}
+.proposal-meta span{display:flex;align-items:center;gap:6px}
+
+/* SECTIONS */
+.section{margin-bottom:56px}
+.section-label{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2rem);
+  line-height:1.2;margin-bottom:20px;
+}
+.section p{color:var(--text-secondary);font-size:1rem;margin-bottom:16px}
+
+/* PAIN POINTS */
+.pain-grid{display:flex;flex-direction:column;gap:16px;margin:24px 0}
+.pain-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+  padding:20px 24px;display:flex;gap:16px;align-items:flex-start;
+  transition:border-color .2s;
+}
+.pain-card:hover{border-color:var(--red)}
+.pain-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,71,87,.08);color:var(--red);font-size:18px;
+}
+.pain-title{font-weight:600;font-size:.95rem;margin-bottom:4px}
+.pain-desc{color:var(--text-secondary);font-size:.88rem;line-height:1.5}
+
+/* SOLUTION CARDS */
+.solution-grid{display:flex;flex-direction:column;gap:16px;margin:24px 0}
+.solution-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+  padding:24px;transition:border-color .2s;
+}
+.solution-card:hover{border-color:var(--accent)}
+.solution-num{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  color:var(--accent);margin-bottom:8px;
+}
+.solution-name{font-weight:600;font-size:1.05rem;margin-bottom:8px}
+.solution-desc{color:var(--text-secondary);font-size:.9rem;line-height:1.6}
+.solution-example{
+  margin-top:12px;padding:12px 16px;border-radius:8px;
+  background:var(--bg-elevated);border:1px solid var(--border);
+  font-family:var(--font-mono);font-size:12px;color:var(--text-muted);
+  line-height:1.6;white-space:pre-line;
+}
+
+/* TIMELINE */
+.timeline{margin:24px 0}
+.timeline-item{
+  display:flex;gap:20px;padding:20px 0;
+  border-bottom:1px solid var(--border);
+}
+.timeline-item:last-child{border-bottom:none}
+.timeline-time{
+  flex-shrink:0;width:100px;
+  font-family:var(--font-mono);font-size:13px;color:var(--accent);
+  padding-top:2px;
+}
+.timeline-content{}
+.timeline-task{font-weight:600;font-size:.95rem;margin-bottom:4px}
+.timeline-detail{color:var(--text-secondary);font-size:.88rem;line-height:1.5}
+
+/* VALUE BLOCK */
+.value-block{
+  background:linear-gradient(135deg,var(--bg-card),var(--surface));
+  border:1px solid var(--border-bright);border-radius:16px;
+  padding:40px;margin:32px 0;text-align:center;
+}
+.value-block .big-number{
+  font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.6rem);
+  color:var(--accent);margin-bottom:8px;
+}
+.value-block .big-label{
+  color:var(--text-secondary);font-size:1rem;margin-bottom:24px;
+}
+.value-row{
+  display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+  margin-top:20px;
+}
+.value-item{text-align:center}
+.value-item .num{font-family:var(--font-display);font-size:1.8rem;color:var(--gold)}
+.value-item .label{font-size:.8rem;color:var(--text-muted);margin-top:4px}
+
+/* CTA */
+.cta-section{
+  text-align:center;padding:48px 0 80px;
+  border-top:1px solid var(--border);
+}
+.cta-headline{
+  font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.4rem);
+  margin-bottom:12px;
+}
+.cta-headline span{color:var(--accent)}
+.cta-sub{color:var(--text-secondary);font-size:1rem;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-button{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;border-radius:12px;
+  background:var(--accent);color:var(--bg);
+  font-weight:600;font-size:1rem;
+  text-decoration:none;
+  transition:transform .15s,box-shadow .15s;
+  box-shadow:0 0 30px var(--accent-glow);
+}
+.cta-button:hover{transform:translateY(-2px);box-shadow:0 0 50px var(--accent-glow)}
+.cta-note{
+  margin-top:16px;font-family:var(--font-mono);font-size:12px;
+  color:var(--text-muted);
+}
+
+/* URGENCY */
+.urgency-bar{
+  background:rgba(238,181,68,.06);border:1px solid rgba(238,181,68,.2);
+  border-radius:12px;padding:20px 24px;margin:24px 0;
+  display:flex;align-items:center;gap:14px;
+}
+.urgency-icon{font-size:24px;flex-shrink:0}
+.urgency-text{font-size:.92rem;color:var(--gold);line-height:1.5}
+.urgency-text strong{color:var(--text)}
+
+/* QUOTE */
+.quote-block{
+  border-left:3px solid var(--accent);
+  padding:16px 24px;margin:24px 0;
+  background:var(--accent-dim);border-radius:0 12px 12px 0;
+}
+.quote-block p{color:var(--text);font-style:italic;font-size:1rem;margin:0}
+.quote-block .attr{color:var(--text-muted);font-style:normal;font-size:.85rem;margin-top:8px}
+
+/* FOOTER */
+.proposal-footer{
+  text-align:center;padding:40px 0;
+  border-top:1px solid var(--border);
+  color:var(--text-muted);font-size:.85rem;
+}
+.proposal-footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:600px){
+  .container{padding:0 16px}
+  .proposal-header{padding:40px 0 32px}
+  .timeline-item{flex-direction:column;gap:8px}
+  .timeline-time{width:auto}
+  .value-row{gap:24px}
+  .proposal-meta{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="proposal-header">
+    <div class="proposal-badge">Custom Implementation Proposal</div>
+    <h1 class="proposal-for">Prepared for <span>Devon Alexander</span></h1>
+    <p class="proposal-sub">AI Operating System — Lender Relations, Deal Pipeline & Team Operations</p>
+    <div class="proposal-meta">
+      <span>📅 March 3, 2026</span>
+      <span>👤 From: Mike Davis, Founder of SellFi</span>
+      <span>⏱ 1-Hour Priority Install</span>
+    </div>
+  </header>
+
+  <!-- THE PROBLEM -->
+  <section class="section">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">Your lenders trust you. But trust needs oxygen — and that oxygen is communication.</h2>
+    <p>You're running multiple deals across multiple lenders in fractional funds and syndications. Every single one of those lenders expects updates, transparency, and access to information. Your team is supposed to handle that. But people drop the ball. Follow-ups slip. Updates don't go out. And when a project takes longer than expected — which happens — silence is what kills the relationship.</p>
+    <p>Here's what's actually breaking:</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📵</div>
+        <div>
+          <div class="pain-title">Lender communication gaps</div>
+          <div class="pain-desc">Multiple lenders asking for updates at different times. You can't respond to everyone simultaneously. Your team doesn't always have the right information to respond on your behalf. Lenders feel ignored.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔄</div>
+        <div>
+          <div class="pain-title">Team follow-through failures</div>
+          <div class="pain-desc">Your operators have lapses in follow-up and organization. Things fall through the cracks — not because they don't care, but because there's no system enforcing consistency. And when trust is already thin from past team issues, every dropped ball compounds.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏳</div>
+        <div>
+          <div class="pain-title">Project delays without proactive updates</div>
+          <div class="pain-desc">Properties go up for sale and don't sell on time. Investors don't get their money back when expected. The delay itself isn't the problem — the silence is. When lenders don't hear anything, they assume the worst.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🧩</div>
+        <div>
+          <div class="pain-title">Discombobulated systems</div>
+          <div class="pain-desc">CRM data is scattered. Deal information lives in different places. When a lender asks "what's the status on X?" — it takes too long to assemble the answer. That lag erodes confidence.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🎯</div>
+        <div>
+          <div class="pain-title">Due diligence bottleneck</div>
+          <div class="pain-desc">Every new lending opportunity requires lenders to evaluate: timeline, returns, security, risk profile. Assembling that information package for each deal, for each lender, is manual and slow. Deals move slower because of it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SOLUTION -->
+  <section class="section">
+    <div class="section-label">The Solution</div>
+    <h2 class="section-title">An intelligence layer that never forgets, never drops the ball, and works 24/7.</h2>
+    <p>The AI OS Blueprint gives you a complete operating system that sits on top of everything you already use. It doesn't replace your team — it makes it impossible for things to fall through the cracks. Here's exactly what it handles for your operation:</p>
+
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="solution-num">01 — LENDER CRM & PIPELINE</div>
+        <div class="solution-name">Every lender, every deal, every interaction — organized and searchable</div>
+        <div class="solution-desc">Your AI knows every lender's name, preferred communication style, investment history, risk tolerance, and current positions. When you say "what does John have out right now?" — it answers instantly. No digging through spreadsheets.</div>
+        <div class="solution-example">You: "Show me all lenders with money in the Maple Street project"
+AI: Lists 4 lenders, their positions, expected return dates, last communication date, and flags that 2 haven't received an update in 14 days.</div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">02 — AUTOMATED LENDER UPDATES</div>
+        <div class="solution-name">Scheduled, personalized updates to every lender — without you writing a single email</div>
+        <div class="solution-desc">Set the cadence: weekly, biweekly, or triggered by milestones. The AI drafts professional updates tailored to each lender's position in each deal. You review and send — or let it send automatically. No lender ever feels forgotten.</div>
+        <div class="solution-example">Auto-generated update:
+"Hi Robert — Quick update on the Elm Street project. Rehab is 85% complete (drywall finished this week). Listing target remains April 15. Your $75K position is on track for full repayment + 12% by May 30. Photos attached. Questions? Just reply."</div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">03 — DEAL INTELLIGENCE PACKAGES</div>
+        <div class="solution-name">One command generates a complete due diligence package for any deal</div>
+        <div class="solution-desc">When you bring a new lending opportunity, your AI assembles the full package: property details, comps, rehab scope, timeline, projected returns, exit strategy, risk factors, and your track record on similar deals. Lenders get professional packages that build confidence.</div>
+        <div class="solution-example">You: "Build a deal package for the Oak Avenue project"
+AI: Generates a complete PDF — property summary, ARV comps, rehab budget, timeline, projected ROI for lenders, exit strategy, comparable past deals you've completed successfully.</div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">04 — PROJECT STATUS DASHBOARD</div>
+        <div class="solution-name">Real-time status on every active project — accessible to you and your team</div>
+        <div class="solution-desc">Every project gets tracked: acquisition, rehab progress, listing status, sale status, lender positions, expected payback dates. Your team can check status without calling you. You can check status without calling them. One source of truth.</div>
+        <div class="solution-example">You: "What's the status on all active projects?"
+AI: Lists 8 projects — 2 in rehab, 3 listed, 1 under contract, 2 in closing. Flags: "Pine Street has been listed 45 days with no offers — may need price adjustment. 3 lenders on that deal are past their expected return date."</div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">05 — TEAM ACCOUNTABILITY SYSTEM</div>
+        <div class="solution-name">SOPs, task tracking, and follow-up enforcement for your operators</div>
+        <div class="solution-desc">Document every process as an SOP. Assign tasks with deadlines. The AI tracks what's done and what's overdue. When someone drops the ball, you know immediately — not 3 weeks later. Your team has clear instructions, and the AI fills gaps when they miss.</div>
+        <div class="solution-example">Morning briefing:
+"2 tasks overdue: Sarah was supposed to send the Pine Street inspection report to lenders (3 days late). Marcus hasn't updated the Birch Ave rehab timeline (due yesterday). 4 lender follow-ups due today. Want me to draft the messages?"</div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">06 — PROACTIVE DELAY MANAGEMENT</div>
+        <div class="solution-name">When projects run long, lenders hear about it before they have to ask</div>
+        <div class="solution-desc">The AI monitors project timelines against lender expectations. When a project is trending behind schedule, it flags it to you AND drafts proactive communications to affected lenders. Transparency builds trust. Silence kills it.</div>
+        <div class="solution-example">Alert: "Oak Avenue rehab is 2 weeks behind schedule (contractor delay). 3 lenders have money in this deal. Projected payback date shifted from April 15 to May 1. Draft proactive update to all 3 lenders? [Yes / Edit first]"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT CHANGES -->
+  <section class="section">
+    <div class="section-label">The Shift</div>
+    <h2 class="section-title">Before vs. After</h2>
+
+    <div class="pain-grid">
+      <div class="pain-card" style="border-color:var(--red)">
+        <div class="pain-icon">❌</div>
+        <div>
+          <div class="pain-title">Today: Reactive chaos</div>
+          <div class="pain-desc">Lenders text you asking for updates. You scramble to find the info. Your team gives you incomplete answers. You respond 2 days late. The lender is frustrated but polite about it — for now. Repeat across 15+ lenders and 8+ active projects.</div>
+        </div>
+      </div>
+      <div class="solution-card" style="border-color:var(--green)">
+        <div class="solution-num" style="color:var(--green)">✓ AFTER AI OS</div>
+        <div class="solution-name">Proactive, automatic, professional</div>
+        <div class="solution-desc">Every lender gets consistent updates on schedule. Your AI knows every deal's status and can answer questions instantly. When projects run long, lenders hear about it before they ask. Your team has clear SOPs and accountability. You spend 80% less time on lender communication and 100% more time closing deals.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section class="section">
+    <div class="value-block">
+      <div class="big-number">$0</div>
+      <div class="big-label">Your cost for the full AI OS Blueprint + 1 hour of dedicated setup with Mike</div>
+      <div class="value-row">
+        <div class="value-item">
+          <div class="num">$497</div>
+          <div class="label">Normal Tier 1 Price</div>
+        </div>
+        <div class="value-item">
+          <div class="num">$1,497</div>
+          <div class="label">Normal Tier 2 Price</div>
+        </div>
+        <div class="value-item">
+          <div class="num">Free</div>
+          <div class="label">For You — Today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="urgency-bar">
+      <div class="urgency-icon">⚡</div>
+      <div class="urgency-text"><strong>Why free?</strong> Because I need one thing from you: a real testimonial after you've used it. I'm building proof that this system works across different business types. Your use case — lender relations, deal pipeline, team ops — is exactly the kind of high-stakes operation where this system shines. You get the full system installed and working today. I get a testimonial that shows the world what it does.</div>
+    </div>
+  </section>
+
+  <!-- 1-HOUR INSTALL PLAN -->
+  <section class="section">
+    <div class="section-label">Your 1-Hour Install</div>
+    <h2 class="section-title">Here's exactly what we're doing today.</h2>
+    <p>This isn't a demo. This isn't a pitch call. We're installing the system live, on your machine, customized to your operation. By the end of the hour, your AI is working.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00 – 0:10</div>
+        <div class="timeline-content">
+          <div class="timeline-task">Install & Configure</div>
+          <div class="timeline-detail">Install Claude Desktop App + AI OS Blueprint. Set up your identity file — who you are, how you operate, your business context. The AI learns Devon Alexander's world in 10 minutes.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:10 – 0:25</div>
+        <div class="timeline-content">
+          <div class="timeline-task">Build Your Shared Brain</div>
+          <div class="timeline-detail">Set up your lender CRM, active project tracker, and deal pipeline. Dump your current lender info, active deals, and team structure into the brain. The AI organizes everything.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:25 – 0:40</div>
+        <div class="timeline-content">
+          <div class="timeline-task">Build Your First Workflows</div>
+          <div class="timeline-detail">Create your lender update template, deal package generator, and project status report. Run them live on a real deal so you see exactly how it works.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:40 – 0:55</div>
+        <div class="timeline-content">
+          <div class="timeline-task">Live Demo — Real Deal, Real Output</div>
+          <div class="timeline-detail">Pick an active deal. Ask the AI to generate a lender update, build a due diligence package, and flag overdue follow-ups. See real output on real data. This is the moment it clicks.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55 – 1:00</div>
+        <div class="timeline-content">
+          <div class="timeline-task">Next Steps & Expansion Roadmap</div>
+          <div class="timeline-detail">What to build next on your own. How to add SOPs, train the AI on your specific processes, and expand into team operations. Plus: ongoing support via text.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU WALK AWAY WITH -->
+  <section class="section">
+    <div class="section-label">What You Walk Away With</div>
+    <h2 class="section-title">After 1 hour, you have:</h2>
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="solution-desc">✅ A fully installed AI operating system that knows your business, your lenders, and your deals</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ A lender CRM with every contact organized and searchable by AI</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ Automated lender update workflows — never write a status update from scratch again</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ A deal package generator that creates professional investor packages on command</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ Project status tracking with proactive delay alerts</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ Team SOPs and accountability tracking framework</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ 20+ additional AI capabilities (research, content, web scraping, deployment, and more)</div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-desc">✅ Direct support from Mike — the guy who built it and runs his own business on it daily</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="section">
+    <div class="quote-block">
+      <p>"I built this system because I was the bottleneck in my own business — doing deals, running my CRM, handling follow-ups, building content, managing operations — all through one person. This system is how I broke out of that. Your situation is the same problem at a different scale. The AI doesn't forget. It doesn't take money from you. It doesn't have off days. It just works."</p>
+      <div class="attr">— Mike Davis, Founder of SellFi &amp; Creator of the AI OS Blueprint</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-headline">Ready to install? <span>Let's go.</span></h2>
+    <p class="cta-sub">1 hour. Your machine. Your data. Your AI — working by the end of the call.</p>
+    <a href="https://ai-os-landing-nine.vercel.app" class="cta-button">
+      See the Full AI OS Blueprint →
+    </a>
+    <div class="cta-note">Free install + 1 hour of dedicated setup with Mike · Testimonial requested after use</div>
+  </section>
+
+  <footer class="proposal-footer">
+    <p>AI OS Blueprint · Built by <a href="https://sellfi.io" target="_blank">SellFi</a> · This proposal was generated by the AI OS itself.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

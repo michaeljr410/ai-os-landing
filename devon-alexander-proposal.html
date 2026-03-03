@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI OS Blueprint — Devon Alexander | Private Lending Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.1);
+  --red:#ff4757;
+  --green:#2ed573;
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--bg)}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+
+/* --- HEADER --- */
+.proposal-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:100px;
+  background:var(--accent-dim);border:1px solid rgba(0,229,255,.2);
+  font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:20px;
+}
+.proposal-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+header{padding:60px 0 40px;border-bottom:1px solid var(--border)}
+header h1{
+  font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);
+  font-weight:400;line-height:1.15;margin-bottom:12px;
+}
+header h1 em{font-style:italic;color:var(--accent)}
+header .subtitle{color:var(--text-secondary);font-size:1.1rem;margin-bottom:24px}
+header .meta{
+  display:flex;flex-wrap:wrap;gap:24px;
+  color:var(--text-muted);font-size:.85rem;font-family:var(--font-mono);
+}
+header .meta span{display:flex;align-items:center;gap:6px}
+
+/* --- SECTIONS --- */
+section{padding:48px 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h2{
+  font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2rem);
+  font-weight:400;margin-bottom:20px;line-height:1.2;
+}
+h2 em{font-style:italic;color:var(--accent)}
+h3{font-size:1.1rem;font-weight:600;margin:28px 0 12px;color:var(--text)}
+p{margin-bottom:16px;color:var(--text-secondary)}
+
+/* --- PROBLEM CARDS --- */
+.problem-grid{display:grid;gap:16px;margin:24px 0}
+.problem-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+  padding:20px 24px;display:flex;align-items:flex-start;gap:16px;
+}
+.problem-icon{
+  width:40px;height:40px;min-width:40px;border-radius:10px;
+  background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.15);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.problem-card h4{font-size:.95rem;font-weight:600;margin-bottom:4px}
+.problem-card p{font-size:.9rem;margin:0;color:var(--text-muted)}
+
+/* --- SOLUTION CARDS --- */
+.solution-grid{display:grid;gap:16px;margin:24px 0}
+.solution-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+  padding:24px;position:relative;overflow:hidden;
+}
+.solution-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+}
+.solution-card .label{
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:8px;
+}
+.solution-card h4{font-size:1.05rem;font-weight:600;margin-bottom:8px}
+.solution-card p{font-size:.9rem;margin:0;color:var(--text-muted)}
+
+/* --- TERMINAL --- */
+.terminal{
+  background:#0a0e14;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;margin:24px 0;font-family:var(--font-mono);font-size:.82rem;
+}
+.terminal-header{
+  background:#0f1520;padding:10px 16px;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.terminal-dot{width:10px;height:10px;border-radius:50%;background:#2a3a52}
+.terminal-dot:nth-child(1){background:#ff5f57}
+.terminal-dot:nth-child(2){background:#febc2e}
+.terminal-dot:nth-child(3){background:#28c840}
+.terminal-body{padding:20px;line-height:1.8;overflow-x:auto}
+.terminal-body .prompt{color:var(--accent)}
+.terminal-body .comment{color:var(--text-muted)}
+.terminal-body .output{color:var(--green)}
+.terminal-body .highlight{color:var(--gold)}
+
+/* --- TIMELINE --- */
+.timeline{margin:24px 0;position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:24px}
+.timeline-item::before{
+  content:'';position:absolute;left:-27px;top:6px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent);z-index:1;
+}
+.timeline-item.done::before{background:var(--accent)}
+.timeline-item .time{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-bottom:2px}
+.timeline-item h4{font-size:.95rem;font-weight:600;margin-bottom:4px}
+.timeline-item p{font-size:.85rem;color:var(--text-muted);margin:0}
+
+/* --- COMPARISON TABLE --- */
+.comparison{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0;
+}
+.comparison-col{padding:24px}
+.comparison-col:first-child{border-right:1px solid var(--border);background:rgba(255,71,87,.03)}
+.comparison-col:last-child{background:rgba(0,229,255,.03)}
+.comparison-col h4{
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;margin-bottom:16px;
+}
+.comparison-col:first-child h4{color:var(--red)}
+.comparison-col:last-child h4{color:var(--accent)}
+.comparison-col li{
+  font-size:.85rem;color:var(--text-muted);margin-bottom:10px;
+  list-style:none;padding-left:20px;position:relative;
+}
+.comparison-col:first-child li::before{content:'✕';position:absolute;left:0;color:var(--red);font-size:.75rem}
+.comparison-col:last-child li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700}
+
+/* --- CTA --- */
+.cta-section{
+  text-align:center;padding:60px 0;
+}
+.cta-section h2{margin-bottom:12px}
+.cta-section p{max-width:560px;margin:0 auto 32px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 40px;border-radius:10px;font-size:1.05rem;font-weight:600;
+  text-decoration:none;transition:all .2s;cursor:pointer;border:none;
+  background:var(--accent);color:var(--bg);
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+.cta-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:16px;color:var(--text-muted);font-size:.85rem;text-decoration:none;
+}
+.cta-secondary:hover{color:var(--text)}
+
+/* --- FOOTER --- */
+footer{
+  padding:32px 0;border-top:1px solid var(--border);
+  text-align:center;color:var(--text-muted);font-size:.8rem;
+}
+
+/* --- URGENCY BAR --- */
+.urgency-bar{
+  background:linear-gradient(90deg,rgba(238,181,68,.08),rgba(238,181,68,.15),rgba(238,181,68,.08));
+  border:1px solid rgba(238,181,68,.2);border-radius:10px;
+  padding:16px 24px;margin:24px 0;text-align:center;
+}
+.urgency-bar p{color:var(--gold);font-weight:600;margin:0;font-size:.95rem}
+.urgency-bar span{color:var(--text-muted);font-weight:400;font-size:.85rem}
+
+/* --- QUOTE --- */
+.pull-quote{
+  border-left:3px solid var(--accent);padding:16px 24px;margin:28px 0;
+  background:var(--accent-dim);border-radius:0 8px 8px 0;
+}
+.pull-quote p{color:var(--text);font-size:1.05rem;font-style:italic;margin:0}
+.pull-quote cite{display:block;margin-top:8px;font-size:.8rem;color:var(--text-muted);font-style:normal}
+
+/* --- VALUE STACK --- */
+.value-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.value-item:last-child{border-bottom:none}
+.value-item .label{color:var(--text-secondary);font-size:.95rem}
+.value-item .amount{font-family:var(--font-mono);color:var(--text);font-weight:600}
+.value-total{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 20px;margin-top:12px;
+  background:var(--accent-dim);border:1px solid rgba(0,229,255,.2);border-radius:10px;
+}
+.value-total .label{color:var(--accent);font-weight:700;font-size:1.05rem}
+.value-total .amount{font-family:var(--font-mono);color:var(--accent);font-weight:700;font-size:1.2rem}
+
+.strikethrough{text-decoration:line-through;color:var(--text-muted)}
+.free-tag{
+  display:inline-block;padding:2px 10px;border-radius:100px;
+  background:var(--green);color:var(--bg);font-size:.75rem;font-weight:700;
+  margin-left:8px;
+}
+
+@media(max-width:640px){
+  .comparison{grid-template-columns:1fr}
+  .comparison-col:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  header .meta{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <div class="proposal-badge">Personalized Proposal</div>
+  <h1>Devon — here's how AI runs your <em>lending operations</em> while you sleep.</h1>
+  <p class="subtitle">A custom AI operating system for private money lending, investor communications, deal tracking, and team accountability — installed today.</p>
+  <div class="meta">
+    <span>Prepared by Mike Davis</span>
+    <span>March 3, 2026</span>
+    <span>Devon Alexander — Washington State</span>
+  </div>
+</header>
+
+<!-- THE PROBLEM -->
+<section>
+  <h2>The problem isn't your <em>team.</em> It's your <em>system.</em></h2>
+  <p>You have lenders waiting for updates. Projects running behind timeline. A team that means well but drops the ball on follow-up. And you — one person — fielding calls, managing relationships, keeping everyone calm, while trying to actually close deals.</p>
+  <p>Here's what's actually happening:</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📞</div>
+      <div>
+        <h4>Lenders are reaching out and getting silence</h4>
+        <p>Multiple private money lenders asking for updates at the same time. You can't respond to all of them. Your team doesn't have the information to respond for you. Things fall through the cracks.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⏰</div>
+      <div>
+        <h4>Delayed projects = anxious investors</h4>
+        <p>Properties sit on the market longer than expected. Returns take longer. The silence makes it worse — people don't know what's happening, so they assume the worst.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔗</div>
+      <div>
+        <h4>Your team is the weakest link</h4>
+        <p>Communication gaps between team members. Information not flowing. Some people have been untrustworthy. You've lost money and trust because of operational failures that were 100% preventable.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🧩</div>
+      <div>
+        <h4>CRM and systems are scattered</h4>
+        <p>You have tools. You have a CRM. But nothing talks to each other. Nothing enforces follow-up. Nothing catches what falls through the cracks. The system exists but doesn't actually work as a system.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"The deals aren't the problem. The money isn't the problem. The communication is the problem — and communication is exactly what AI was built to solve."</p>
+  </div>
+</section>
+
+<!-- THE SOLUTION -->
+<section>
+  <h2>What we're <em>installing</em> today.</h2>
+  <p>This is the same AI operating system I use to run my own businesses — SellFi, TOP Wheels, everything. It's not a chatbot. It's not another SaaS tool. It's an intelligence layer that sits on top of your entire operation and actually does the work.</p>
+
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="label">Capability 01</div>
+      <h4>Automated Investor Updates</h4>
+      <p>Every lender gets consistent, professional updates on their deals — automatically. Weekly status reports, milestone notifications, timeline changes. No one gets left in the dark. No one has to chase you or your team.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Capability 02</div>
+      <h4>Deal Intelligence Dashboard</h4>
+      <p>Ask "what's the status of the 5th Ave project?" and get an instant answer — timeline, budget, investor exposure, next milestones. Every deal, every number, organized and queryable on demand.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Capability 03</div>
+      <h4>Lender Communication System</h4>
+      <p>Due diligence packages generated on demand. Investment summaries. Security breakdowns. Return timelines. FAQ responses. Professional, accurate, instant — for every lender, every deal, every time.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Capability 04</div>
+      <h4>Follow-Up Enforcement</h4>
+      <p>AI tracks every open thread — every lender question, every team task, every commitment made. Nothing gets dropped. If someone on your team doesn't follow through, the system catches it and flags it before the lender notices.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Capability 05</div>
+      <h4>Team Accountability Layer</h4>
+      <p>SOPs built into the system. Task assignment, progress tracking, deadline enforcement. Your team operates against a clear playbook — and the AI makes sure they actually follow it. No more "I forgot" or "I didn't know."</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Capability 06</div>
+      <h4>Offer & Deal Package Generation</h4>
+      <p>New lending opportunity? AI generates the investment memo, projected returns, security structure, and due diligence package — ready to send to your lender network in minutes, not days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT LOOKS LIKE -->
+<section>
+  <h2>What this <em>actually</em> looks like.</h2>
+  <p>You talk to it like a person. It handles the rest.</p>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+    </div>
+    <div class="terminal-body">
+      <span class="prompt">devon:</span> Send all active lenders an update on the Bellevue project. <br>
+      Timeline pushed 60 days, property listed but no offers yet. <br>
+      Emphasize their security position hasn't changed.<br><br>
+      <span class="comment">// AI drafts personalized updates for 8 lenders...</span><br>
+      <span class="comment">// Each one references their specific investment amount...</span><br>
+      <span class="comment">// Each one includes their projected return date (updated)...</span><br><br>
+      <span class="output">✓ 8 investor update drafts ready for review</span><br>
+      <span class="output">✓ Each personalized with name, amount, position</span><br>
+      <span class="output">✓ Timeline adjusted in deal tracker</span><br>
+      <span class="output">✓ Follow-up reminders set for 14 days</span><br><br>
+      <span class="prompt">devon:</span> Which lenders haven't gotten an update in over 30 days?<br><br>
+      <span class="highlight">⚠ 3 lenders flagged:</span><br>
+      <span class="output">  • Sarah M. — 42 days, $150K in Tacoma project</span><br>
+      <span class="output">  • James R. — 37 days, $80K in Bellevue project</span><br>
+      <span class="output">  • Marcus T. — 31 days, $200K across 2 projects</span><br><br>
+      <span class="prompt">devon:</span> Draft catch-up messages for all three. Apologize for <br>
+      the gap, give them current status on each of their positions.<br><br>
+      <span class="output">✓ 3 personalized messages drafted</span><br>
+      <span class="output">✓ Each references their specific deals and current status</span><br>
+      <span class="output">✓ Tone: professional, transparent, relationship-first</span>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+    </div>
+    <div class="terminal-body">
+      <span class="prompt">devon:</span> New deal: 4-unit multifamily in Kirkland. <br>
+      Purchase price $1.2M, rehab budget $180K, ARV $1.8M. <br>
+      12-month hold. Need $400K in private money. <br>
+      Build me a lender package.<br><br>
+      <span class="comment">// AI generates full investment package...</span><br><br>
+      <span class="output">✓ Investment memo — 1-page executive summary</span><br>
+      <span class="output">✓ Deal breakdown — purchase, rehab, ARV, margins</span><br>
+      <span class="output">✓ Lender security analysis — LTV 76.7%, 1st position</span><br>
+      <span class="output">✓ Projected returns — 10% annual, 12-month term</span><br>
+      <span class="output">✓ Comparable sales pulled from market data</span><br>
+      <span class="output">✓ Ready to send to your lender network</span>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section>
+  <h2>Before vs. <em>After</em></h2>
+
+  <div class="comparison">
+    <div class="comparison-col">
+      <h4>Today — Manual</h4>
+      <ul>
+        <li>Lenders wait days or weeks for updates</li>
+        <li>You personally field every investor question</li>
+        <li>Team drops follow-ups — nobody catches it</li>
+        <li>New deal packages take days to prepare</li>
+        <li>CRM is scattered, nothing enforced</li>
+        <li>Delayed projects = angry, uninformed investors</li>
+        <li>Trust erodes with every silence gap</li>
+      </ul>
+    </div>
+    <div class="comparison-col">
+      <h4>With AI OS — Automated</h4>
+      <ul>
+        <li>Every lender gets weekly updates automatically</li>
+        <li>AI handles routine questions instantly</li>
+        <li>System catches every dropped ball in real-time</li>
+        <li>Deal packages generated in minutes</li>
+        <li>One organized brain — deals, lenders, tasks</li>
+        <li>Proactive updates before anyone has to ask</li>
+        <li>Trust compounds with consistent communication</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 1-HOUR SETUP PLAN -->
+<section>
+  <h2>The <em>1-hour</em> installation plan.</h2>
+  <p>We're doing this today. Here's exactly what happens:</p>
+
+  <div class="timeline">
+    <div class="timeline-item done">
+      <div class="time">Minutes 0–10</div>
+      <h4>Install Claude Desktop + AI OS Blueprint</h4>
+      <p>Download Claude Desktop app. Open the Code tab. Load the full AI OS framework — shared brain, skills, SOPs, and your custom CLAUDE.md identity file configured for your operation.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Minutes 10–20</div>
+      <h4>Configure your Shared Brain</h4>
+      <p>Set up your goals, active projects, lender CRM, and deal pipeline inside the brain. This is where the AI learns who your lenders are, what deals are active, and what the status is on everything.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Minutes 20–35</div>
+      <h4>Load your lenders & active deals</h4>
+      <p>Enter your private money lenders — names, contact preferences, investment amounts, which deals they're in. Enter your active projects — status, timeline, investors attached, next milestones.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Minutes 35–45</div>
+      <h4>Build your first automation</h4>
+      <p>Generate your first batch of investor updates. Draft a lender package for a new deal. Ask the AI to flag any lenders overdue for communication. See it work in real time, on YOUR data.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Minutes 45–55</div>
+      <h4>SOPs & team accountability setup</h4>
+      <p>Define your team's workflows as SOPs the AI enforces. Follow-up cadences, reporting requirements, task ownership. The system becomes the operations manager your team needs.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Minutes 55–60</div>
+      <h4>Go-forward plan & next steps</h4>
+      <p>Map out week 1 priorities. Schedule your first automated lender update cycle. Set up follow-up triggers. You walk away with a functioning system — not a to-do list.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'RE GETTING -->
+<section>
+  <h2>What you're <em>getting.</em></h2>
+
+  <div class="value-item">
+    <span class="label">AI OS Blueprint — Full Framework</span>
+    <span class="amount">$497</span>
+  </div>
+  <div class="value-item">
+    <span class="label">Custom CLAUDE.md — configured for private lending ops</span>
+    <span class="amount">$250</span>
+  </div>
+  <div class="value-item">
+    <span class="label">1-Hour Live Setup + Installation Support</span>
+    <span class="amount">$500</span>
+  </div>
+  <div class="value-item">
+    <span class="label">Lender CRM Template — contacts, deals, follow-ups</span>
+    <span class="amount">$150</span>
+  </div>
+  <div class="value-item">
+    <span class="label">Deal Package Generator — investment memos on demand</span>
+    <span class="amount">$200</span>
+  </div>
+  <div class="value-item">
+    <span class="label">SOPs for Team Accountability</span>
+    <span class="amount">$150</span>
+  </div>
+  <div class="value-item">
+    <span class="label">Ongoing support from Mike for first 30 days</span>
+    <span class="amount">$500</span>
+  </div>
+
+  <div class="value-total">
+    <span class="label">Total Value</span>
+    <span class="amount">$2,247</span>
+  </div>
+
+  <div class="urgency-bar" style="margin-top:24px">
+    <p>Your cost today: <span class="strikethrough" style="color:var(--text-muted)">$2,247</span> → $0</p>
+    <span>You're getting this at zero cost. I'm investing in your success because your results become the proof.</span>
+  </div>
+</section>
+
+<!-- THE ASK -->
+<section>
+  <h2>What I need <em>from you.</em></h2>
+  <p style="color:var(--text);font-size:1.05rem">This is free. But it's not charity — it's an exchange. Here's the deal:</p>
+
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="label">Commitment 01</div>
+      <h4>1 hour of your time today</h4>
+      <p>Dedicated, focused setup time. We install it, configure it, and get it running on your real data. Not "I'll look at it later" — today.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Commitment 02</div>
+      <h4>Actually use it for 30 days</h4>
+      <p>Not just install it and forget it. Run your lender updates through it. Generate your deal packages with it. Let it catch what your team drops. Give it a real shot.</p>
+    </div>
+    <div class="solution-card">
+      <div class="label">Commitment 03</div>
+      <h4>Give me an honest testimonial</h4>
+      <p>After 30 days, tell me what changed. On video, in writing, however you want. If it didn't help, tell me that too. I want the truth — that's what makes this valuable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section>
+  <h2>Why <em>today.</em></h2>
+  <p>Every day without this system is another day where:</p>
+  <p style="color:var(--text)">
+    → A lender is waiting for an update they're not getting<br>
+    → A team member is dropping a ball you won't catch until it's too late<br>
+    → A new deal opportunity sits because the package isn't ready<br>
+    → Trust is eroding in silence<br>
+  </p>
+  <p>This doesn't get better by itself. Your team won't magically start communicating better. You won't magically find more hours in the day. But you can install a system that fills every one of those gaps — today, in 60 minutes.</p>
+
+  <div class="pull-quote">
+    <p>"You don't need more people. You don't need better people. You need a system that makes the people you have 10x more effective — and catches everything they miss."</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Let's <em>go.</em></h2>
+  <p>Click below to see the full product page. Then let's get on a call and install this thing.</p>
+  <a href="https://ai-os-landing-nine.vercel.app" class="cta-btn" target="_blank">See the Full AI OS Blueprint →</a>
+  <br>
+  <a href="#" class="cta-secondary">Questions? Text Mike directly.</a>
+</section>
+
+<footer>
+  <p>Prepared for Devon Alexander by Mike Davis — Founder, SellFi | Creator, T.O.P. Method</p>
+  <p style="margin-top:4px">This proposal was generated using the AI OS Blueprint. Yes, the system built its own pitch.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cookout Gets Equipped &mdash; AI OS Blueprint</title>
+<meta name="description" content="The Cookout collective gets the full AI OS Blueprint — free. No man left behind. 35 AI capabilities. One install. The family eats together.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --bg-card-hover:#141c2b;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.12);
+  --gold-glow:rgba(238,181,68,.25);
+  --red:#ff4757;
+  --green:#2ed573;
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--bg)}
+
+/* --- NOISE OVERLAY --- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+/* --- UTILITY --- */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* --- GRID LINES (subtle background) --- */
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:.08;
+}
+
+/* --- NAV --- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.25rem 2rem;
+  background:rgba(6,8,13,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-logo{
+  font-family:var(--font-mono);font-weight:500;font-size:.85rem;
+  color:var(--gold);letter-spacing:.08em;text-transform:uppercase;
+}
+.nav-logo span{color:var(--text-muted)}
+.nav-cta{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:400;
+  padding:.6rem 1.5rem;
+  border:1px solid var(--gold);color:var(--gold);
+  background:transparent;text-decoration:none;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:all .25s ease;cursor:pointer;
+}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+
+/* --- HERO --- */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:8rem 2rem 6rem;position:relative;
+  text-align:center;
+}
+.hero::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%);
+  opacity:.12;pointer-events:none;filter:blur(80px);
+}
+.hero-inner{max-width:800px;margin:0 auto;width:100%;position:relative;z-index:2}
+.hero-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold)}
+.hero-h1{
+  font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);
+  font-weight:400;line-height:1.05;margin-bottom:1.5rem;
+  letter-spacing:-.02em;
+}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{
+  font-size:1.2rem;color:var(--text-secondary);line-height:1.7;
+  max-width:640px;margin:0 auto 1rem;
+}
+.hero-sub-detail{
+  font-size:1.05rem;color:var(--text-secondary);line-height:1.7;
+  max-width:600px;margin:0 auto 2.5rem;
+}
+.hero-price{
+  display:inline-flex;align-items:center;gap:1rem;
+  margin-bottom:2.5rem;
+}
+.hero-price .original{
+  font-family:var(--font-display);font-size:2rem;
+  color:var(--text-muted);text-decoration:line-through;
+  text-decoration-color:var(--red);
+}
+.hero-price .free{
+  font-family:var(--font-display);font-size:2.8rem;
+  color:var(--gold);line-height:1;
+}
+.hero-price .arrow{
+  font-size:1.5rem;color:var(--text-muted);
+}
+
+/* --- BUTTONS --- */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1.1rem 2.5rem;
+  background:var(--gold);color:var(--bg);
+  font-family:var(--font-body);font-weight:700;font-size:1rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .3s ease;position:relative;overflow:hidden;
+  letter-spacing:.02em;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.2) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .5s ease;
+}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
+
+/* --- SECTIONS --- */
+section{padding:6rem 0;position:relative}
+.section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;
+}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);
+  font-weight:400;line-height:1.15;margin-bottom:1rem;letter-spacing:-.01em;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-desc{
+  font-size:1.1rem;color:var(--text-secondary);max-width:640px;
+  line-height:1.7;margin-bottom:3rem;
+}
+
+/* --- WHAT THIS IS --- */
+.what-section{border-top:1px solid var(--border);background:var(--bg-elevated)}
+.what-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  margin-top:2.5rem;
+}
+.what-item{
+  background:var(--bg-card);border:1px solid var(--border);
+  padding:1.75rem 1.5rem;
+  transition:all .35s ease;
+}
+.what-item:hover{
+  border-color:var(--gold);transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.what-item h3{
+  font-family:var(--font-display);font-size:1.2rem;font-weight:400;
+  margin-bottom:.5rem;color:var(--text);
+}
+.what-item p{
+  font-size:.9rem;color:var(--text-secondary);line-height:1.6;
+}
+
+/* --- THE DEAL --- */
+.deal-section{border-top:1px solid var(--border)}
+.deal-box{
+  max-width:700px;margin:0 auto;
+  background:var(--bg-card);border:2px solid var(--gold);
+  padding:3rem;position:relative;text-align:center;
+}
+.deal-box::before{
+  content:'FREE FOR THE COOKOUT';
+  position:absolute;top:-1px;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;
+  background:var(--gold);color:var(--bg);padding:.4rem 1.25rem;
+  font-weight:600;
+}
+.deal-price{
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  margin-bottom:1.5rem;
+}
+.deal-price .was{
+  font-family:var(--font-display);font-size:2.5rem;
+  color:var(--text-muted);text-decoration:line-through;
+  text-decoration-color:var(--red);
+}
+.deal-price .now{
+  font-family:var(--font-display);font-size:3.5rem;
+  color:var(--gold);line-height:1;
+}
+.deal-price .arrow{font-size:1.5rem;color:var(--text-muted)}
+.deal-features{
+  list-style:none;text-align:left;margin-bottom:2rem;
+  max-width:480px;margin-left:auto;margin-right:auto;
+}
+.deal-features li{
+  padding:.6rem 0;font-size:.95rem;color:var(--text-secondary);
+  display:flex;align-items:flex-start;gap:.75rem;line-height:1.5;
+  border-bottom:1px solid var(--border);
+}
+.deal-features li::before{
+  content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0;
+}
+.deal-features li:last-child{border-bottom:none}
+.deal-exchange{
+  margin-top:1.5rem;padding:1.25rem;
+  border:1px solid var(--border);background:var(--bg-elevated);
+}
+.deal-exchange p{
+  font-size:.95rem;color:var(--text-secondary);line-height:1.7;
+}
+.deal-exchange strong{color:var(--text)}
+
+/* --- HOW TO GET IT --- */
+.get-section{border-top:1px solid var(--border);background:var(--bg-elevated)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:steps}
+.step{
+  position:relative;padding:2.5rem 2rem 2rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  counter-increment:steps;text-align:center;
+}
+.step::before{
+  content:counter(steps);
+  font-family:var(--font-display);font-size:2.5rem;color:var(--gold);
+  display:block;margin-bottom:.75rem;line-height:1;
+}
+.step h3{
+  font-family:var(--font-display);font-size:1.35rem;font-weight:400;
+  margin-bottom:.6rem;
+}
+.step p{color:var(--text-secondary);font-size:.9rem;line-height:1.6}
+.code-badge{
+  display:inline-block;margin-top:1.5rem;
+  font-family:var(--font-mono);font-size:.8rem;
+  color:var(--gold);background:var(--gold-dim);
+  padding:.5rem 1.25rem;letter-spacing:.08em;
+  border:1px solid rgba(238,181,68,.2);
+}
+
+/* --- CTA SECTION --- */
+.cta-section{
+  text-align:center;padding:6rem 2rem;
+  border-top:1px solid var(--border);
+  position:relative;
+}
+.cta-section::before{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,var(--gold-glow) 0%,transparent 70%);
+  opacity:.1;pointer-events:none;filter:blur(60px);
+}
+
+/* --- TESTIMONIAL ASK --- */
+.testimonial-section{border-top:1px solid var(--border);background:var(--bg-elevated)}
+.testimonial-inner{max-width:640px;margin:0 auto}
+.testimonial-inner blockquote{
+  border-left:3px solid var(--gold);
+  padding-left:1.75rem;margin-bottom:2rem;
+}
+.testimonial-inner blockquote p{
+  font-family:var(--font-display);font-size:1.4rem;
+  font-style:italic;font-weight:400;line-height:1.5;
+  color:var(--text);
+}
+.testimonial-prompts{list-style:none;margin-top:2rem}
+.testimonial-prompts li{
+  padding:.85rem 0;border-bottom:1px solid var(--border);
+  color:var(--text-secondary);font-size:.95rem;line-height:1.6;
+  display:flex;align-items:flex-start;gap:.75rem;
+}
+.testimonial-prompts li::before{
+  content:'\2192';color:var(--gold);font-weight:700;flex-shrink:0;
+}
+
+/* --- FOOTER --- */
+footer{
+  padding:3rem 2rem;border-top:1px solid var(--border);
+  text-align:center;
+}
+footer p{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  letter-spacing:.03em;line-height:1.8;
+}
+footer a{color:var(--gold);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* --- DIVIDER --- */
+.gold-divider{
+  width:60px;height:2px;background:var(--gold);
+  margin:0 auto 2rem;
+}
+
+/* --- ANIMATIONS --- */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* --- RESPONSIVE --- */
+@media(max-width:968px){
+  .what-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  nav{padding:1rem 1.25rem}
+  .container{padding:0 1.25rem}
+  .hero{padding:7rem 1.25rem 4rem}
+  section{padding:4.5rem 0}
+  .deal-box{padding:2rem 1.25rem}
+  .hero-price .original{font-size:1.5rem}
+  .hero-price .free{font-size:2.2rem}
+  .deal-price .was{font-size:2rem}
+  .deal-price .now{font-size:2.8rem}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">The Cookout <span>&times; AI OS</span></div>
+  <a href="#get-it" class="nav-cta">Get It Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag reveal">Exclusive &mdash; The Cookout Only</div>
+    <h1 class="hero-h1 reveal reveal-delay-1">No Man <em>Left Behind.</em></h1>
+    <p class="hero-sub reveal reveal-delay-2">I built an AI system that runs my businesses. The research. The content. The deals. The pipeline. All of it. Now The Cookout gets it too.</p>
+    <p class="hero-sub-detail reveal reveal-delay-2">This is the full AI OS Blueprint &mdash; 35 capabilities, the brain architecture, the install automation &mdash; free for every member of The Cookout. Because when one of us levels up, we all level up.</p>
+    <div class="hero-price reveal reveal-delay-3">
+      <span class="original">$497</span>
+      <span class="arrow">&rarr;</span>
+      <span class="free">FREE</span>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e?checkout%5Bdiscount_code%5D=NOMANLEFTBEHIND" class="btn-primary">Claim Your Blueprint &rarr;</a>
+    </div>
+    <p class="reveal reveal-delay-4" style="margin-top:1.5rem;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">The family eats together. &mdash; Mike Davis</p>
+  </div>
+</section>
+
+<!-- WHAT THIS IS -->
+<section class="what-section">
+  <div class="container">
+    <div class="section-tag reveal">What You're Getting</div>
+    <h2 class="section-title reveal reveal-delay-1">A complete AI operating system.<br>Not a chatbot. Not a course. <em>A weapon.</em></h2>
+    <p class="section-desc reveal reveal-delay-2">The AI OS Blueprint turns Claude into a digital employee that actually does the work. It installs on your computer in 30 minutes. Here's what it handles:</p>
+
+    <div class="what-grid">
+      <div class="what-item reveal">
+        <h3>Deal Analysis</h3>
+        <p>Tell it about a deal. It runs comps, cash flow projections, ROI breakdown, risk flags &mdash; and gives you a go/no-go recommendation. The analysis that takes hours, done in 90 seconds.</p>
+      </div>
+      <div class="what-item reveal reveal-delay-1">
+        <h3>Content Creation</h3>
+        <p>A week of social posts, scripts, captions &mdash; in your voice, for your brand. Not generic AI slop. Content that sounds like you because your AI actually knows you.</p>
+      </div>
+      <div class="what-item reveal reveal-delay-2">
+        <h3>Pipeline Management</h3>
+        <p>Your AI tracks every lead, every deal, every project. Flags what's overdue. Tells you who to call. Drafts the outreach. You make the decisions &mdash; it handles the rest.</p>
+      </div>
+      <div class="what-item reveal reveal-delay-3">
+        <h3>Research &amp; Intel</h3>
+        <p>Competitor analysis. Market data. Company research before calls. Topic deep-dives. Your AI pulls it, structures it, and saves it to your brain &mdash; permanently.</p>
+      </div>
+      <div class="what-item reveal">
+        <h3>Negotiation Prep</h3>
+        <p>Walking into a meeting? Your AI pulls everything relevant &mdash; the other party's background, comparable deals, your leverage points, talking points &mdash; and briefs you before you walk in the door.</p>
+      </div>
+      <div class="what-item reveal reveal-delay-1">
+        <h3>Build &amp; Deploy</h3>
+        <p>Websites. Landing pages. Tools. Your AI designs them, codes them, deploys them to a live URL. From a single instruction. This page was built the same way.</p>
+      </div>
+    </div>
+
+    <p class="reveal reveal-delay-2" style="margin-top:2.5rem;color:var(--text-secondary);font-size:1rem;line-height:1.7;text-align:center;max-width:600px;margin-left:auto;margin-right:auto"><strong style="color:var(--text)">35 capabilities total.</strong> Research. Content. Email drafting. Project tracking. Financial analysis. Contract review. SOPs. Lead generation. And more. All installed with one prompt.</p>
+  </div>
+</section>
+
+<!-- THE DEAL -->
+<section class="deal-section">
+  <div class="container">
+    <div class="section-tag reveal" style="justify-content:center">The Deal</div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto">The Cookout takes care <em>of its own.</em></h2>
+    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin-left:auto;margin-right:auto">This isn't charity. This is making sure the whole collective has the same weapons.</p>
+
+    <div class="deal-box reveal reveal-delay-2">
+      <div class="deal-price">
+        <span class="was">$497</span>
+        <span class="arrow">&rarr;</span>
+        <span class="now">$0</span>
+      </div>
+
+      <ul class="deal-features">
+        <li>Complete AI OS Blueprint &mdash; all 35 capabilities</li>
+        <li>All 35 slash commands &mdash; one word triggers full workflows</li>
+        <li>The Brain architecture &mdash; persistent memory that never forgets</li>
+        <li>Magic Install &mdash; paste one prompt, everything sets up automatically</li>
+        <li>First Week Checklist &mdash; guided 7-day onboarding</li>
+        <li>Extension guide &mdash; build new capabilities as you grow</li>
+      </ul>
+
+      <div class="deal-exchange">
+        <p><strong>In exchange:</strong> Give an honest testimonial after 2 weeks of using it. That's it. A quick video or text about what changed. No strings. No catch. The Cookout takes care of its own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO GET IT -->
+<section class="get-section" id="get-it">
+  <div class="container">
+    <div class="section-tag reveal" style="justify-content:center">How To Get It</div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center">Three steps. <em>That's it.</em></h2>
+
+    <div class="steps-grid" style="margin-top:2.5rem">
+      <div class="step reveal">
+        <h3>Click the Button</h3>
+        <p>Hit the link below. The discount code is already applied &mdash; price shows $0 at checkout.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <h3>Check Your Email</h3>
+        <p>You'll get the full Blueprint package &mdash; install guide, all 35 capabilities, the brain architecture, everything.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <h3>Install in 30 Min</h3>
+        <p>Download Claude, paste one prompt, tell it about your business. You're live. Start giving instructions.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem" class="reveal reveal-delay-3">
+      <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e?checkout%5Bdiscount_code%5D=NOMANLEFTBEHIND" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Claim Your Free Blueprint &rarr;</a>
+      <div class="code-badge" style="display:block;margin-top:1.25rem">
+        Discount code auto-applied &mdash; manual entry if needed: NOMANLEFTBEHIND
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL ASK -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="testimonial-inner">
+      <div class="section-tag reveal">The One Ask</div>
+      <h2 class="section-title reveal reveal-delay-1">Use it for 2 weeks.<br>Then tell me <em>what happened.</em></h2>
+
+      <blockquote class="reveal reveal-delay-2">
+        <p>&ldquo;Your testimonial helps me show the world what this system can do. Real results from real entrepreneurs. That's all I need.&rdquo;</p>
+      </blockquote>
+
+      <p class="reveal reveal-delay-2" style="color:var(--text-secondary);font-size:1rem;line-height:1.7;margin-bottom:1rem">After 2 weeks of using the AI OS, send Mike a quick video or text. A few sentences is fine. A 60-second video is gold. Here's what to cover:</p>
+
+      <ul class="testimonial-prompts reveal reveal-delay-3">
+        <li>What was your business like before the AI OS?</li>
+        <li>What does your AI handle for you now?</li>
+        <li>What's the most surprising thing it did?</li>
+        <li>What would you tell someone in The Cookout who's on the fence?</li>
+      </ul>
+
+      <p class="reveal reveal-delay-4" style="margin-top:2rem;color:var(--text-secondary);font-size:.95rem;line-height:1.7">Send it to Mike directly &mdash; text, DM, email, however you normally reach him. That's the deal. Use the system, share what happened, help the next person see what's possible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2">
+    <div class="gold-divider reveal"></div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto">The Cookout <em>gets equipped.</em></h2>
+    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin-left:auto;margin-right:auto">Same system. Same 35 capabilities. Same brain architecture. No man left behind.</p>
+    <div class="reveal reveal-delay-3" style="text-align:center">
+      <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e?checkout%5Bdiscount_code%5D=NOMANLEFTBEHIND" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Claim Your Free Blueprint &rarr;</a>
+    </div>
+    <p class="reveal reveal-delay-4" style="margin-top:1.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">$497 value &bull; Free for The Cookout &bull; Code: NOMANLEFTBEHIND</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by <strong style="color:var(--text)">Mike Davis</strong> &mdash; Creator of the T.O.P. Method &bull; Founder of <a href="https://sellfi.io">SellFi</a></p>
+  <p style="margin-top:.5rem"><a href="https://aiosblueprint.com">aiosblueprint.com</a> &mdash; See the full AI OS Blueprint</p>
+  <p style="margin-top:.75rem">&copy; 2026 Vivant Investments LLC</p>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>

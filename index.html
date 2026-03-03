@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI OS Blueprint — Your Business, Run By AI</title>
-<meta name="description" content="A complete AI operating system with 20 pre-built skills, a structured knowledge brain, and mobile agent access. Installed in 30 minutes.">
+<meta name="description" content="A complete AI operating system — installed in 30 minutes. It researches, builds, deploys, and manages. You just tell it what you need. 20 capabilities. One install. Yours forever.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -116,6 +116,10 @@ nav{
 .hero-h1 em{font-style:italic;color:var(--accent)}
 .hero-sub{
   font-size:1.15rem;color:var(--text-secondary);line-height:1.7;
+  max-width:520px;margin-bottom:1rem;
+}
+.hero-sub-detail{
+  font-size:1.05rem;color:var(--text-secondary);line-height:1.7;
   max-width:520px;margin-bottom:2.5rem;
 }
 .hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
@@ -148,6 +152,7 @@ nav{
   font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
   letter-spacing:.03em;
 }
+.hero-trust a{color:var(--accent);text-decoration:none}
 
 /* --- HERO TERMINAL --- */
 .hero-terminal{
@@ -167,6 +172,10 @@ nav{
 .terminal-dot.r{background:#ff5f57}.terminal-dot.y{background:#febc2e}.terminal-dot.g{background:#28c840}
 .terminal-title{margin-left:.5rem;color:var(--text-muted);font-size:.7rem}
 .terminal-body{padding:1.25rem 1.5rem;color:var(--text-secondary)}
+.terminal-body .prompt{color:var(--accent)}
+.terminal-body .user-input{color:var(--text);font-style:italic}
+.terminal-body .status{color:var(--text-muted)}
+.terminal-body .success{color:var(--green)}
 .terminal-body .dir{color:var(--accent)}
 .terminal-body .file{color:var(--text-secondary)}
 .terminal-body .comment{color:var(--text-muted);font-style:italic}
@@ -197,16 +206,18 @@ section{padding:7rem 0;position:relative}
   line-height:1.7;margin-bottom:3.5rem;
 }
 
-/* --- PROBLEM --- */
+/* --- THE SHIFT (problem) --- */
 .problem{border-top:1px solid var(--border);background:var(--bg-elevated)}
 .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.problem-stat{
-  font-family:var(--font-display);font-size:clamp(4rem,8vw,7rem);
-  color:var(--accent);line-height:1;margin-bottom:.5rem;
+.pull-quote{
+  font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.8rem);
+  font-style:italic;font-weight:400;line-height:1.5;
+  color:var(--text);border-left:3px solid var(--accent);
+  padding-left:1.75rem;margin-bottom:2rem;
 }
-.problem-stat-label{
-  font-size:1.1rem;color:var(--text-secondary);margin-bottom:2rem;
-  max-width:400px;
+.pull-quote-attr{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  letter-spacing:.05em;margin-bottom:2.5rem;padding-left:1.75rem;
 }
 .problem-list{list-style:none}
 .problem-list li{
@@ -215,61 +226,117 @@ section{padding:7rem 0;position:relative}
   display:flex;align-items:flex-start;gap:1rem;
 }
 .problem-list li::before{
-  content:'×';color:var(--red);font-size:1.2rem;font-weight:700;
+  content:'\00d7';color:var(--red);font-size:1.2rem;font-weight:700;
   flex-shrink:0;margin-top:-.1rem;
 }
-
-/* --- PACKAGE --- */
-.package-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+.problem-punchline{
+  margin-top:2rem;font-size:1.05rem;color:var(--text);line-height:1.7;
 }
-.package-card{
+
+/* --- SCENARIO BLOCKS --- */
+.scenario-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+}
+.scenario-block{
   background:var(--bg-card);border:1px solid var(--border);
-  padding:2rem;position:relative;
+  padding:2.25rem 2rem;position:relative;
   transition:all .35s ease;
 }
-.package-card:hover{
+.scenario-block:hover{
   border-color:var(--accent);transform:translateY(-4px);
   box-shadow:0 12px 40px rgba(0,0,0,.3);
 }
-.package-icon{
-  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-  background:var(--accent-dim);color:var(--accent);
-  font-family:var(--font-mono);font-size:1rem;font-weight:500;
-  margin-bottom:1.25rem;border:1px solid rgba(0,229,255,.15);
+.scenario-command{
+  font-family:var(--font-display);font-size:1.25rem;font-weight:400;
+  font-style:italic;color:var(--text);margin-bottom:.85rem;
+  line-height:1.35;
 }
-.package-card h3{
-  font-family:var(--font-display);font-size:1.35rem;margin-bottom:.6rem;
-  font-weight:400;
+.scenario-command::before{
+  content:'\201C';color:var(--accent);
 }
-.package-card p{color:var(--text-secondary);font-size:.9rem;line-height:1.6}
+.scenario-command::after{
+  content:'\201D';color:var(--accent);
+}
+.scenario-result{
+  font-size:.9rem;color:var(--text-secondary);line-height:1.7;
+}
 
-/* --- SKILLS --- */
-.skills{background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.skills-category{
-  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
-  color:var(--gold);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:1.25rem;margin-top:2.5rem;
-  display:flex;align-items:center;gap:.6rem;
+/* --- TELEGRAM MOCK --- */
+.telegram-section{background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.telegram-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.telegram-mock{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;max-width:400px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
-.skills-category:first-of-type{margin-top:0}
-.skills-category::before{content:'';width:16px;height:1px;background:var(--gold)}
-.skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;
-  background:var(--border);border:1px solid var(--border);
+.telegram-header{
+  background:#1c2733;padding:.75rem 1.25rem;
+  display:flex;align-items:center;gap:.75rem;
+  border-bottom:1px solid var(--border);
 }
-.skill-item{
-  background:var(--bg-card);padding:1.25rem 1.5rem;
-  transition:all .25s ease;cursor:default;
+.telegram-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--bg);
 }
-.skill-item:hover{background:var(--bg-card-hover)}
-.skill-name{
-  font-family:var(--font-mono);font-size:.8rem;font-weight:500;
-  color:var(--accent);margin-bottom:.35rem;
-  display:flex;align-items:center;gap:.5rem;
+.telegram-name{font-size:.9rem;font-weight:600;color:var(--text)}
+.telegram-status{font-size:.7rem;color:var(--green)}
+.telegram-body{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.msg{
+  max-width:85%;padding:.65rem 1rem;border-radius:12px;
+  font-size:.85rem;line-height:1.55;
 }
-.skill-name::before{content:'/';color:var(--text-muted)}
-.skill-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.55}
+.msg-you{
+  align-self:flex-end;
+  background:#2b5278;color:var(--text);
+  border-bottom-right-radius:4px;
+}
+.msg-ai{
+  align-self:flex-start;
+  background:var(--bg-elevated);color:var(--text-secondary);
+  border:1px solid var(--border);border-bottom-left-radius:4px;
+}
+.msg-time{
+  font-size:.65rem;color:var(--text-muted);margin-top:.15rem;
+  font-family:var(--font-mono);
+}
+.msg-you .msg-time{text-align:right}
+
+/* --- SCENARIOS LIST (mobile section body copy) --- */
+.mobile-scenarios{list-style:none;margin-top:2.5rem}
+.mobile-scenarios li{
+  padding:1.25rem 0;border-bottom:1px solid var(--border);
+  color:var(--text-secondary);font-size:1rem;line-height:1.7;
+}
+.mobile-scenarios li strong{color:var(--text);font-weight:600}
+
+/* --- VALUE MATH --- */
+.value-math{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.math-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
+}
+.math-block{
+  background:var(--bg-card);border:1px solid var(--border);
+  padding:2.5rem 2rem;text-align:center;
+  transition:all .35s ease;
+}
+.math-block:hover{
+  border-color:var(--accent);transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.math-block.final{border-color:var(--accent);background:var(--accent-dim)}
+.math-number{
+  font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);
+  color:var(--accent);line-height:1;margin-bottom:.75rem;
+}
+.math-block:not(.final) .math-number{color:var(--text-muted)}
+.math-label{
+  font-size:.9rem;color:var(--text-secondary);line-height:1.55;
+}
+.math-note{
+  margin-top:1.5rem;text-align:center;font-family:var(--font-mono);
+  font-size:.75rem;color:var(--text-muted);letter-spacing:.03em;
+}
 
 /* --- HOW IT WORKS --- */
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:steps}
@@ -288,7 +355,7 @@ section{padding:7rem 0;position:relative}
 }
 .step-time{
   font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);
-  margin-bottom:.75rem;letter-spacing:.05em;
+  margin-bottom:.75rem;letter-spacing:.05em;display:block;
 }
 .step h3{
   font-family:var(--font-display);font-size:1.5rem;font-weight:400;
@@ -319,8 +386,8 @@ section{padding:7rem 0;position:relative}
   font-size:.95rem;color:var(--text-secondary);
   display:flex;align-items:center;gap:.75rem;
 }
-.compare-col.not li::before{content:'✕';color:var(--red);font-weight:700}
-.compare-col.is li::before{content:'→';color:var(--green);font-weight:700}
+.compare-col.not li::before{content:'\2715';color:var(--red);font-weight:700}
+.compare-col.is li::before{content:'\2192';color:var(--green);font-weight:700}
 
 /* --- PRICING --- */
 .pricing{background:var(--bg-elevated);border-top:1px solid var(--border)}
@@ -360,7 +427,7 @@ section{padding:7rem 0;position:relative}
   padding:.55rem 0;font-size:.9rem;color:var(--text-secondary);
   display:flex;align-items:flex-start;gap:.75rem;line-height:1.5;
 }
-.price-features li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.price-features li::before{content:'\2713';color:var(--accent);font-weight:700;flex-shrink:0}
 .price-btn{
   display:block;width:100%;padding:1rem;text-align:center;
   font-family:var(--font-body);font-weight:600;font-size:.95rem;
@@ -417,46 +484,6 @@ footer{
 }
 footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em}
 
-/* --- ANIMATIONS --- */
-.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-
-/* --- RESPONSIVE --- */
-@media(max-width:968px){
-  .hero-inner{grid-template-columns:1fr;gap:3rem}
-  .hero-terminal{max-width:500px}
-  .problem-grid{grid-template-columns:1fr;gap:3rem}
-  .package-grid{grid-template-columns:1fr 1fr}
-  .steps-grid{grid-template-columns:1fr}
-  .compare-grid{grid-template-columns:1fr}
-  .pricing-grid{grid-template-columns:1fr;max-width:480px}
-}
-/* --- VALUE MATH --- */
-.value-math{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.math-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
-}
-.math-block{
-  background:var(--bg-card);border:1px solid var(--border);
-  padding:2.5rem 2rem;text-align:center;
-  transition:all .35s ease;
-}
-.math-block:hover{
-  border-color:var(--accent);transform:translateY(-4px);
-  box-shadow:0 12px 40px rgba(0,0,0,.3);
-}
-.math-number{
-  font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);
-  color:var(--accent);line-height:1;margin-bottom:.75rem;
-}
-.math-label{
-  font-size:.9rem;color:var(--text-secondary);line-height:1.55;
-}
-
 /* --- EMAIL CAPTURE --- */
 .email-capture{
   border-top:1px solid var(--border);
@@ -473,25 +500,6 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   font-size:1rem;color:var(--text-secondary);line-height:1.7;
   margin-bottom:2rem;
 }
-.email-form{
-  display:flex;gap:.75rem;max-width:500px;margin:0 auto;
-}
-.email-form input[type="email"]{
-  flex:1;padding:1rem 1.25rem;
-  background:var(--bg-card);border:1px solid var(--border);
-  color:var(--text);font-family:var(--font-body);font-size:.95rem;
-  outline:none;transition:border-color .25s ease;
-}
-.email-form input[type="email"]::placeholder{color:var(--text-muted)}
-.email-form input[type="email"]:focus{border-color:var(--accent)}
-.email-form button{
-  padding:1rem 1.75rem;
-  background:var(--accent);color:var(--bg);
-  font-family:var(--font-body);font-weight:600;font-size:.9rem;
-  border:none;cursor:pointer;white-space:nowrap;
-  transition:all .3s ease;
-}
-.email-form button:hover{box-shadow:0 8px 30px var(--accent-glow);transform:translateY(-2px)}
 
 /* --- GUARANTEE --- */
 .guarantee{
@@ -548,7 +556,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   position:relative;z-index:2;
 }
 .vsl-wrapper{
-  position:relative;width:100%;padding-bottom:56.25%; /* 16:9 */
+  position:relative;width:100%;padding-bottom:56.25%;
   background:var(--bg-elevated);border:1px solid var(--border);
   border-radius:6px;overflow:hidden;
 }
@@ -574,11 +582,22 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   color:var(--text-secondary);letter-spacing:.05em;
 }
 
+/* --- ANIMATIONS --- */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* --- RESPONSIVE --- */
 @media(max-width:968px){
   .hero-inner{grid-template-columns:1fr;gap:3rem}
   .hero-terminal{max-width:500px}
   .problem-grid{grid-template-columns:1fr;gap:3rem}
-  .package-grid{grid-template-columns:1fr 1fr}
+  .scenario-grid{grid-template-columns:1fr}
+  .telegram-grid{grid-template-columns:1fr;gap:3rem}
+  .telegram-mock{margin:0 auto}
   .steps-grid{grid-template-columns:1fr}
   .compare-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr;max-width:480px}
@@ -590,14 +609,11 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .container{padding:0 1.25rem}
   .hero{padding:7rem 1.25rem 4rem}
   section{padding:5rem 0}
-  .package-grid{grid-template-columns:1fr}
-  .skills-grid{grid-template-columns:1fr}
+  .scenario-grid{grid-template-columns:1fr}
   .hero-buttons{flex-direction:column}
   .btn-primary,.btn-secondary{width:100%;justify-content:center}
   .final-buttons{flex-direction:column;align-items:center}
   .math-grid{grid-template-columns:1fr}
-  .email-form{flex-direction:column}
-  .email-form button{width:100%}
 }
 </style>
 </head>
@@ -608,18 +624,19 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 <!-- NAV -->
 <nav>
   <div class="nav-logo">AI OS <span>Blueprint</span></div>
-  <a href="#pricing" class="nav-cta">Get the Blueprint</a>
+  <a href="#pricing" class="nav-cta">See What's Possible</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-tag reveal">AI Operating System</div>
+      <div class="hero-tag reveal">2026 Changed Everything</div>
       <h1 class="hero-h1 reveal reveal-delay-1">Your Business.<br><em>Run by AI.</em></h1>
-      <p class="hero-sub reveal reveal-delay-2">A complete AI operating system with 20 pre-built skills, a structured knowledge brain, and mobile agent access — installed in 30 minutes.</p>
+      <p class="hero-sub reveal reveal-delay-2">Your next employee doesn't sleep, doesn't quit, and works faster than your entire team.</p>
+      <p class="hero-sub-detail reveal reveal-delay-2">A complete AI operating system &mdash; installed on your computer in 30 minutes. It researches. It builds. It deploys. It manages. You just tell it what you need.</p>
       <div class="hero-buttons reveal reveal-delay-3">
-        <a href="#pricing" class="btn-primary">Get the Blueprint &rarr;</a>
+        <a href="#how-it-works" class="btn-primary">See How It Works &rarr;</a>
         <a href="#pricing" class="btn-secondary">See Pricing &amp; Options &rarr;</a>
       </div>
       <!-- Unhide this section and add Loom embed URL when video is recorded -->
@@ -631,7 +648,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           </div>
         </div>
       </div>
-      <p class="hero-trust reveal reveal-delay-4">Built by an entrepreneur who runs his entire business with this system.</p>
+      <p class="hero-trust reveal reveal-delay-4">Built by the founder of <a href="https://sellfi.io">SellFi</a> &mdash; who built it, and this landing page, using this exact system.</p>
     </div>
     <div class="hero-terminal reveal reveal-delay-2">
       <div class="terminal-bar">
@@ -641,213 +658,218 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <span class="terminal-title">ai-os-blueprint</span>
       </div>
       <div class="terminal-body">
-        <div><span class="dir">ai-os-blueprint/</span></div>
-        <div class="indent"><span class="dir">brain/</span> <span class="comment">← your AI's knowledge</span></div>
-        <div class="indent2"><span class="file">goals.md</span></div>
-        <div class="indent2"><span class="file">projects/</span></div>
-        <div class="indent2"><span class="file">people/</span></div>
-        <div class="indent2"><span class="file">sops/</span></div>
-        <div class="indent2"><span class="file">daily/</span></div>
-        <div class="indent"><span class="dir">skills/</span> <span class="comment">← 20 pre-built</span></div>
-        <div class="indent2"><span class="highlight">deal-analyzer/</span></div>
-        <div class="indent2"><span class="highlight">deep-research/</span></div>
-        <div class="indent2"><span class="highlight">content-batch/</span></div>
-        <div class="indent2"><span class="file">... 17 more</span></div>
-        <div class="indent"><span class="dir">commands/</span> <span class="comment">← slash commands</span></div>
-        <div class="indent"><span class="file">CLAUDE.md</span> <span class="comment">← AI identity</span></div>
-        <div class="indent"><span class="file">INSTALL.md</span></div>
-        <div style="margin-top:.75rem"><span style="color:var(--green)">$</span> claude<span class="terminal-cursor"></span></div>
+        <div><span class="prompt">$</span> <span class="user-input">"Build me a landing page for the new product.</span></div>
+        <div><span class="user-input">&nbsp;&nbsp;&nbsp;Wire it to payments. Deploy it live.</span></div>
+        <div><span class="user-input">&nbsp;&nbsp;&nbsp;Send me the link when it's done."</span></div>
+        <div style="margin-top:.75rem"><span class="status">&rarr; Researching competitor landing pages...</span></div>
+        <div><span class="status">&rarr; Designing page structure...</span></div>
+        <div><span class="status">&rarr; Writing conversion copy...</span></div>
+        <div><span class="status">&rarr; Connecting Lemon Squeezy checkout...</span></div>
+        <div><span class="status">&rarr; Deploying to Vercel...</span></div>
+        <div style="margin-top:.5rem"><span class="success">&check; Live at yoursite.com &mdash; link sent to Telegram.</span></div>
+        <div style="margin-top:.75rem"><span style="color:var(--green)">$</span><span class="terminal-cursor"></span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
+<!-- THE SHIFT -->
 <section class="problem">
   <div class="container">
-    <div class="problem-grid">
+    <div class="section-tag reveal">The Shift</div>
+    <h2 class="section-title reveal reveal-delay-1">AI didn't work for you before.<br>That wasn't <em>AI's fault.</em></h2>
+    <div class="problem-grid" style="margin-top:3rem">
       <div class="reveal">
-        <div class="problem-stat">88%</div>
-        <p class="problem-stat-label">of businesses tried AI tools in 2025.<br>Only a fraction built systems that stuck.</p>
-        <div class="problem-stat" style="font-size:clamp(2rem,4vw,3.5rem);color:var(--gold)">Prompts aren't systems.</div>
+        <p class="pull-quote">&ldquo;I told my AI to build a landing page, connect it to payments, deploy it to a live URL, and text me the link. I was laying in bed. It took 20 minutes.&rdquo;</p>
+        <p class="pull-quote-attr">&mdash; Built with the AI OS Blueprint</p>
       </div>
       <div class="reveal reveal-delay-2">
         <ul class="problem-list">
-          <li>You tried ChatGPT. It was impressive for 20 minutes, then you forgot about it.</li>
-          <li>You watched the YouTube tutorials. You set up a prompt template. It didn't stick.</li>
-          <li>You downloaded someone's "AI toolkit." It was a PDF with generic instructions.</li>
-          <li>You hired a VA to "figure out AI." They're still figuring it out.</li>
-          <li>You know AI could transform your business. You just can't make it <em>work</em>.</li>
+          <li>You're still the bottleneck. Every decision, every task, every email &mdash; it flows through you.</li>
+          <li>You hired people. They need training, management, days off, and they still drop the ball.</li>
+          <li>You tried AI tools. They answer questions. They don't <em>do</em> work.</li>
+          <li>You know what needs to happen in your business. You just can't clone yourself to do it all.</li>
+          <li>The gap was never about AI being smart enough. It was about AI having no context, no memory, and no ability to actually execute.</li>
         </ul>
-        <p style="margin-top:2rem;color:var(--text);font-size:1.05rem">The gap isn't knowledge. It's <strong>infrastructure</strong>. You need a <em>system</em> — not a prompt.</p>
+        <p class="problem-punchline">That gap is closed. <strong>Right now. Today.</strong> What you're looking at is the infrastructure that makes AI go from &ldquo;interesting chatbot&rdquo; to &ldquo;I can't imagine running my business without this.&rdquo;</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE MATH — VALUE QUANTIFICATION -->
+<!-- WHAT THIS ACTUALLY IS — SCENARIO BLOCKS -->
+<section>
+  <div class="container">
+    <div class="section-tag reveal">What This Is</div>
+    <h2 class="section-title reveal reveal-delay-1">Not a chatbot. Not a template.<br>A digital employee that actually <em>does the work.</em></h2>
+    <p class="section-desc reveal reveal-delay-2">When you install the AI OS Blueprint, your AI doesn't just answer questions &mdash; it operates. Here's what that looks like in practice:</p>
+
+    <div class="scenario-grid">
+      <div class="scenario-block reveal">
+        <div class="scenario-command">Research this company before my call at 2pm.</div>
+        <p class="scenario-result">Your AI pulls competitor data, recent news, financial info, key people &mdash; and drops a full briefing on your desktop. Done before you finish your coffee.</p>
+      </div>
+      <div class="scenario-block reveal reveal-delay-1">
+        <div class="scenario-command">Write me a week of social media content.</div>
+        <p class="scenario-result">Not generic AI slop. Content that sounds like you, references your brand, your audience, your voice &mdash; because your AI knows all of it. 10 posts. Captions. Hashtags. Ready to schedule.</p>
+      </div>
+      <div class="scenario-block reveal reveal-delay-2">
+        <div class="scenario-command">Analyze this deal and tell me if I should move on it.</div>
+        <p class="scenario-result">Cash flow projections. ROI breakdown. Comparable properties. Risk flags. Go/no-go recommendation. The analysis that used to take your team a full day &mdash; done in 90 seconds.</p>
+      </div>
+      <div class="scenario-block reveal reveal-delay-1">
+        <div class="scenario-command">Build me a website for this product and deploy it.</div>
+        <p class="scenario-result">Not a mockup. Not a wireframe. A live, functioning website &mdash; designed, coded, deployed to a real URL. From a single instruction.</p>
+      </div>
+      <div class="scenario-block reveal reveal-delay-2">
+        <div class="scenario-command">I just had a meeting. Here are my notes. Handle the follow-ups.</div>
+        <p class="scenario-result">Your AI extracts every action item, drafts the follow-up emails, updates your project tracker, creates tasks for your team &mdash; all before you walk back to your desk.</p>
+      </div>
+      <div class="scenario-block reveal reveal-delay-3">
+        <div class="scenario-command">Manage my pipeline. Tell me what needs attention today.</div>
+        <p class="scenario-result">Your AI checks every lead, every deal, every project. Flags what's overdue. Tells you who to call. Drafts the outreach. You make the decisions &mdash; it handles everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR AI, IN YOUR POCKET — MOBILE SECTION -->
+<section class="telegram-section">
+  <div class="container">
+    <div class="section-tag reveal">Your AI, In Your Pocket</div>
+    <h2 class="section-title reveal reveal-delay-1">Run your business from your phone.<br><em>Literally.</em></h2>
+    <p class="section-desc reveal reveal-delay-2">This isn't a notification app. This is full AI capability &mdash; from a text message.</p>
+
+    <div class="telegram-grid">
+      <div class="telegram-mock reveal">
+        <div class="telegram-header">
+          <div class="telegram-avatar">AI</div>
+          <div>
+            <div class="telegram-name">AI OS</div>
+            <div class="telegram-status">online</div>
+          </div>
+        </div>
+        <div class="telegram-body">
+          <div class="msg msg-you">
+            Research the top 5 competitors in the AI automation space. Save the report to my brain.
+            <div class="msg-time">10:42 PM</div>
+          </div>
+          <div class="msg msg-ai">
+            On it. Researching now...
+            <div class="msg-time">10:42 PM</div>
+          </div>
+          <div class="msg msg-ai">
+            Done. Full competitive analysis saved. Key finding: most charge $200-500/mo for what you're offering as a one-time purchase. Want me to draft positioning copy based on this?
+            <div class="msg-time">10:45 PM</div>
+          </div>
+          <div class="msg msg-you">
+            Yes. Make it aggressive.
+            <div class="msg-time">10:45 PM</div>
+          </div>
+          <div class="msg msg-ai">
+            Drafting now. Give me 2 minutes.
+            <div class="msg-time">10:46 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <ul class="mobile-scenarios">
+          <li><strong>You're at dinner.</strong> A deal comes in. You pull out your phone and text: "Analyze this deal." Ninety seconds later &mdash; full breakdown, on your phone.</li>
+          <li><strong>You're on vacation.</strong> A client emails. You text: "Draft a response to Sarah's email. Professional but firm on the timeline." Done. Sent to your drafts. You review it, hit send, go back to the beach.</li>
+          <li><strong>You wake up at 2am with an idea.</strong> You text: "Research whether this business model works. Pull market data. Save everything." You go back to sleep. By morning, there's a full report waiting.</li>
+        </ul>
+        <p style="margin-top:2rem;font-size:1.1rem;color:var(--text);line-height:1.7"><strong>This is Tier 2.</strong> Your AI OS on your computer is powerful. Your AI OS in your pocket is a different level entirely. This is the piece that makes people say <em style="color:var(--accent)">&ldquo;holy shit&rdquo;</em> when they see it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MATH -->
 <section class="value-math">
   <div class="container">
     <div class="section-tag reveal">The Math</div>
-    <h2 class="section-title reveal reveal-delay-1">The numbers speak <em>for themselves.</em></h2>
-    <p class="section-desc reveal reveal-delay-2">Here's what you're actually getting when you install the AI OS Blueprint.</p>
+    <h2 class="section-title reveal reveal-delay-1">What would you pay for an employee <em>this capable?</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Here's what the alternatives actually cost.</p>
 
     <div class="math-grid">
       <div class="math-block reveal">
-        <div class="math-number">80+ Hours</div>
-        <div class="math-label">of AI-powered work, ready on Day 1</div>
+        <div class="math-number">$4&ndash;8K/mo</div>
+        <div class="math-label">Virtual assistant. Works 8 hours. Needs training. Takes vacations. Makes mistakes. Quits.</div>
       </div>
       <div class="math-block reveal reveal-delay-1">
-        <div class="math-number">$7,000+</div>
-        <div class="math-label">worth of automation engineering, packaged for you</div>
+        <div class="math-number">$15&ndash;25K/mo</div>
+        <div class="math-label">Executive assistant or ops manager. Better, but still one person, still limited hours, still human speed.</div>
       </div>
       <div class="math-block reveal reveal-delay-2">
-        <div class="math-number">$4,000/mo</div>
-        <div class="math-label">what a virtual assistant costs. Your AI OS costs $497 once.</div>
+        <div class="math-number">$50&ndash;200K/yr</div>
+        <div class="math-label">Fractional COO or agency retainer to systematize your business.</div>
       </div>
-      <div class="math-block reveal reveal-delay-3">
-        <div class="math-number">60 Seconds</div>
-        <div class="math-label">to install. One prompt. Claude does the rest.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT YOU GET -->
-<section class="package">
-  <div class="container">
-    <div class="section-tag reveal">What You Get</div>
-    <h2 class="section-title reveal reveal-delay-1">Not a template.<br>A complete <em>operating system.</em></h2>
-    <p class="section-desc reveal reveal-delay-2">Everything your AI needs to understand your business, execute real work, and get smarter over time.</p>
-
-    <div class="package-grid">
-      <div class="package-card reveal">
-        <div class="package-icon">🧠</div>
-        <h3>Structured Brain</h3>
-        <p>Goals, projects, SOPs, contacts, daily logs, calendar — all in a format your AI reads automatically. It knows what you're working on before you tell it.</p>
-      </div>
-      <div class="package-card reveal reveal-delay-1">
-        <div class="package-icon">⚡</div>
-        <h3>20 Pre-Built Skills</h3>
-        <p>Research, content generation, deal analysis, lead tracking, email drafting, competitor analysis, and 14 more. Working skills — not templates you still have to build.</p>
-      </div>
-      <div class="package-card reveal reveal-delay-2">
-        <div class="package-icon">/</div>
-        <h3>Slash Commands</h3>
-        <p>Type /deal-analyzer or /content-batch and watch your AI execute. 20 commands mapped to 20 skills. One word triggers a complete workflow.</p>
-      </div>
-      <div class="package-card reveal reveal-delay-1">
-        <div class="package-icon">📖</div>
-        <h3>Installation Guide</h3>
-        <p>Step-by-step walkthrough plus a First Week Checklist. From zero to running in 30 minutes. No coding required.</p>
-      </div>
-      <div class="package-card reveal reveal-delay-2">
-        <div class="package-icon">🔧</div>
-        <h3>Extension Guide</h3>
-        <p>Build your own skills. Your AI OS grows with your business. Full guide with templates, naming conventions, and examples.</p>
-      </div>
-      <div class="package-card reveal reveal-delay-3">
-        <div class="package-icon">📱</div>
-        <h3>Mobile Agent <span style="font-size:.75rem;color:var(--gold);font-family:var(--font-mono)">TIER 2</span></h3>
-        <p>Full Claude Code capabilities from your phone via Telegram. Build websites, run research, manage deals — all from a text message. Anywhere.</p>
+      <div class="math-block final reveal reveal-delay-3">
+        <div class="math-number">$497</div>
+        <div class="math-label">Your AI OS. Smarter than most hires. Faster than any team. 24/7. Never forgets. Never quits. Gets better every day. <strong style="color:var(--text)">Once.</strong></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="skills">
-  <div class="container">
-    <div class="section-tag reveal">The 20 Skills</div>
-    <h2 class="section-title reveal reveal-delay-1">Every skill works <em>out of the box.</em></h2>
-    <p class="section-desc reveal reveal-delay-2">No API keys. No configuration. Install the blueprint, run the command, get results.</p>
-
-    <div class="skills-category reveal">Business Operations — 14 Skills</div>
-    <div class="skills-grid reveal reveal-delay-1">
-      <div class="skill-item"><div class="skill-name">brain-dump</div><div class="skill-desc">Quick capture — AI auto-files info into the right brain location</div></div>
-      <div class="skill-item"><div class="skill-name">content-batch</div><div class="skill-desc">Generate 5-10 social media posts for any topic across platforms</div></div>
-      <div class="skill-item"><div class="skill-name">deep-research</div><div class="skill-desc">Web research on any topic — comprehensive report saved to brain</div></div>
-      <div class="skill-item"><div class="skill-name">competitor-analysis</div><div class="skill-desc">Pricing, features, market position, gaps — full competitive landscape</div></div>
-      <div class="skill-item"><div class="skill-name">meeting-to-actions</div><div class="skill-desc">Meeting notes or transcript → decisions, action items, follow-ups</div></div>
-      <div class="skill-item"><div class="skill-name">email-drafter</div><div class="skill-desc">Professional emails — cold outreach, follow-ups, proposals, negotiations</div></div>
-      <div class="skill-item"><div class="skill-name">sop-builder</div><div class="skill-desc">Describe a process → complete standard operating procedure</div></div>
-      <div class="skill-item"><div class="skill-name">lead-tracker</div><div class="skill-desc">Track leads through pipeline stages — new → contacted → closed</div></div>
-      <div class="skill-item"><div class="skill-name">social-media-calendar</div><div class="skill-desc">Multi-platform content calendar with captions, hashtags, posting times</div></div>
-      <div class="skill-item"><div class="skill-name">market-research</div><div class="skill-desc">Market size, trends, growth rates, key players, opportunities</div></div>
-      <div class="skill-item"><div class="skill-name">project-pulse</div><div class="skill-desc">Instant status dashboard across all active projects</div></div>
-      <div class="skill-item"><div class="skill-name">weekly-review</div><div class="skill-desc">What got done, what slipped, goal alignment, next week priorities</div></div>
-      <div class="skill-item"><div class="skill-name">invoice-generator</div><div class="skill-desc">Professional formatted invoices with line items and payment terms</div></div>
-      <div class="skill-item"><div class="skill-name">client-onboarding</div><div class="skill-desc">New client → contact file + project + welcome email + checklist</div></div>
-    </div>
-
-    <div class="skills-category reveal" style="margin-top:3rem">Real Estate Bonus — 6 Skills</div>
-    <div class="skills-grid reveal reveal-delay-1">
-      <div class="skill-item"><div class="skill-name">deal-analyzer</div><div class="skill-desc">Full deal analysis — cash flow, ROI, cap rate, DSCR, go/no-go</div></div>
-      <div class="skill-item"><div class="skill-name">rental-analysis</div><div class="skill-desc">Rental market analysis — LTR, MTR, STR, co-living, Section 8</div></div>
-      <div class="skill-item"><div class="skill-name">property-research</div><div class="skill-desc">Deep dive on any address — value, history, taxes, neighborhood</div></div>
-      <div class="skill-item"><div class="skill-name">deal-marketing-package</div><div class="skill-desc">One-pager, social posts, email blast, investor pitch — one command</div></div>
-      <div class="skill-item"><div class="skill-name">seller-outreach-drafter</div><div class="skill-desc">Personalized letter, text, email, voicemail, cold call script</div></div>
-      <div class="skill-item"><div class="skill-name">investment-calculator</div><div class="skill-desc">BRRRR, flip, hold, seller finance — side-by-side projections</div></div>
-    </div>
+    <p class="math-note reveal reveal-delay-4">The $20/month Claude Pro subscription is the only ongoing cost. That's the AI engine &mdash; not our product.</p>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section>
+<section id="how-it-works">
   <div class="container">
-    <div class="section-tag reveal">How It Works</div>
-    <h2 class="section-title reveal reveal-delay-1">Live in <em>30 minutes.</em></h2>
+    <div class="section-tag reveal">Dead Simple</div>
+    <h2 class="section-title reveal reveal-delay-1">Three steps. Thirty minutes. <em>That's it.</em></h2>
     <p class="section-desc reveal reveal-delay-2">No developers. No terminal. No coding. Just the Claude desktop app and your $20/mo subscription.</p>
 
     <div class="steps-grid">
       <div class="step reveal">
         <span class="step-time">5 minutes</span>
         <h3>Download Claude</h3>
-        <p>Download the free Claude desktop app. Subscribe to Claude Pro ($20/mo). Click the Code tab. Done.</p>
+        <p>Free desktop app from claude.ai. Subscribe to Pro ($20/mo). Click the Code tab. You're in.</p>
       </div>
       <div class="step reveal reveal-delay-1">
-        <span class="step-time">10 minutes</span>
-        <h3>Paste the Magic Prompt</h3>
-        <p>Copy one prompt from the install guide, paste it into Claude Code. It installs everything automatically in 60 seconds.</p>
+        <span class="step-time">60 seconds</span>
+        <h3>Paste One Prompt</h3>
+        <p>Copy the Magic Install Prompt. Paste it. Your AI installs the entire operating system automatically. 20 capabilities. The brain. The commands. Everything.</p>
       </div>
       <div class="step reveal reveal-delay-2">
         <span class="step-time">15 minutes</span>
-        <h3>Customize Your Brain</h3>
-        <p>Fill in goals.md and CLAUDE.md. Tell your AI who you are, what you're building, and what matters.</p>
+        <h3>Tell It Who You Are</h3>
+        <p>Fill in your goals, your business, your priorities. Now your AI knows you &mdash; not generically, specifically. It knows what you're building and what matters.</p>
       </div>
     </div>
 
     <div class="step-result reveal" style="margin-top:2.5rem">
-      <p>You're live. Ask your AI anything about your business.</p>
+      <p>You're live. Start giving instructions. Your AI is ready to work.</p>
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
+<!-- LET'S BE CLEAR -->
 <section style="border-top:1px solid var(--border)">
   <div class="container">
     <div class="section-tag reveal">Let's Be Clear</div>
-    <h2 class="section-title reveal reveal-delay-1">Know what you're <em>buying.</em></h2>
+    <h2 class="section-title reveal reveal-delay-1">This is not what you <em>think it is.</em></h2>
 
     <div class="compare-grid">
       <div class="compare-col not reveal">
         <h3>This is NOT</h3>
         <ul>
-          <li>A ChatGPT wrapper or prompt template</li>
-          <li>A course teaching you "how to use AI"</li>
-          <li>A chatbot in a browser window</li>
-          <li>A SaaS tool with monthly fees</li>
-          <li>A generic automation that breaks in a week</li>
+          <li>A ChatGPT wrapper or prompt pack</li>
+          <li>A course teaching you &ldquo;how to use AI&rdquo;</li>
+          <li>A chatbot that answers questions in a browser</li>
+          <li>A SaaS tool with monthly fees that owns your data</li>
+          <li>A complicated developer workflow</li>
         </ul>
       </div>
       <div class="compare-col is reveal reveal-delay-2">
         <h3>This IS</h3>
         <ul>
-          <li>A complete operating system your AI runs on</li>
-          <li>20 skills that execute real work — not just answer questions</li>
-          <li>A brain that makes your AI smarter every day you use it</li>
-          <li>Runs on YOUR machine with YOUR data — nothing leaves your computer</li>
-          <li>Extensible — build new skills as your business grows</li>
+          <li>A complete operating system that turns AI into a digital employee</li>
+          <li>20 capabilities that execute real work &mdash; not just generate text</li>
+          <li>A persistent memory system &mdash; your AI remembers everything, permanently</li>
+          <li>Infrastructure YOU own, on YOUR computer, with YOUR data</li>
+          <li>The same system the creator uses to run his businesses, every single day</li>
         </ul>
       </div>
     </div>
@@ -860,44 +882,46 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <div class="built-by-inner">
       <div class="section-tag reveal">Who Built This</div>
       <blockquote class="reveal reveal-delay-1">
-        <p>&ldquo;I built this system to run my own businesses. Then I realized every entrepreneur needs it.&rdquo;</p>
+        <p>&ldquo;I didn't build this to sell it. I built it because I was drowning &mdash; running deals, writing code, creating content, managing projects, all by myself. Then I realized: the infrastructure IS the product.&rdquo;</p>
       </blockquote>
       <div class="built-by-details">
-        <p class="reveal reveal-delay-2"><strong>Mike Davis</strong> &mdash; Creative finance entrepreneur. Creator of the T.O.P. Method, a framework used by hundreds of real estate investors. Founder of <a href="https://sellfi.io" style="color:var(--accent);text-decoration:none">SellFi</a>, the creative finance marketplace. Runs 4 active businesses.</p>
-        <p class="reveal reveal-delay-3">This isn't a course about AI. This is the actual system I use every single day &mdash; to run deals, generate content, manage projects, track leads, and build products. My AI knows my goals, my contacts, my processes, and my schedule. Every morning, I open Claude Code and my AI already knows what I need to do.</p>
-        <p class="reveal reveal-delay-4">I packaged it so you can have the same thing &mdash; installed in 30 minutes, customized to your business, running real work on Day 1.</p>
+        <p class="reveal reveal-delay-2"><strong>Mike Davis</strong> &mdash; Creative finance entrepreneur. Creator of the <a href="https://sellfi.io" style="color:var(--accent);text-decoration:none">T.O.P. Method</a>. Founder of <a href="https://sellfi.io" style="color:var(--accent);text-decoration:none">SellFi</a>.</p>
+        <p class="reveal reveal-delay-3">Here's the truth: I'm one person running multiple businesses. I was the bottleneck in every single one. Every deal, every piece of content, every project update, every email &mdash; it all flowed through me. So I built a system where AI actually does the work. Not answers questions about the work. <strong style="color:var(--text)">Does the work.</strong> Researches deals. Writes content. Builds websites. Manages my pipeline. Tracks my projects. Drafts my emails. Deploys my code.</p>
+        <p class="reveal reveal-delay-4">I run this system every single day. The landing page you're reading right now? My AI built it. The payment system it's connected to? My AI wired it. The copy you're reading? My AI drafted it while I gave instructions from my phone. That's not a sales pitch. That's Tuesday.</p>
+        <p class="reveal reveal-delay-4">I packaged everything &mdash; the architecture, the capabilities, the brain structure, the install automation &mdash; so you can have the same thing, customized to your business, running in 30 minutes.</p>
       </div>
       <div class="built-by-sig reveal reveal-delay-4">&mdash; Mike Davis, Founder of SellFi &bull; Creator of the T.O.P. Method</div>
     </div>
   </div>
 </section>
 
-<!-- WHO IS THIS FOR -->
+<!-- WHO THIS IS FOR -->
 <section style="border-top:1px solid var(--border)">
   <div class="container">
     <div class="section-tag reveal">Who This Is For</div>
-    <h2 class="section-title reveal reveal-delay-1">Built for operators. <em>Not hobbyists.</em></h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem">
+    <h2 class="section-title reveal reveal-delay-1">Built for people who run things.<br>Not people who <em>talk about AI.</em></h2>
+    <div class="who-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem">
       <div class="reveal">
         <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:400;margin-bottom:1.25rem;color:var(--green)">This is for you if&hellip;</h3>
         <ul class="problem-list" style="list-style:none">
-          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You run a business and want AI doing real work &mdash; not just answering questions</li>
-          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You're an entrepreneur, investor, agency owner, consultant, or creator</li>
-          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You've tried ChatGPT but couldn't make AI stick as part of your workflow</li>
-          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You want a system, not a subscription to another SaaS tool</li>
+          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You run a business and you're tired of being the bottleneck</li>
+          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You want AI that DOES work &mdash; not just answers questions</li>
+          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You've tried ChatGPT, Zapier, AI tools &mdash; nothing stuck because nothing had context</li>
+          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You're an entrepreneur, investor, agency owner, consultant, or operator</li>
+          <li style="border-color:rgba(46,213,115,.15)"><span style="color:var(--green);font-weight:700;margin-right:.5rem">&#10003;</span> You want to own the infrastructure, not rent another SaaS</li>
         </ul>
       </div>
       <div class="reveal reveal-delay-2">
         <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:400;margin-bottom:1.25rem;color:var(--text-muted)">This is NOT for you if&hellip;</h3>
         <ul class="problem-list" style="list-style:none">
           <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You just want to play with AI casually &mdash; ChatGPT is fine for that</li>
-          <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You don't have a business or concrete projects to apply it to</li>
-          <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You're looking for a done-for-you service &mdash; this is a system you own and customize</li>
+          <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You don't have a business or concrete work to apply it to</li>
+          <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You're looking for someone to do it for you &mdash; this is a system you own and operate</li>
           <li><span style="color:var(--text-muted);font-weight:700;margin-right:.5rem">&times;</span> You're not willing to spend 30 minutes setting it up</li>
         </ul>
       </div>
     </div>
-    <p class="reveal reveal-delay-3" style="margin-top:2rem;color:var(--text-secondary);font-size:1rem"><strong style="color:var(--text)">Note:</strong> 14 of the 20 skills work for any industry. The 6 real estate bonus skills are exactly that &mdash; a bonus. Whether you run an agency, a consulting practice, an investment firm, or an e-commerce brand, the core system works.</p>
+    <p class="reveal reveal-delay-3" style="margin-top:2rem;color:var(--text-secondary);font-size:1rem"><strong style="color:var(--text)">Note:</strong> 14 of the 20 capabilities work for any industry. The 6 real estate bonus capabilities are exactly that &mdash; a bonus. Whether you run an agency, a consulting practice, an investment firm, or an e-commerce brand, the core system works.</p>
   </div>
 </section>
 
@@ -906,7 +930,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   <div class="container">
     <div class="section-tag reveal" style="justify-content:center">Launch Pricing</div>
     <h2 class="section-title reveal reveal-delay-1" style="text-align:center">One payment. <em>Yours forever.</em></h2>
-    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 3.5rem">No subscriptions. No recurring fees. Launch pricing &mdash; available to early adopters only.</p>
+    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 3.5rem">Launch pricing &mdash; available to early adopters only. No subscriptions. No recurring fees.</p>
 
     <div class="pricing-grid">
       <div class="price-card reveal">
@@ -915,13 +939,13 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <div class="price-amount">$497 <span>one-time</span></div>
         <div class="price-note">+ Claude Pro subscription ($20/mo)</div>
         <ul class="price-features">
-          <li>CLAUDE.md master template + filled example</li>
-          <li>Full brain directory structure</li>
-          <li>20 pre-built skills</li>
-          <li>20 slash commands</li>
-          <li>Magic Install (one-prompt setup)</li>
-          <li>First Week Checklist (7-day guided setup)</li>
-          <li>HOW-TO-ADD-SKILLS extension guide</li>
+          <li>Complete AI operating system for your computer</li>
+          <li>20 capabilities that execute real work</li>
+          <li>Persistent brain &mdash; your AI remembers everything</li>
+          <li>Slash commands &mdash; one word triggers complete workflows</li>
+          <li>Magic Install &mdash; paste one prompt, everything installs in 60 seconds</li>
+          <li>First Week Checklist &mdash; guided 7-day onboarding</li>
+          <li>Extension guide &mdash; build new capabilities as your business grows</li>
         </ul>
         <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e" class="price-btn secondary">Launch Your AI OS &mdash; $497</a>
         <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Lemon Squeezy</p>
@@ -934,11 +958,10 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <div class="price-note">+ Claude Pro subscription ($20/mo)</div>
         <ul class="price-features">
           <li>Everything in Tier 1</li>
-          <li>Telegram bridge code (full repo)</li>
-          <li>Mobile agent setup guide</li>
-          <li>Control your AI from your phone</li>
-          <li>Full Claude Code capabilities &mdash; mobile</li>
-          <li>Run research, build sites, manage deals &mdash; from anywhere</li>
+          <li>Telegram bridge &mdash; full AI capabilities from your phone</li>
+          <li>Run research, build projects, manage operations &mdash; from a text message</li>
+          <li>Same brain, same capabilities, same power &mdash; anywhere you are</li>
+          <li>Setup guide for mobile deployment</li>
         </ul>
         <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/8cd6c8f1-683e-47ea-9b4f-d29b7c2c4271" class="price-btn primary">Go Mobile &mdash; $1,497</a>
         <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Lemon Squeezy</p>
@@ -949,20 +972,20 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <div class="guarantee reveal">
       <div class="guarantee-icon">&#10003;</div>
       <h3>30-Day Money-Back Guarantee</h3>
-      <p>Install the AI OS Blueprint. Follow the setup guide. If it doesn't transform how you run your business &mdash; full refund, no questions asked. I built this for myself first. It works.</p>
+      <p>Install it. Use it. If it doesn't fundamentally change how you operate your business &mdash; full refund, no questions asked. I built this for myself first. It works.</p>
     </div>
   </div>
 </section>
 
-<!-- NOT READY — FREE PREVIEW (positioned after pricing as fallback) -->
+<!-- NOT READY — FREE PREVIEW -->
 <section class="email-capture">
   <div class="container">
     <div class="email-capture-inner">
       <div class="section-tag reveal" style="justify-content:center">Not Ready?</div>
-      <h2 class="reveal reveal-delay-1">Try <em>5 skills free</em> first.</h2>
-      <p class="capture-sub reveal reveal-delay-2">Get a working preview of the AI OS Blueprint &mdash; 5 skills, the brain template, and the quick-start guide. Free, no credit card.</p>
-      <div class="email-form reveal reveal-delay-3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/d6ecd862-77d9-44b2-9824-8c3b3f20daed" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:1rem 2.5rem">Get 5 Free Skills &rarr;</a>
+      <h2 class="reveal reveal-delay-1">Try <em>5 capabilities free.</em><br>See what this feels like.</h2>
+      <p class="capture-sub reveal reveal-delay-2">Get a working preview &mdash; 5 capabilities, the brain template, and the quick-start guide. No credit card. See for yourself what it's like to have AI that actually does the work.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal reveal-delay-3">
+        <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/d6ecd862-77d9-44b2-9824-8c3b3f20daed" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:1rem 2.5rem;width:auto;display:inline-flex">Get the Free Preview &rarr;</a>
       </div>
     </div>
   </div>
@@ -975,44 +998,40 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <h2 class="section-title reveal reveal-delay-1">Questions.</h2>
     <div class="faq-list" style="margin-top:2rem">
       <div class="faq-item reveal">
-        <button class="faq-q">What do I need to run this?</button>
-        <div class="faq-a"><p>A computer (Mac, Windows, or Linux) and a Claude Pro subscription ($20/month). Download the free Claude desktop app, subscribe to Pro, click the Code tab &mdash; you're ready. Total cost: $497 one-time + $20/month Claude Pro. That's it.</p></div>
+        <button class="faq-q">What do I need to get started?</button>
+        <div class="faq-a"><p>A computer and a Claude Pro subscription ($20/month). Download the free Claude desktop app, subscribe to Pro, click the Code tab &mdash; you're ready. Total investment: $497 one-time + $20/month. That's it.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">I'm not technical. Can I really set this up?</button>
-        <div class="faq-a"><p>Yes. Download the Claude desktop app, click the Code tab, and paste one prompt. That's the entire install. No terminal. No command line. No coding. If you can copy and paste, you can install this.</p></div>
+        <button class="faq-q">I'm not technical. Can I actually set this up?</button>
+        <div class="faq-a"><p>If you can copy and paste, you can install this. Download the app. Click the Code tab. Paste one prompt. Your AI installs everything automatically in 60 seconds. Zero coding. Zero terminal. Zero technical knowledge required.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">How is this different from just using ChatGPT?</button>
-        <div class="faq-a"><p>ChatGPT is a conversation that forgets you exist. Your AI OS is a system that remembers your goals, your projects, your contacts, your processes, and your preferences &mdash; permanently. It picks up where it left off. Every. Single. Time. ChatGPT gives you answers. Your AI OS runs your business.</p></div>
+        <button class="faq-q">How is this different from ChatGPT?</button>
+        <div class="faq-a"><p>ChatGPT is a conversation that forgets you exist every time you close the tab. Your AI OS remembers your goals, your projects, your contacts, your processes &mdash; permanently. It doesn't answer questions about your business. It runs your business. ChatGPT is a search engine with personality. This is an employee with capability.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Why $497 for markdown files?</button>
-        <div class="faq-a"><p>You're not paying for files. You're paying for the architecture. The directory structure, the skill design patterns, the brain topology, the command system, the install automation, and the 70+ hours of design decisions that make it all work together on Day 1. You could build this yourself &mdash; it would take you 2-3 months of full-time work and you'd still be iterating. Or you can paste one prompt and be running in 30 minutes.</p></div>
+        <button class="faq-q">$497 for an AI system &mdash; what am I actually getting?</button>
+        <div class="faq-a"><p>You're getting the architecture that makes AI go from &ldquo;interesting toy&rdquo; to &ldquo;I can't run my business without this.&rdquo; The capability design patterns. The memory system. The command infrastructure. The install automation. The 70+ hours of engineering decisions that make it all work on Day 1. You could build this yourself &mdash; it would take 2-3 months and you'd still be iterating. Or you paste one prompt and you're running in 30 minutes.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Do I need to be in real estate to use this?</button>
-        <div class="faq-a"><p>No. 14 of the 20 skills are universal &mdash; research, content, email, lead tracking, invoicing, SOPs, project management, competitor analysis, and more. The 6 real estate skills are a bonus pack. Whether you run an agency, a consulting practice, an e-commerce brand, or any other business, the core system works.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q">Is this a monthly subscription?</button>
-        <div class="faq-a"><p>No. One payment. You own it forever. Updates are free. Your only ongoing cost is the $20/month Claude Pro subscription &mdash; that's the AI engine, not our product.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q">What if AI tools change in 6 months?</button>
-        <div class="faq-a"><p>The skills and brain architecture you build are yours &mdash; they're markdown files on your computer. Even if Claude Code evolves, the system design transfers. You're not buying software that can be shut down. You're buying an architecture that works with any AI.</p></div>
+        <button class="faq-q">Do I need to be in real estate?</button>
+        <div class="faq-a"><p>No. 14 of 20 capabilities are universal &mdash; research, content, email, lead tracking, invoicing, SOPs, project management, competitor analysis, and more. The 6 real estate capabilities are a bonus. Any industry. Any business.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What's the difference between Tier 1 and Tier 2?</button>
-        <div class="faq-a"><p>Tier 1 is the complete AI OS for your computer &mdash; brain, 20 skills, 20 commands, guides. Tier 2 adds mobile access through Telegram. Imagine being at dinner when a deal comes in. You text your AI &ldquo;analyze this deal.&rdquo; 90 seconds later, you have a full breakdown on your phone. Same brain, same skills, anywhere. That's Tier 2.</p></div>
+        <div class="faq-a"><p>Tier 1 is the complete AI operating system on your computer. Powerful. Life-changing. Tier 2 adds your AI to your phone via Telegram. You text it instructions from anywhere &mdash; and it executes. Full capability. Build websites, run research, manage deals, draft emails &mdash; all from a text message while you're at dinner, on vacation, or laying in bed at 2am. That's the difference.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">What kind of results can I expect?</button>
-        <div class="faq-a"><p>The system is designed to save 15-40 hours per month. The /deep-research skill alone replaces hours of manual research. /content-batch generates a month of social posts in minutes. /weekly-review gives you a CEO-level business summary every Friday. The more you feed your brain, the more your AI can do autonomously. The compound effect is massive.</p></div>
+        <button class="faq-q">What kind of results should I expect?</button>
+        <div class="faq-a"><p>This isn't a productivity hack that saves you 20 minutes a day. This is a structural shift in how you operate. The AI researches for you. Writes for you. Builds for you. Manages for you. The people using systems like this aren't saving hours &mdash; they're doing things that weren't possible before. One person operating like a team of ten.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What if AI changes in 6 months?</button>
+        <div class="faq-a"><p>You own everything. It runs on your computer. Even if Claude evolves (it will &mdash; it'll get better), the architecture transfers. You're not renting software that can be shut down. You own the infrastructure.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What if I need help?</button>
-        <div class="faq-a"><p>The installation guide walks you through everything step by step. The First Week Checklist gives you a daily plan for your first 7 days. And if you're stuck, email support@aiosblueprint.com &mdash; we respond within 24 hours.</p></div>
+        <div class="faq-a"><p>Step-by-step installation guide. 7-day First Week Checklist. Email support@aiosblueprint.com &mdash; we respond within 24 hours.</p></div>
       </div>
     </div>
   </div>
@@ -1022,8 +1041,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 <section class="final-cta">
   <div class="container">
     <div class="section-tag reveal" style="justify-content:center">Ready?</div>
-    <h2 class="section-title reveal reveal-delay-1">Stop prompting.<br>Start <em>operating.</em></h2>
-    <p class="section-desc reveal reveal-delay-2">20 skills. A structured brain. Mobile access. Installed in 30 minutes. This is how AI actually works for your business.</p>
+    <h2 class="section-title reveal reveal-delay-1">Stop being the bottleneck.<br>Start <em>operating.</em></h2>
+    <p class="section-desc reveal reveal-delay-2">One AI operating system. 20 capabilities. A brain that gets smarter every day. Installed in 30 minutes. This is how business runs now.</p>
     <div class="final-buttons reveal reveal-delay-3">
       <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e" class="btn-primary">Launch Your AI OS &mdash; $497</a>
       <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/8cd6c8f1-683e-47ea-9b4f-d29b7c2c4271" class="btn-secondary">Go Mobile &mdash; $1,497</a>

@@ -15,6 +15,21 @@
 <meta name="twitter:title" content="AI OS Blueprint — Your Business, Run By AI">
 <meta name="twitter:description" content="A complete AI operating system — installed in 30 minutes. 35 capabilities. One install. Yours forever.">
 <meta name="twitter:image" content="https://aiosblueprint.com/images/og-image.png">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID_HERE');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1101,16 +1116,21 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   </div>
 </section>
 
-<!-- NOT READY — FREE PREVIEW -->
+<!-- NOT READY — FREE PREVIEW (EMAIL GATE) -->
 <section class="email-capture">
   <div class="container">
     <div class="email-capture-inner">
       <div class="section-tag reveal" style="justify-content:center">Not Ready?</div>
       <h2 class="reveal reveal-delay-1">Try <em>5 capabilities free.</em><br>See what this feels like.</h2>
       <p class="capture-sub reveal reveal-delay-2">Get a working preview &mdash; 5 capabilities, the brain template, and the quick-start guide. No credit card. See for yourself what it's like to have AI that actually does the work.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal reveal-delay-3">
-        <a href="/api/free-access?source=preview" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:1rem 2.5rem;width:auto;display:inline-flex">Get the Free Preview &rarr;</a>
-      </div>
+      <form id="previewForm" class="reveal reveal-delay-3" style="max-width:480px;margin:0 auto" onsubmit="handlePreviewCapture(event)">
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
+          <input type="email" id="previewEmail" required placeholder="Your best email" style="flex:1;min-width:220px;padding:.9rem 1.2rem;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .2s">
+          <button type="submit" id="previewBtn" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:.9rem 2rem;width:auto;display:inline-flex;white-space:nowrap;border:none;cursor:pointer">Get the Free Preview &rarr;</button>
+        </div>
+        <p id="previewError" style="color:#ff4757;font-size:.82rem;margin-top:.6rem;display:none"></p>
+        <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);margin-top:.75rem;letter-spacing:.02em">No spam. No sequences. Just the preview.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -1210,6 +1230,46 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// Email capture for free preview
+async function handlePreviewCapture(e) {
+  e.preventDefault();
+  const email = document.getElementById('previewEmail').value.trim();
+  const btn = document.getElementById('previewBtn');
+  const errEl = document.getElementById('previewError');
+
+  if (!email || !email.includes('@')) {
+    errEl.textContent = 'Please enter a valid email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  errEl.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/capture-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+
+    if (data.success && data.redirectUrl) {
+      // Track conversion if Meta Pixel is loaded
+      if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'Free Preview' });
+      window.location.href = data.redirectUrl;
+    } else {
+      throw new Error(data.error || 'Something went wrong');
+    }
+  } catch (err) {
+    btn.textContent = 'Get the Free Preview →';
+    btn.disabled = false;
+    errEl.textContent = 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
+  }
+}
 </script>
 
 </body>

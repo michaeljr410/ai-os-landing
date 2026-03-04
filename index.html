@@ -665,7 +665,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <div style="margin-top:.75rem"><span class="status">&rarr; Researching competitor landing pages...</span></div>
         <div><span class="status">&rarr; Designing page structure...</span></div>
         <div><span class="status">&rarr; Writing conversion copy...</span></div>
-        <div><span class="status">&rarr; Connecting Lemon Squeezy checkout...</span></div>
+        <div><span class="status">&rarr; Connecting Stripe checkout...</span></div>
         <div><span class="status">&rarr; Deploying to Vercel...</span></div>
         <div style="margin-top:.5rem"><span class="success">&check; Live at yoursite.com &mdash; link sent to Telegram.</span></div>
         <div style="margin-top:.75rem"><span style="color:var(--green)">$</span><span class="terminal-cursor"></span></div>
@@ -1059,8 +1059,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>Magic Install &mdash; paste one prompt, everything sets up in 60 seconds</li>
           <li>First Week Checklist + Extension guide</li>
         </ul>
-        <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/8cd6c8f1-683e-47ea-9b4f-d29b7c2c4271" class="price-btn primary">Get the Full System &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$3,497</span> $1,497</a>
-        <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout &bull; 30-day money-back guarantee</p>
+        <a href="/api/checkout?tier=2" class="price-btn primary">Get the Full System &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$3,497</span> $1,497</a>
+        <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; 30-day money-back guarantee</p>
       </div>
 
       <div class="price-card reveal reveal-delay-1">
@@ -1077,8 +1077,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No mobile agent</li>
           <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No private consultation</li>
         </ul>
-        <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e" class="price-btn secondary">Blueprint Only &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$997</span> $497</a>
-        <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Lemon Squeezy</p>
+        <a href="/api/checkout?tier=1" class="price-btn secondary">Blueprint Only &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$997</span> $497</a>
+        <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; 30-day money-back guarantee</p>
       </div>
     </div>
 
@@ -1099,7 +1099,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       <h2 class="reveal reveal-delay-1">Try <em>5 capabilities free.</em><br>See what this feels like.</h2>
       <p class="capture-sub reveal reveal-delay-2">Get a working preview &mdash; 5 capabilities, the brain template, and the quick-start guide. No credit card. See for yourself what it's like to have AI that actually does the work.</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal reveal-delay-3">
-        <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/d6ecd862-77d9-44b2-9824-8c3b3f20daed" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:1rem 2.5rem;width:auto;display:inline-flex">Get the Free Preview &rarr;</a>
+        <a href="/api/free-access?source=preview" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:1rem 2.5rem;width:auto;display:inline-flex">Get the Free Preview &rarr;</a>
       </div>
     </div>
   </div>
@@ -1162,8 +1162,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <h2 class="section-title reveal reveal-delay-1">Stop being the bottleneck.<br>Start <em>operating.</em></h2>
     <p class="section-desc reveal reveal-delay-2">One AI operating system. 35 capabilities. A brain that gets smarter every day. Installed in 30 minutes. This is how business runs now.</p>
     <div class="final-buttons reveal reveal-delay-3">
-      <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/8cd6c8f1-683e-47ea-9b4f-d29b7c2c4271" class="btn-primary">Get the Full System &mdash; $1,497</a>
-      <a href="https://aiosblueprint.lemonsqueezy.com/checkout/buy/46ff2889-5547-43b1-8110-913f71d7660e" class="btn-secondary">Blueprint Only &mdash; $497</a>
+      <a href="/api/checkout?tier=2" class="btn-primary">Get the Full System &mdash; $1,497</a>
+      <a href="/api/checkout?tier=1" class="btn-secondary">Blueprint Only &mdash; $497</a>
     </div>
     <p class="reveal reveal-delay-4" style="margin-top:1.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)">Launch pricing &bull; 30-day money-back guarantee &bull; support@aiosblueprint.com</p>
   </div>

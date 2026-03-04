@@ -343,12 +343,18 @@ footer a:hover{text-decoration:underline}
 <!-- SECTION 2: YOUR FILES ARE READY -->
 <section style="border-top:1px solid var(--border);padding-top:4rem;padding-bottom:4rem">
   <div class="container">
-    <div class="delivery-card reveal">
-      <div class="delivery-icon">&#9993;</div>
+    <div class="delivery-card reveal" id="delivery-card">
+      <div class="delivery-icon">&#128230;</div>
       <h3>Your Files Are Ready</h3>
-      <p>Your download link has been delivered via email from <strong style="color:var(--text)">Lemon Squeezy</strong>.</p>
-      <p>Check your inbox for the message with your download link.</p>
-      <div class="delivery-note">Don't see it? Check your spam or promotions folder. It arrives within 2 minutes.</div>
+      <p id="delivery-msg">Verifying your purchase...</p>
+      <div id="download-area" style="margin-top:1.5rem;display:none">
+        <a id="download-btn" href="#" style="display:inline-flex;align-items:center;gap:.6rem;background:var(--accent);color:var(--bg);padding:1rem 2.5rem;font-family:var(--font-mono);font-size:.95rem;font-weight:600;text-decoration:none;letter-spacing:.03em;border:none;cursor:pointer;transition:all .2s">&#11015; Download Your AI OS Blueprint&trade;</a>
+        <div class="delivery-note" style="margin-top:1rem">Your download link is valid for 7 days. Save the files to your computer.</div>
+      </div>
+      <div id="error-area" style="margin-top:1.5rem;display:none">
+        <p style="color:var(--red)">Something went wrong verifying your purchase.</p>
+        <div class="delivery-note">Contact <a href="mailto:support@aiosblueprint.com" style="color:var(--accent)">support@aiosblueprint.com</a> with your order details and we'll get you sorted.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -449,16 +455,48 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Tier detection: show/hide consultation section based on ?tier= query param
+// Download & tier logic
 (function() {
   const params = new URLSearchParams(window.location.search);
   const tier = params.get('tier');
+  const sessionId = params.get('session_id');
+  const token = params.get('token');
+  const source = params.get('source');
   const consultationSection = document.getElementById('consultation');
-  if (tier === '1') {
-    // Tier 1 buyers: hide the consultation section
+  const deliveryMsg = document.getElementById('delivery-msg');
+  const downloadArea = document.getElementById('download-area');
+  const downloadBtn = document.getElementById('download-btn');
+  const errorArea = document.getElementById('error-area');
+
+  // Tier 1 or preview: hide consultation section
+  if (tier === '1' || tier === 'preview') {
     consultationSection.style.display = 'none';
   }
-  // Default behavior: show consultation (tier=2, no param, or any other value)
+
+  // Build the download URL based on auth method
+  if (sessionId) {
+    // Paid purchase: download via Stripe session verification
+    downloadBtn.href = '/api/download?session_id=' + encodeURIComponent(sessionId);
+    deliveryMsg.textContent = 'Your purchase is confirmed. Click below to download.';
+    downloadArea.style.display = 'block';
+  } else if (token) {
+    // Free access: download via signed token
+    downloadBtn.href = '/api/download?token=' + encodeURIComponent(token);
+    const sourceLabel = source === 'cookout' ? 'Cookout' : source === 'devon' ? 'Devon' : 'preview';
+    deliveryMsg.innerHTML = source === 'preview'
+      ? 'Your free preview is ready. Click below to download.'
+      : 'Welcome, ' + sourceLabel + ' fam. Your full system is ready.';
+    downloadArea.style.display = 'block';
+  } else {
+    // No session or token — show error
+    deliveryMsg.textContent = '';
+    errorArea.style.display = 'block';
+  }
+
+  // Preview tier: update button text
+  if (tier === 'preview') {
+    downloadBtn.innerHTML = '&#11015; Download Free Preview';
+  }
 })();
 </script>
 

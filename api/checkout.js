@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
       cancel_url: `${siteUrl}/#pricing`,
       metadata: { tier },
       allow_promotion_codes: true,
+      customer_creation: 'always',
     });
 
     // Redirect to Stripe Checkout

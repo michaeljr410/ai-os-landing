@@ -355,6 +355,29 @@ footer a:hover{text-decoration:underline}
   margin:0 auto 2rem;
 }
 
+/* --- LIVE COUNTER --- */
+.counter-box{
+  display:inline-flex;align-items:center;gap:.75rem;
+  margin-bottom:2rem;padding:.75rem 1.5rem;
+  border:1px solid var(--gold);background:var(--gold-dim);
+  font-family:var(--font-mono);font-size:.85rem;
+  color:var(--gold);letter-spacing:.04em;
+  animation:counterPulse 3s ease-in-out infinite;
+}
+.counter-box.sold-out{
+  border-color:var(--red);background:rgba(255,71,87,.08);
+  color:var(--red);animation:none;
+}
+.counter-num{
+  font-size:1.6rem;font-weight:700;line-height:1;
+  color:var(--gold);
+}
+.counter-box.sold-out .counter-num{color:var(--red)}
+@keyframes counterPulse{
+  0%,100%{box-shadow:0 0 0 0 var(--gold-glow)}
+  50%{box-shadow:0 0 20px 4px var(--gold-glow)}
+}
+
 /* --- ANIMATIONS --- */
 .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -403,8 +426,17 @@ footer a:hover{text-decoration:underline}
       <span class="arrow">&rarr;</span>
       <span class="free">$1,497</span>
     </div>
+
+    <!-- LIVE COUNTER -->
     <div class="reveal reveal-delay-3">
-      <a href="/api/checkout?tier=2" class="btn-primary">Get the Full System &rarr;</a>
+      <div class="counter-box" id="live-counter">
+        <span class="counter-num" id="counter-num">&mdash;</span>
+        <span id="counter-text">spots left at $1,497</span>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-3">
+      <a href="/api/checkout?tier=2&source=cookout" class="btn-primary">Get the Full System &rarr;</a>
     </div>
     <p class="reveal reveal-delay-4" style="margin-top:1rem;font-family:var(--font-mono);font-size:.8rem;color:var(--gold);letter-spacing:.03em;background:var(--gold-dim);display:inline-block;padding:.5rem 1.25rem;border:1px solid rgba(238,181,68,.2)">&#x1F525; ONE DAY ONLY &mdash; March 5th &bull; Use code: NOMANLEFTBEHIND</p>
     <p class="reveal reveal-delay-4" style="margin-top:.75rem;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">The family eats together. &mdash; Mike Davis</p>
@@ -613,7 +645,7 @@ footer a:hover{text-decoration:underline}
     </div>
 
     <div style="text-align:center;margin-top:3rem" class="reveal reveal-delay-3">
-      <a href="/api/checkout?tier=2" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System &rarr;</a>
+      <a href="/api/checkout?tier=2&source=cookout" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System &rarr;</a>
       <p style="margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;color:var(--gold);letter-spacing:.03em">Use code <strong>NOMANLEFTBEHIND</strong> at checkout &bull; March 5th only</p>
     </div>
   </div>
@@ -651,7 +683,7 @@ footer a:hover{text-decoration:underline}
     <h2 class="section-title reveal reveal-delay-1" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto">The Cookout <em>gets equipped.</em></h2>
     <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin-left:auto;margin-right:auto">The full system. 35 capabilities. Mobile agent. Private consultation. No man left behind.</p>
     <div class="reveal reveal-delay-3" style="text-align:center">
-      <a href="/api/checkout?tier=2" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System &rarr;</a>
+      <a href="/api/checkout?tier=2&source=cookout" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System &rarr;</a>
     </div>
     <p class="reveal reveal-delay-4" style="margin-top:1rem;text-align:center;font-family:var(--font-mono);font-size:.8rem;color:var(--gold);letter-spacing:.03em">&#x1F525; ONE DAY ONLY &mdash; March 5th &bull; Code: NOMANLEFTBEHIND</p>
     <p class="reveal reveal-delay-4" style="margin-top:.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">$3,497 value &bull; $1,497 intro pricing &bull; $0 for The Cookout with code</p>
@@ -667,6 +699,33 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
+// === LIVE COUNTER ===
+async function fetchCounter() {
+  try {
+    const resp = await fetch('/api/coupon-status?code=NOMANLEFTBEHIND&displayMax=25');
+    const data = await resp.json();
+    const numEl = document.getElementById('counter-num');
+    const textEl = document.getElementById('counter-text');
+    const boxEl = document.getElementById('live-counter');
+    if (!numEl || !data) return;
+
+    const remaining = data.remaining;
+    if (remaining === null || remaining === undefined) {
+      numEl.textContent = '25';
+      textEl.textContent = 'spots at intro pricing';
+    } else if (remaining <= 0) {
+      numEl.textContent = '0';
+      textEl.textContent = 'spots left — sold out';
+      boxEl.classList.add('sold-out');
+    } else {
+      numEl.textContent = remaining;
+      textEl.textContent = remaining === 1 ? 'spot left at $1,497' : 'spots left at $1,497';
+    }
+  } catch(e) { console.warn('Counter fetch failed:', e); }
+}
+fetchCounter();
+setInterval(fetchCounter, 30000);
+
 // Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});

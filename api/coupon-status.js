@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { code } = req.query;
+  const { code, displayMax } = req.query;
   if (!code) {
     return res.status(400).json({ error: 'Missing code parameter' });
   }
@@ -26,7 +26,9 @@ module.exports = async (req, res) => {
     }
 
     const promo = promos.data[0];
-    const max = promo.max_redemptions || promo.coupon.max_redemptions || 0;
+    // Use Stripe max_redemptions if set, otherwise fall back to displayMax param
+    const stripeMax = promo.max_redemptions || promo.coupon.max_redemptions || 0;
+    const max = stripeMax > 0 ? stripeMax : (parseInt(displayMax) || 0);
     const used = promo.times_redeemed || 0;
     const remaining = max > 0 ? Math.max(0, max - used) : null;
 
@@ -38,7 +40,7 @@ module.exports = async (req, res) => {
       remaining,
       max,
       used,
-      active: promo.active && remaining > 0,
+      active: promo.active && (remaining === null || remaining > 0),
     });
   } catch (err) {
     console.error('[COUPON-STATUS] Error:', err.message);

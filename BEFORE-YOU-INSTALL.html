@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIOS Blueprint — Digital Product License Agreement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a1a;
+    background: #ffffff;
+    line-height: 1.7;
+    font-size: 14px;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 1in 1.15in;
+  }
+
+  @media print {
+    body { padding: 0; background: white; }
+    .page { max-width: none; padding: 0.75in 1in; }
+    .header-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .notice-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .penalty-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* Header */
+  .header-bar {
+    background: #0a0a0a;
+    color: #ffffff;
+    padding: 28px 36px;
+    margin-bottom: 32px;
+    border-radius: 4px;
+  }
+
+  .header-bar h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .header-bar .subtitle {
+    font-size: 13px;
+    color: #a0a0a0;
+    font-weight: 400;
+  }
+
+  .header-bar .doc-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  /* Notice Box */
+  .notice-box {
+    background: #fef3cd;
+    border-left: 4px solid #f0ad4e;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+  }
+
+  .notice-box strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #856404;
+  }
+
+  .notice-box p {
+    color: #664d03;
+    margin: 0;
+  }
+
+  /* Sections */
+  h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #e0e0e0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  h2 .section-num {
+    color: #888;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  p, li {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+  }
+
+  ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+
+  ol li {
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+
+  ul {
+    padding-left: 24px;
+    margin-bottom: 16px;
+    list-style-type: disc;
+  }
+
+  ul li {
+    margin-bottom: 6px;
+    padding-left: 4px;
+  }
+
+  .subsection {
+    margin-left: 0;
+    margin-bottom: 16px;
+  }
+
+  .subsection-title {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  /* Penalty Box */
+  .penalty-box {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .penalty-box strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #721c24;
+  }
+
+  .penalty-box p {
+    color: #721c24;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  /* Signature Area */
+  .sig-section {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 2px solid #0a0a0a;
+  }
+
+  .sig-section p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 24px;
+  }
+
+  .sig-block {
+    padding-top: 8px;
+  }
+
+  .sig-line {
+    border-bottom: 1px solid #333;
+    height: 36px;
+    margin-bottom: 6px;
+  }
+
+  .sig-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  .effective-date {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  /* Definitions table */
+  .def-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px 0;
+    font-size: 13px;
+  }
+
+  .def-table td {
+    padding: 8px 12px;
+    vertical-align: top;
+    border-bottom: 1px solid #eee;
+  }
+
+  .def-table td:first-child {
+    font-weight: 600;
+    width: 180px;
+    color: #1a1a1a;
+  }
+
+  .def-table td:last-child {
+    color: #444;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header-bar">
+    <div class="doc-type">Digital Product License Agreement</div>
+    <h1>BEFORE YOU INSTALL</h1>
+    <div class="subtitle">AIOS Blueprint™ — by Mike Davis / Vivant Investments LLC</div>
+  </div>
+
+  <!-- IMPORTANT NOTICE -->
+  <div class="notice-box">
+    <strong>⚠ READ THIS BEFORE INSTALLING</strong>
+    <p>By downloading, accessing, copying, or installing any files included in the AIOS Blueprint product package, you acknowledge that you have read, understood, and agree to be bound by all terms and conditions of this Digital Product License Agreement ("Agreement"). If you do not agree, do not install, copy, or use the files — delete them immediately and contact support@aiosblueprint.com for a refund within 30 days of purchase.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h2><span class="section-num">1.</span> Definitions</h2>
+  <table class="def-table">
+    <tr>
+      <td>"Licensor"</td>
+      <td>Mike Davis, operating as Vivant Investments LLC (DBA TOP Wheels), sole owner and creator of the AIOS Blueprint.</td>
+    </tr>
+    <tr>
+      <td>"Licensee" / "You"</td>
+      <td>The individual or entity that purchased and/or received authorized access to the Product.</td>
+    </tr>
+    <tr>
+      <td>"Product"</td>
+      <td>The AIOS Blueprint™ digital product package, including but not limited to: all files, templates, configurations, skill definitions, command definitions, brain architecture files, installation guides, documentation, and any supplemental materials delivered as part of the purchased tier (Tier 1: Blueprint Only or Tier 2: Full System).</td>
+    </tr>
+    <tr>
+      <td>"Licensor IP"</td>
+      <td>All intellectual property owned by the Licensor, including but not limited to: the AIOS Blueprint brand name, trade dress, logos, marketing materials, the T.O.P. Method™, SellFi™, the structural organization and architecture of the Product, and any proprietary methodologies or frameworks embodied within.</td>
+    </tr>
+    <tr>
+      <td>"User-Generated Work"</td>
+      <td>Any original content, modifications, customizations, configurations, outputs, or derivative works created by the Licensee using the Product after installation.</td>
+    </tr>
+  </table>
+
+  <!-- SECTION 2 -->
+  <h2><span class="section-num">2.</span> License Grant</h2>
+  <p>Subject to the terms of this Agreement and upon completed payment, the Licensor grants the Licensee a <strong>personal, non-exclusive, non-transferable, non-sublicensable, revocable license</strong> to:</p>
+  <ol type="a">
+    <li>Download and install one (1) copy of the Product on devices owned or controlled by the Licensee;</li>
+    <li>Use the Product for the Licensee's own personal or business purposes;</li>
+    <li>Modify, customize, and build upon the Product files for the Licensee's own use;</li>
+    <li>Retain the Product indefinitely, subject to continued compliance with this Agreement.</li>
+  </ol>
+  <p>This license is granted to the <strong>individual purchaser only</strong>. It does not extend to employees, contractors, partners, associates, family members, or any other third party unless each such party has independently purchased their own license.</p>
+
+  <!-- SECTION 3 -->
+  <h2><span class="section-num">3.</span> Ownership of Your Work</h2>
+  <p><strong>You own 100% of everything you create.</strong></p>
+  <p>Any User-Generated Work — including but not limited to custom skills, commands, configurations, AI outputs, business workflows, content, intellectual property, or any other original work produced by the Licensee using the Product — is the sole and exclusive property of the Licensee. The Licensor claims no ownership, license, royalty, or interest of any kind in User-Generated Work.</p>
+  <p>You are free to use, sell, license, distribute, or commercialize anything you build with this system. The Product is a tool. What you build with it is yours.</p>
+
+  <!-- SECTION 4 -->
+  <h2><span class="section-num">4.</span> Restrictions — What You Cannot Do</h2>
+  <p>The Licensee shall <strong>NOT</strong>, under any circumstances:</p>
+  <ol>
+    <li><strong>Redistribute</strong> — Share, email, upload, post, transmit, airdrop, or otherwise distribute the Product files (in whole or in part) to any third party through any medium, including but not limited to email, messaging apps, file-sharing services, cloud storage links, social media, forums, or physical media;</li>
+    <li><strong>Resell</strong> — Sell, offer for sale, auction, or exchange the Product (in original or modified form) for money, cryptocurrency, trade, barter, or any other form of consideration;</li>
+    <li><strong>Sublicense</strong> — Grant any third party access to or rights to use the Product, whether for free or for compensation;</li>
+    <li><strong>Rebrand &amp; Repackage</strong> — Remove the Licensor's branding, attribution, or identifying marks and present the Product (in whole or in part) as the Licensee's own original creation for the purpose of commercial distribution;</li>
+    <li><strong>Create Competing Products</strong> — Use the Product's structure, architecture, or methodology as the basis for a substantially similar competing product offered for sale;</li>
+    <li><strong>Misrepresent Ownership</strong> — Claim authorship or original creation of the Product or its core architecture, methodology, or frameworks;</li>
+    <li><strong>Circumvent Protections</strong> — Remove, alter, or obscure any proprietary notices, license terms, or attribution included in the Product files.</li>
+  </ol>
+
+  <p><strong>Clarity:</strong> Sharing screenshots, discussing concepts you learned, recommending the Product to others, or describing your experience publicly is perfectly fine and encouraged. The restriction applies specifically to distributing the actual files, code, templates, and deliverables themselves.</p>
+
+  <!-- SECTION 5 -->
+  <h2><span class="section-num">5.</span> Intellectual Property</h2>
+  <p>The Product, including its structure, architecture, organization, documentation, branding, and all Licensor IP, remains the exclusive property of the Licensor. This Agreement does not transfer ownership of the Product to the Licensee — it grants a limited license to use it.</p>
+  <p>The following marks and names are proprietary to the Licensor and may not be used in connection with any redistributed, resold, or repackaged version of the Product:</p>
+  <ul>
+    <li>AIOS Blueprint™</li>
+    <li>SellFi™</li>
+    <li>The T.O.P. Method™</li>
+    <li>TOP Wheels™</li>
+    <li>Vivant Investments LLC</li>
+    <li>Any associated logos, trade dress, or visual branding</li>
+  </ul>
+
+  <!-- SECTION 6 -->
+  <h2><span class="section-num">6.</span> Acknowledgment of Digital Delivery</h2>
+  <p>The Licensee acknowledges that:</p>
+  <ol type="a">
+    <li>The Product is delivered digitally and access is granted immediately upon completed payment;</li>
+    <li>Due to the nature of digital products, the Licensee understands that once the Product files have been downloaded and/or installed, the transaction is considered fulfilled;</li>
+    <li>A 30-day money-back guarantee is offered from the date of purchase, subject to the Licensor's refund policy. Requesting a refund requires deletion of all Product files from the Licensee's devices;</li>
+    <li>The Licensor reserves the right to deny refund requests where evidence suggests the Product has been installed, used extensively, or redistributed prior to the refund request.</li>
+  </ol>
+
+  <!-- SECTION 7 -->
+  <h2><span class="section-num">7.</span> Remedies &amp; Liquidated Damages</h2>
+
+  <div class="penalty-box">
+    <strong>REDISTRIBUTION &amp; RESALE PENALTY</strong>
+    <p>Any violation of Section 4 (Restrictions) shall result in liquidated damages of <strong>Fifteen Thousand United States Dollars ($15,000.00) per occurrence</strong>, in addition to all other remedies available at law or in equity.</p>
+  </div>
+
+  <p>The parties acknowledge and agree that:</p>
+  <ol type="a">
+    <li><strong>Actual damages from unauthorized redistribution are difficult to calculate</strong> at the time of this Agreement because the Licensor cannot predict how many potential sales will be lost, how widely the files may spread, or the downstream commercial impact of each unauthorized distribution;</li>
+    <li>The liquidated damages amount of $15,000.00 per occurrence represents a <strong>reasonable pre-estimate of the Licensor's anticipated loss</strong> from each act of unauthorized redistribution, based on the Product's retail value of $3,497.00 and the multiplied harm caused when files are shared with multiple potential purchasers;</li>
+    <li>This amount is <strong>not intended as a penalty</strong> but as a genuine, good-faith estimate of foreseeable harm;</li>
+    <li>Each separate act of redistribution, resale, or sublicensing constitutes a <strong>separate occurrence</strong> subject to its own $15,000.00 liquidated damages amount;</li>
+    <li>The Licensor additionally reserves the right to seek <strong>injunctive relief</strong> (a court order to immediately stop unauthorized distribution), <strong>actual damages</strong> if they exceed the liquidated amount, and <strong>recovery of reasonable attorney's fees and costs</strong> incurred in enforcement.</li>
+  </ol>
+
+  <p>Upon discovery of a violation, the Licensee's license is <strong>immediately and automatically revoked</strong> without notice, and the Licensee shall delete all copies of the Product from all devices within 24 hours.</p>
+
+  <!-- SECTION 8 -->
+  <h2><span class="section-num">8.</span> Disclaimer of Warranties</h2>
+  <p>The Product is provided <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. The Licensor does not guarantee specific results, income, or outcomes from use of the Product. Results depend entirely on the Licensee's implementation, effort, and circumstances.</p>
+
+  <!-- SECTION 9 -->
+  <h2><span class="section-num">9.</span> Limitation of Liability</h2>
+  <p>In no event shall the Licensor be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to the Licensee's use of the Product, including but not limited to loss of profits, data, business opportunities, or goodwill. The Licensor's total cumulative liability under this Agreement shall not exceed the amount paid by the Licensee for the Product.</p>
+
+  <!-- SECTION 10 -->
+  <h2><span class="section-num">10.</span> Governing Law &amp; Dispute Resolution</h2>
+  <p>This Agreement shall be governed by and construed in accordance with the laws of the <strong>State of Arizona, United States</strong>, without regard to its conflict-of-law provisions. Any dispute arising under this Agreement shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) in Maricopa County, Arizona, unless the Licensor elects to pursue injunctive relief in a court of competent jurisdiction. The prevailing party in any dispute shall be entitled to recover reasonable attorney's fees and costs.</p>
+
+  <!-- SECTION 11 -->
+  <h2><span class="section-num">11.</span> Severability &amp; Entire Agreement</h2>
+  <p>If any provision of this Agreement is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such finding shall not affect the validity of the remaining provisions, which shall continue in full force and effect. This Agreement constitutes the entire agreement between the parties regarding the subject matter herein and supersedes all prior agreements, representations, and understandings.</p>
+
+  <!-- SECTION 12 -->
+  <h2><span class="section-num">12.</span> Amendments</h2>
+  <p>The Licensor reserves the right to update this Agreement at any time. Updated terms will be posted at aiosblueprint.com and will apply to all new purchases and downloads after the posting date. Existing Licensees will be notified of material changes via the email address associated with their purchase.</p>
+
+  <!-- ACCEPTANCE -->
+  <div class="sig-section">
+    <p><strong>ACCEPTANCE:</strong> By downloading, installing, or using the AIOS Blueprint product files, you confirm that you have read this Agreement in its entirety, that you understand its terms, and that you agree to be legally bound by all provisions contained herein.</p>
+
+    <p style="font-size: 12px; color: #888; margin-top: 20px;">If you purchased via aiosblueprint.com, your completed checkout and download constitutes acceptance of these terms. If you received this file as part of a promotional or free-access distribution, your installation of the Product files constitutes acceptance.</p>
+
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">Licensee Signature</div>
+        <div style="height: 28px;"></div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Printed Name</div>
+        <div style="height: 28px;"></div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Date</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line" style="font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: 22px; padding-top: 4px; color: #1a1a1a;">Mike Davis</div>
+        <div class="sig-label">Licensor — Mike Davis</div>
+        <div style="height: 28px;"></div>
+        <div class="sig-line" style="font-size: 13px; padding-top: 12px;">Vivant Investments LLC</div>
+        <div class="sig-label">Company</div>
+        <div style="height: 28px;"></div>
+        <div class="sig-line" style="font-size: 13px; padding-top: 12px;">March 2026</div>
+        <div class="sig-label">Effective Date</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="effective-date">Document Version 1.0 — Effective March 2026</div>
+    <div>AIOS Blueprint™ is a product of Vivant Investments LLC · aiosblueprint.com · support@aiosblueprint.com</div>
+    <div style="margin-top: 6px;">This document does not constitute legal advice. Consult a licensed attorney for jurisdiction-specific guidance.</div>
+  </div>
+
+</div>
+</body>
+</html>

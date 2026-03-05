@@ -7,7 +7,12 @@ module.exports = async (req, res) => {
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { session_id, token } = req.query;
+    const { session_id, token, license_accepted, accepted_at } = req.query;
+
+    // Log license acceptance for legal record
+    if (license_accepted === '1') {
+      console.log(`[LICENSE ACCEPTED] at=${accepted_at || 'unknown'} session=${session_id || 'token-access'} ip=${req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || 'unknown'} ua=${req.headers['user-agent'] || 'unknown'}`);
+    }
 
     // Two verification paths: Stripe session OR signed free-access token
     let tier = null;

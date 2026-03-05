@@ -68,7 +68,7 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-::selection{background:var(--gold);color:var(--bg)}
+::selection{background:var(--accent);color:var(--bg)}
 
 /* --- NOISE OVERLAY --- */
 body::before{
@@ -102,18 +102,18 @@ nav{
 }
 .nav-logo{
   font-family:var(--font-mono);font-weight:500;font-size:.85rem;
-  color:var(--gold);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
 }
 .nav-logo span{color:var(--text-muted)}
 .nav-cta{
   font-family:var(--font-mono);font-size:.75rem;font-weight:400;
   padding:.6rem 1.5rem;
-  border:1px solid var(--gold);color:var(--gold);
+  border:1px solid var(--accent);color:var(--accent);
   background:transparent;text-decoration:none;
   letter-spacing:.05em;text-transform:uppercase;
   transition:all .25s ease;cursor:pointer;
 }
-.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.nav-cta:hover{background:var(--accent);color:var(--bg)}
 
 /* --- HERO --- */
 .hero{
@@ -124,24 +124,24 @@ nav{
 .hero::after{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:700px;height:700px;
-  background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%);
+  background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
   opacity:.12;pointer-events:none;filter:blur(80px);
 }
 .hero-inner{max-width:800px;margin:0 auto;width:100%;position:relative;z-index:2}
 .hero-tag{
   font-family:var(--font-mono);font-size:.7rem;font-weight:400;
-  color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
   margin-bottom:1.5rem;
   display:inline-flex;align-items:center;gap:.6rem;
 }
-.hero-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
-.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold)}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-tag::after{content:'';width:24px;height:1px;background:var(--accent)}
 .hero-h1{
   font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);
   font-weight:400;line-height:1.05;margin-bottom:1.5rem;
   letter-spacing:-.02em;
 }
-.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-h1 em{font-style:italic;color:var(--accent)}
 .hero-sub{
   font-size:1.2rem;color:var(--text-secondary);line-height:1.7;
   max-width:640px;margin:0 auto 1rem;
@@ -155,9 +155,9 @@ nav{
 .counter-box{
   display:inline-flex;align-items:center;gap:.75rem;
   margin-bottom:2rem;padding:.75rem 1.5rem;
-  border:1px solid var(--gold);background:var(--gold-dim);
+  border:1px solid var(--accent);background:var(--accent-dim);
   font-family:var(--font-mono);font-size:.85rem;
-  color:var(--gold);letter-spacing:.04em;
+  color:var(--accent);letter-spacing:.04em;
   animation:counterPulse 3s ease-in-out infinite;
 }
 .counter-box.sold-out{
@@ -166,19 +166,19 @@ nav{
 }
 .counter-num{
   font-size:1.6rem;font-weight:700;line-height:1;
-  color:var(--gold);
+  color:var(--accent);
 }
 .counter-box.sold-out .counter-num{color:var(--red)}
 @keyframes counterPulse{
-  0%,100%{box-shadow:0 0 0 0 var(--gold-glow)}
-  50%{box-shadow:0 0 20px 4px var(--gold-glow)}
+  0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}
+  50%{box-shadow:0 0 20px 4px var(--accent-glow)}
 }
 
 /* --- BUTTONS --- */
 .btn-primary{
   display:inline-flex;align-items:center;gap:.5rem;
   padding:1.1rem 2.5rem;
-  background:var(--gold);color:var(--bg);
+  background:var(--accent);color:var(--bg);
   font-family:var(--font-body);font-weight:700;font-size:1rem;
   border:none;cursor:pointer;text-decoration:none;
   transition:all .3s ease;position:relative;overflow:hidden;
@@ -190,7 +190,7 @@ nav{
   transform:translateX(-100%);transition:transform .5s ease;
 }
 .btn-primary:hover::after{transform:translateX(100%)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
 .btn-secondary{
   display:inline-flex;align-items:center;gap:.5rem;
   padding:1.1rem 2.5rem;
@@ -208,15 +208,15 @@ nav{
 section{padding:6rem 0;position:relative}
 .section-tag{
   font-family:var(--font-mono);font-size:.7rem;font-weight:400;
-  color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
   margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;
 }
-.section-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
 .section-title{
   font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);
   font-weight:400;line-height:1.15;margin-bottom:1rem;letter-spacing:-.01em;
 }
-.section-title em{font-style:italic;color:var(--gold)}
+.section-title em{font-style:italic;color:var(--accent)}
 .section-desc{
   font-size:1.1rem;color:var(--text-secondary);max-width:640px;
   line-height:1.7;margin-bottom:3rem;
@@ -234,7 +234,7 @@ section{padding:6rem 0;position:relative}
   transition:all .35s ease;
 }
 .what-item:hover{
-  border-color:var(--gold);transform:translateY(-3px);
+  border-color:var(--accent);transform:translateY(-3px);
   box-shadow:0 12px 40px rgba(0,0,0,.3);
 }
 .what-item h3{
@@ -283,13 +283,13 @@ section{padding:6rem 0;position:relative}
 }
 .pricing-card:hover{border-color:var(--border-bright);transform:translateY(-3px)}
 .pricing-card.featured{
-  border:2px solid var(--gold);
+  border:2px solid var(--accent);
 }
 .pricing-card.featured::before{
   content:'FREE FOR THE CIRCLE';
   position:absolute;top:-1px;left:50%;transform:translate(-50%,-50%);
   font-family:var(--font-mono);font-size:.65rem;letter-spacing:.12em;
-  background:var(--gold);color:var(--bg);padding:.4rem 1.25rem;
+  background:var(--accent);color:var(--bg);padding:.4rem 1.25rem;
   font-weight:600;white-space:nowrap;
 }
 .pricing-tier{
@@ -304,7 +304,7 @@ section{padding:6rem 0;position:relative}
   font-family:var(--font-display);font-size:3rem;
   line-height:1;margin-bottom:.5rem;
 }
-.pricing-price.free-price{color:var(--gold)}
+.pricing-price.free-price{color:var(--accent)}
 .pricing-price .original-price{
   font-size:1.5rem;color:var(--text-muted);
   text-decoration:line-through;text-decoration-color:var(--red);
@@ -323,11 +323,11 @@ section{padding:6rem 0;position:relative}
   border-bottom:1px solid var(--border);
 }
 .pricing-features li::before{
-  content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0;
+  content:'\2713';color:var(--accent);font-weight:700;flex-shrink:0;
 }
 .pricing-features li:last-child{border-bottom:none}
 .pricing-features li.highlight{color:var(--text)}
-.pricing-features li.highlight strong{color:var(--gold)}
+.pricing-features li.highlight strong{color:var(--accent)}
 
 /* --- STEPS --- */
 .get-section{border-top:1px solid var(--border)}
@@ -339,7 +339,7 @@ section{padding:6rem 0;position:relative}
 }
 .step::before{
   content:counter(steps);
-  font-family:var(--font-display);font-size:2.5rem;color:var(--gold);
+  font-family:var(--font-display);font-size:2.5rem;color:var(--accent);
   display:block;margin-bottom:.75rem;line-height:1;
 }
 .step h3{
@@ -350,16 +350,16 @@ section{padding:6rem 0;position:relative}
 .code-badge{
   display:inline-block;margin-top:1.5rem;
   font-family:var(--font-mono);font-size:.8rem;
-  color:var(--gold);background:var(--gold-dim);
+  color:var(--accent);background:var(--accent-dim);
   padding:.5rem 1.25rem;letter-spacing:.08em;
-  border:1px solid rgba(238,181,68,.2);
+  border:1px solid rgba(0,229,255,.2);
 }
 
 /* --- TESTIMONIAL --- */
 .testimonial-section{border-top:1px solid var(--border);background:var(--bg-elevated)}
 .testimonial-inner{max-width:640px;margin:0 auto}
 .testimonial-inner blockquote{
-  border-left:3px solid var(--gold);
+  border-left:3px solid var(--accent);
   padding-left:1.75rem;margin-bottom:2rem;
 }
 .testimonial-inner blockquote p{
@@ -374,7 +374,7 @@ section{padding:6rem 0;position:relative}
   display:flex;align-items:flex-start;gap:.75rem;
 }
 .testimonial-prompts li::before{
-  content:'\2192';color:var(--gold);font-weight:700;flex-shrink:0;
+  content:'\2192';color:var(--accent);font-weight:700;flex-shrink:0;
 }
 
 /* --- CTA --- */
@@ -386,7 +386,7 @@ section{padding:6rem 0;position:relative}
 .cta-section::before{
   content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
   width:800px;height:400px;
-  background:radial-gradient(ellipse,var(--gold-glow) 0%,transparent 70%);
+  background:radial-gradient(ellipse,var(--accent-glow) 0%,transparent 70%);
   opacity:.1;pointer-events:none;filter:blur(60px);
 }
 
@@ -399,12 +399,12 @@ footer p{
   font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
   letter-spacing:.03em;line-height:1.8;
 }
-footer a{color:var(--gold);text-decoration:none}
+footer a{color:var(--accent);text-decoration:none}
 footer a:hover{text-decoration:underline}
 
 /* --- DIVIDER --- */
 .gold-divider{
-  width:60px;height:2px;background:var(--gold);
+  width:60px;height:2px;background:var(--accent);
   margin:0 auto 2rem;
 }
 
@@ -420,14 +420,14 @@ footer a:hover{text-decoration:underline}
 .own-col h4,.rent-col h4{
   font-family:var(--font-display);font-size:1.2rem;margin-bottom:1rem;
 }
-.own-col h4{color:var(--gold)}
+.own-col h4{color:var(--accent)}
 .rent-col h4{color:var(--red)}
 .own-col ul,.rent-col ul{list-style:none}
 .own-col li,.rent-col li{
   padding:.4rem 0;font-size:.85rem;color:var(--text-secondary);
   display:flex;align-items:flex-start;gap:.5rem;line-height:1.5;
 }
-.own-col li::before{content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0}
+.own-col li::before{content:'\2713';color:var(--accent);font-weight:700;flex-shrink:0}
 .rent-col li::before{content:'\2717';color:var(--red);font-weight:700;flex-shrink:0}
 
 /* --- ANIMATIONS --- */
@@ -463,7 +463,7 @@ footer a:hover{text-decoration:underline}
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Creative Circle <span>&times; AI OS</span></div>
+  <div class="nav-logo">Creative Friends <span>&times; AI OS</span></div>
   <a href="#pricing" class="nav-cta">Get Access</a>
 </nav>
 
@@ -487,7 +487,7 @@ footer a:hover{text-decoration:underline}
       <a href="/api/checkout?tier=2&source=creativefriends" class="btn-primary">Get the Full System Free &rarr;</a>
       <a href="/api/checkout?tier=1&source=creativefriends" class="btn-secondary">Get the Blueprint &mdash; $497</a>
     </div>
-    <p class="reveal reveal-delay-4" style="margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;color:var(--gold);letter-spacing:.03em;background:var(--gold-dim);display:inline-block;padding:.5rem 1.25rem;border:1px solid rgba(238,181,68,.2)">Use code <strong>WEALLWEGOT</strong> at checkout &bull; Limited to 5 people</p>
+    <p class="reveal reveal-delay-4" style="margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;color:var(--accent);letter-spacing:.03em;background:var(--accent-dim);display:inline-block;padding:.5rem 1.25rem;border:1px solid rgba(0,229,255,.2)">Use code <strong>WEALLWEGOT</strong> at checkout &bull; Limited to 5 people</p>
     <p class="reveal reveal-delay-4" style="margin-top:.75rem;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">We all we got. &mdash; Mike Davis</p>
   </div>
 </section>
@@ -645,7 +645,7 @@ footer a:hover{text-decoration:underline}
         <span style="font-family:var(--font-mono);color:var(--gold);font-size:1.05rem;white-space:nowrap">$55,000/yr</span>
       </div>
 
-      <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;margin-top:.5rem;border-top:2px solid var(--gold)">
+      <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;margin-top:.5rem;border-top:2px solid var(--accent)">
         <span style="color:var(--text);font-size:1.2rem;font-family:var(--font-display)">Combined Salary</span>
         <span style="font-family:var(--font-mono);color:var(--gold);font-size:1.4rem;font-weight:700">$265,000/yr</span>
       </div>
@@ -669,7 +669,7 @@ footer a:hover{text-decoration:underline}
       <div class="reveal reveal-delay-2" style="color:var(--text-secondary);font-size:1.05rem;line-height:1.8">
         <p style="margin-bottom:1.25rem">I need social proof. Real people. Real businesses. Real results.</p>
         <p style="margin-bottom:1.25rem">Not paid influencers. Not fake screenshots. People I actually know using this system and telling me &mdash; honestly &mdash; what it did for their business.</p>
-        <p style="margin-bottom:1.25rem">That's why I'm limiting this to 5. Because this isn't a download-and-figure-it-out situation. Every person who gets the full system also gets a <strong style="color:var(--gold)">private 1-hour consultation</strong> with me on Zoom. I'm going to make sure you set it up right, give you real use cases specific to your business, and shift your mindset on what AI can actually do for you.</p>
+        <p style="margin-bottom:1.25rem">That's why I'm limiting this to 5. Because this isn't a download-and-figure-it-out situation. Every person who gets the full system also gets a <strong style="color:var(--accent)">private 1-hour consultation</strong> with me on Zoom. I'm going to make sure you set it up right, give you real use cases specific to your business, and shift your mindset on what AI can actually do for you.</p>
         <p style="margin-bottom:1.25rem">I can't do that for 50 people for free. I can do it for 5.</p>
         <p>Use it for a week. Then tell me what happened. That's the deal.</p>
       </div>
@@ -718,7 +718,7 @@ footer a:hover{text-decoration:underline}
           <span class="original-price">$1,497</span>
           FREE
         </div>
-        <div class="pricing-note">Use code <strong style="color:var(--gold)">WEALLWEGOT</strong> at checkout</div>
+        <div class="pricing-note">Use code <strong style="color:var(--accent)">WEALLWEGOT</strong> at checkout</div>
         <ul class="pricing-features">
           <li class="highlight">Everything in The Blueprint</li>
           <li class="highlight"><strong>Telegram mobile agent</strong> &mdash; run your AI from your phone, anywhere</li>
@@ -729,7 +729,7 @@ footer a:hover{text-decoration:underline}
           <li>Priority support during your first week</li>
         </ul>
         <a href="/api/checkout?tier=2&source=creativefriends" class="btn-primary" style="width:100%;justify-content:center;font-size:1rem">Get the Full System Free &rarr;</a>
-        <p style="margin-top:.75rem;font-family:var(--font-mono);font-size:.72rem;color:var(--gold);letter-spacing:.03em" id="pricing-spots-note">Only <span id="pricing-spots-inline">5</span> spots &bull; Code: WEALLWEGOT</p>
+        <p style="margin-top:.75rem;font-family:var(--font-mono);font-size:.72rem;color:var(--accent);letter-spacing:.03em" id="pricing-spots-note">Only <span id="pricing-spots-inline">5</span> spots &bull; Code: WEALLWEGOT</p>
       </div>
     </div>
   </div>
@@ -744,7 +744,7 @@ footer a:hover{text-decoration:underline}
     <div class="steps-grid" style="margin-top:2.5rem">
       <div class="step reveal">
         <h3>Click the Button</h3>
-        <p>Hit the link below. You'll land on Stripe checkout. For the free full system, enter promo code <strong style="color:var(--gold)">WEALLWEGOT</strong> &mdash; the price drops to $0.</p>
+        <p>Hit the link below. You'll land on Stripe checkout. For the free full system, enter promo code <strong style="color:var(--accent)">WEALLWEGOT</strong> &mdash; the price drops to $0.</p>
       </div>
       <div class="step reveal reveal-delay-1">
         <h3>Download the System</h3>
@@ -758,7 +758,7 @@ footer a:hover{text-decoration:underline}
 
     <div style="text-align:center;margin-top:3rem" class="reveal reveal-delay-3">
       <a href="/api/checkout?tier=2&source=creativefriends" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System Free &rarr;</a>
-      <p style="margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;color:var(--gold);letter-spacing:.03em">Use code <strong>WEALLWEGOT</strong> at checkout &bull; Limited to 5 people</p>
+      <p style="margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;color:var(--accent);letter-spacing:.03em">Use code <strong>WEALLWEGOT</strong> at checkout &bull; Limited to 5 people</p>
     </div>
   </div>
 </section>
@@ -799,7 +799,7 @@ footer a:hover{text-decoration:underline}
       <a href="/api/checkout?tier=2&source=creativefriends" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem">Get the Full System Free &rarr;</a>
       <a href="/api/checkout?tier=1&source=creativefriends" class="btn-secondary" style="font-size:1.1rem;padding:1.2rem 3rem">Blueprint &mdash; $497</a>
     </div>
-    <p class="reveal reveal-delay-4" style="margin-top:1rem;text-align:center;font-family:var(--font-mono);font-size:.8rem;color:var(--gold);letter-spacing:.03em">Code: WEALLWEGOT &bull; Limited to 5 free spots</p>
+    <p class="reveal reveal-delay-4" style="margin-top:1rem;text-align:center;font-family:var(--font-mono);font-size:.8rem;color:var(--accent);letter-spacing:.03em">Code: WEALLWEGOT &bull; Limited to 5 free spots</p>
     <p class="reveal reveal-delay-4" style="margin-top:.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);letter-spacing:.03em">$1,497 value &bull; Includes 1-hour private consultation &bull; $0 with code</p>
   </div>
 </section>

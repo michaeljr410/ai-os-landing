@@ -702,7 +702,7 @@ footer a:hover{text-decoration:underline}
 // === LIVE COUNTER ===
 async function fetchCounter() {
   try {
-    const resp = await fetch('/api/coupon-status?code=NOMANLEFTBEHIND&displayMax=25');
+    const resp = await fetch('/api/coupon-status?code=NOMANLEFTBEHIND');
     const data = await resp.json();
     const numEl = document.getElementById('counter-num');
     const textEl = document.getElementById('counter-text');
@@ -711,7 +711,7 @@ async function fetchCounter() {
 
     const remaining = data.remaining;
     if (remaining === null || remaining === undefined) {
-      numEl.textContent = '25';
+      numEl.textContent = '10';
       textEl.textContent = 'spots at intro pricing';
     } else if (remaining <= 0) {
       numEl.textContent = '0';

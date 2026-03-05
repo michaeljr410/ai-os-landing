@@ -431,7 +431,7 @@ footer a:hover{text-decoration:underline}
     <div class="reveal reveal-delay-3">
       <div class="counter-box" id="live-counter">
         <span class="counter-num" id="counter-num">&mdash;</span>
-        <span id="counter-text">spots left at $1,497</span>
+        <span id="counter-text">free spots remaining</span>
       </div>
     </div>
 
@@ -712,14 +712,14 @@ async function fetchCounter() {
     const remaining = data.remaining;
     if (remaining === null || remaining === undefined) {
       numEl.textContent = '10';
-      textEl.textContent = 'spots at intro pricing';
+      textEl.textContent = 'free spots remaining';
     } else if (remaining <= 0) {
       numEl.textContent = '0';
       textEl.textContent = 'spots left — sold out';
       boxEl.classList.add('sold-out');
     } else {
       numEl.textContent = remaining;
-      textEl.textContent = remaining === 1 ? 'spot left at $1,497' : 'spots left at $1,497';
+      textEl.textContent = remaining === 1 ? 'free spot remaining' : 'free spots remaining';
     }
   } catch(e) { console.warn('Counter fetch failed:', e); }
 }

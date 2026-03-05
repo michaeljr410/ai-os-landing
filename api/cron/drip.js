@@ -16,6 +16,7 @@
 const Stripe = require('stripe');
 const { Resend } = require('resend');
 const { getDripEmail } = require('../_lib/email-templates');
+const { getDripEmail: getCFDripEmail } = require('../_lib/email-templates-creativefriends');
 
 module.exports = async (req, res) => {
   // Only allow GET (Vercel cron uses GET)
@@ -60,6 +61,7 @@ module.exports = async (req, res) => {
         aios_purchased_at,
         aios_emails_sent,
         aios_session_id,
+        aios_funnel,
       } = customer.metadata;
 
       if (!aios_purchased_at || !customer.email) {
@@ -89,7 +91,10 @@ module.exports = async (req, res) => {
       }
 
       const firstName = (customer.name || '').split(' ')[0] || '';
-      const emailData = getDripEmail(emailNum, {
+
+      // Route to funnel-specific templates if applicable
+      const getEmail = aios_funnel === 'creativefriends' ? getCFDripEmail : getDripEmail;
+      const emailData = getEmail(emailNum, {
         firstName,
         tier: aios_tier || '1',
         sessionId: aios_session_id || '',

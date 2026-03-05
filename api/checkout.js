@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     }
 
     const stripe = new Stripe((process.env.STRIPE_SECRET_KEY || '').trim());
-    const { tier } = req.query;
+    const { tier, source } = req.query;
 
     // Map tiers to Stripe Price IDs (set in Vercel env vars) — trim to prevent issues
     const priceMap = {
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${siteUrl}/thank-you?tier=${tier}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/#pricing`,
-      metadata: { tier },
+      metadata: { tier, ...(source ? { source } : {}) },
       allow_promotion_codes: true,
       customer_creation: 'always',
     });

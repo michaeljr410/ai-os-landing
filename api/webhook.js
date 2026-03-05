@@ -1,6 +1,7 @@
 const Stripe = require('stripe');
 const { Resend } = require('resend');
 const { getDripEmail } = require('./_lib/email-templates');
+const { getDripEmail: getCFDripEmail } = require('./_lib/email-templates-creativefriends');
 
 // Disable Vercel body parsing — Stripe needs the raw body for signature verification
 module.exports.config = { api: { bodyParser: false } };
@@ -37,6 +38,7 @@ module.exports = async (req, res) => {
     case 'checkout.session.completed': {
       const session = event.data.object;
       const tier = session.metadata?.tier;
+      const source = session.metadata?.source || '';
       const email = session.customer_details?.email;
       const name = session.customer_details?.name || '';
       const firstName = name.split(' ')[0] || '';
@@ -48,7 +50,9 @@ module.exports = async (req, res) => {
       if (resendKey && email) {
         try {
           const resend = new Resend(resendKey);
-          const emailData = getDripEmail(1, {
+          // Route to funnel-specific templates
+          const getEmail = source === 'creativefriends' ? getCFDripEmail : getDripEmail;
+          const emailData = getEmail(1, {
             firstName,
             tier,
             sessionId: session.id,
@@ -82,6 +86,7 @@ module.exports = async (req, res) => {
               aios_purchased_at: new Date().toISOString(),
               aios_emails_sent: '1',
               aios_session_id: session.id,
+              ...(source ? { aios_funnel: source } : {}),
             },
           });
           console.log(`[CRM] Customer ${customerId} metadata updated for drip tracking`);
@@ -97,11 +102,12 @@ module.exports = async (req, res) => {
         try {
           const tierLabel = tier === '2' ? 'Full System ($1,497)' : 'Blueprint ($497)';
           const amount = session.amount_total ? `$${(session.amount_total / 100).toFixed(2)}` : tierLabel;
+          const sourceLabel = source ? `\n*Source:* ${source}` : '';
           const msg = `🎯 *New AIOS Blueprint Sale*\n\n` +
             `*Tier:* ${tierLabel}\n` +
             `*Paid:* ${amount}\n` +
             `*Email:* ${email}\n` +
-            `*Name:* ${name || 'N/A'}`;
+            `*Name:* ${name || 'N/A'}${sourceLabel}`;
 
           await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
             method: 'POST',

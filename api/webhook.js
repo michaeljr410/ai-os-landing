@@ -61,6 +61,7 @@ module.exports = async (req, res) => {
           if (emailData) {
             await resend.emails.send({
               from: process.env.RESEND_FROM_EMAIL || 'Mike Davis <mike@aiosblueprint.com>',
+              reply_to: 'vivantinvestments@gmail.com',
               to: email,
               subject: emailData.subject,
               html: emailData.html,

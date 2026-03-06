@@ -108,6 +108,7 @@ module.exports = async (req, res) => {
       try {
         await resend.emails.send({
           from: fromEmail,
+          reply_to: 'vivantinvestments@gmail.com',
           to: customer.email,
           subject: emailData.subject,
           html: emailData.html,

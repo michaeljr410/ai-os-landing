@@ -942,23 +942,26 @@ footer a:hover{color:var(--accent)}
             </div>
           </div>
           <div class="tg-chat" id="tg-chat">
-            <div class="tg-msg user">Handle the new lead from the website</div>
+            <div class="tg-msg user">Build a full marketing campaign for the Atlas. Posts, images, video scripts, landing page.</div>
             <div class="tg-typing" id="tg-typing">
               <span class="typing-dots"><span>.</span><span>.</span><span>.</span></span> typing
             </div>
-            <div class="tg-msg bot" id="tg-response" style="display:none">On it. Running the full workflow. I&rsquo;ll text you when they respond.</div>
+            <div class="tg-msg bot" id="tg-response" style="display:none">On it. Loading your brand voice and deal data now. I&rsquo;ll send everything when it&rsquo;s ready.</div>
+            <div class="tg-msg bot" id="tg-done" style="display:none">Done. 8 posts, 4 images, 2 video scripts, 1 landing page &mdash; all scheduled. Campaign brief in your inbox.</div>
           </div>
         </div>
         <div class="phone-home"></div>
       </div>
 
       <div class="action-cards" id="action-cards">
-        <div class="action-card ac-1" data-delay="0"><span class="check">&#10003;</span> Lead qualified &mdash; Score: 8.4/10</div>
-        <div class="action-card ac-2" data-delay="400"><span class="check">&#10003;</span> CRM record created <span class="service">&middot; Pipedrive</span></div>
-        <div class="action-card ac-3" data-delay="800"><span class="check">&#10003;</span> Personalized email sent <span class="service">&middot; Gmail</span></div>
-        <div class="action-card ac-4" data-delay="1200"><span class="check">&#10003;</span> Follow-up scheduled <span class="service">&middot; 2-day, 5-day</span></div>
-        <div class="action-card ac-5" data-delay="1600"><span class="check">&#10003;</span> Brief saved to brain/</div>
-        <div class="action-card ac-6" data-delay="2000"><span class="arrow">&rarr;</span> You&rsquo;ll be texted when they reply</div>
+        <div class="action-card ac-1" data-delay="0"><span class="check">&#10003;</span> Brand voice + Atlas deal data loaded <span class="service">&middot; brain/</span></div>
+        <div class="action-card ac-2" data-delay="350"><span class="check">&#10003;</span> 8 social posts written &mdash; IG, FB, TikTok, X <span class="service">&middot; Content Engine</span></div>
+        <div class="action-card ac-3" data-delay="700"><span class="check">&#10003;</span> 4 images generated &mdash; lifestyle + spec cards <span class="service">&middot; DALL&middot;E</span></div>
+        <div class="action-card ac-4" data-delay="1050"><span class="check">&#10003;</span> 2 video scripts with captions created <span class="service">&middot; Scripts</span></div>
+        <div class="action-card ac-5" data-delay="1400"><span class="check">&#10003;</span> Landing page built + deployed <span class="service">&middot; Vercel</span></div>
+        <div class="action-card ac-6" data-delay="1750"><span class="check">&#10003;</span> All posts scheduled &mdash; next 5 days <span class="service">&middot; Buffer</span></div>
+        <div class="action-card ac-7" data-delay="2100"><span class="check">&#10003;</span> Campaign brief saved <span class="service">&middot; brain/campaigns/</span></div>
+        <div class="action-card ac-8" data-delay="2450"><span class="arrow">&rarr;</span> Campaign live. All assets delivered to your inbox.</div>
       </div>
     </div>
 
@@ -1267,9 +1270,11 @@ if (wfMockup) wfObs.observe(wfMockup);
 const phoneObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      // Show typing, then response
       const typing = document.getElementById('tg-typing');
       const response = document.getElementById('tg-response');
+      const doneMsg = document.getElementById('tg-done');
+
+      // Show typing, then first response
       setTimeout(() => {
         if (typing) typing.style.display = 'none';
         if (response) response.style.display = 'block';
@@ -1277,10 +1282,22 @@ const phoneObs = new IntersectionObserver((entries) => {
 
       // Show action cards with stagger
       const cards = e.target.querySelectorAll('.action-card');
+      let maxDelay = 0;
       cards.forEach(card => {
         const delay = parseInt(card.dataset.delay) || 0;
+        if (delay > maxDelay) maxDelay = delay;
         setTimeout(() => card.classList.add('show'), 1800 + delay);
       });
+
+      // Show "Done" message after all cards
+      setTimeout(() => {
+        if (doneMsg) {
+          doneMsg.style.display = 'block';
+          // Scroll chat to bottom
+          const chat = document.getElementById('tg-chat');
+          if (chat) chat.scrollTop = chat.scrollHeight;
+        }
+      }, 1800 + maxDelay + 800);
 
       phoneObs.unobserve(e.target);
     }

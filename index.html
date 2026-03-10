@@ -420,7 +420,7 @@ section{padding:7rem 0;position:relative}
 
 /* --- PRICING --- */
 .pricing{background:var(--bg-elevated);border-top:1px solid var(--border)}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;max-width:1100px;margin:0 auto}
 .price-card{
   background:var(--bg-card);border:1px solid var(--border);
   padding:3rem;position:relative;transition:all .35s ease;
@@ -630,6 +630,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .steps-grid{grid-template-columns:1fr}
   .compare-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr;max-width:480px}
+  .pricing-grid .price-card.community-card{order:3}
   .math-grid{grid-template-columns:1fr 1fr}
   .who-grid{grid-template-columns:1fr !important}
 }
@@ -1062,6 +1063,15 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <p style="font-family:var(--font-mono);font-size:.78rem;color:var(--text-secondary);letter-spacing:.03em">Same result. You own it. No retainers. No lock-in. No dependency.</p>
       </div>
     </div>
+
+      <!-- TIME SAVINGS CALCULATOR CTA -->
+      <div class="reveal reveal-delay-4" style="text-align:center;margin-top:2.5rem">
+        <a href="/compress" style="display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2rem;background:transparent;color:var(--accent);border:1px solid var(--accent);font-family:var(--font-mono);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .3s ease" onmouseover="this.style.background='rgba(0,229,255,.08)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(0,229,255,.15)'" onmouseout="this.style.background='transparent';this.style.transform='none';this.style.boxShadow='none'">
+          &#x23F1; Calculate Your Time Savings <span style="transition:transform .2s ease">&#x25B8;</span>
+        </a>
+        <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);margin-top:.75rem;letter-spacing:.04em">Paste any task. See how much time &amp; money AI saves you.</p>
+      </div>
+
   </div>
 </section>
 
@@ -1070,7 +1080,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   <div class="container">
     <div class="section-tag reveal" style="justify-content:center">Intro Pricing</div>
     <h2 class="section-title reveal reveal-delay-1" style="text-align:center">Launch pricing. <em>Won't last.</em></h2>
-    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 3.5rem">These are intro prices for early adopters only. Once launch ends, prices go to full retail. No subscriptions. No recurring fees. One payment, yours forever.</p>
+    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 3.5rem">Intro prices for early adopters only. The AI agent is a one-time payment &mdash; yours forever. Or join the community to watch, learn, and connect before committing.</p>
 
     <div class="pricing-grid">
       <div class="price-card featured reveal">
@@ -1083,6 +1093,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>Persistent brain &mdash; your AI remembers everything, permanently</li>
           <li>Telegram bridge &mdash; full AI capabilities from your phone</li>
           <li>Run research, build projects, manage operations &mdash; from a text message</li>
+          <li><strong style="color:var(--accent)">Free updates for life</strong> &mdash; every new version, every new skill, every improvement. Forever. No extra cost.</li>
+          <li><strong style="color:var(--accent)">AIOS Blueprint Community &mdash; free forever</strong> &mdash; The Lab, Skill Drops, Community Chat, Office Hours, Start Here guide. Others pay $47/mo. You pay nothing. Ever.</li>
           <li><strong style="color:var(--accent)">1-hour private setup consultation</strong> with the creator via Zoom &mdash; brain dump your business, get your system dialed in for YOUR operation</li>
           <li>Magic Install &mdash; paste one prompt, everything sets up in 60 seconds</li>
           <li>First Week Checklist + Extension guide</li>
@@ -1103,10 +1115,30 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>Slash commands &mdash; one word triggers complete workflows</li>
           <li>Magic Install + First Week Checklist + Extension guide</li>
           <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No mobile agent</li>
+          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No free updates for life</li>
+          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No community access (add for $47/mo)</li>
           <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No private consultation</li>
         </ul>
         <a href="/api/checkout?tier=1" class="price-btn secondary">Blueprint Only &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$997</span> $497</a>
         <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; 30-day money-back guarantee</p>
+      </div>
+
+      <div class="price-card community-card reveal reveal-delay-2">
+        <div class="price-tier" style="display:flex;align-items:center;gap:.75rem">Community Only <span style="background:rgba(46,213,115,.12);color:var(--green);font-size:.6rem;padding:3px 8px;border-radius:4px;font-family:var(--font-mono);letter-spacing:.05em;text-transform:uppercase;font-weight:700;border:1px solid rgba(46,213,115,.25)">Monthly</span></div>
+        <div class="price-name">Join the Builders</div>
+        <div class="price-amount">$47 <span>/month</span></div>
+        <div class="price-note" style="color:var(--green)">Cancel anytime &mdash; no contract</div>
+        <ul class="price-features">
+          <li><strong>The Lab</strong> &mdash; watch real AI systems being built in public, with breakdowns</li>
+          <li><strong>Community Chat</strong> &mdash; connect with other builders, share wins, get help</li>
+          <li>New content weekly &mdash; build logs, experiments, lessons learned</li>
+          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No AI agent (desktop or mobile)</li>
+          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No Skill Drops or Office Hours</li>
+          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No Start Here guide</li>
+        </ul>
+        <a href="https://buy.stripe.com/5kQaEW3S1fF29HtbN70gw05" class="price-btn secondary" style="border-color:var(--green);color:var(--green)">Join the Community &mdash; $47/mo</a>
+        <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; Cancel anytime</p>
+        <p style="text-align:center;margin-top:1rem;font-size:.82rem;color:var(--text-secondary);line-height:1.5">Want the full AI agent too? <a href="/api/checkout?tier=2" style="color:var(--accent);text-decoration:underline">Get the Full System</a> &mdash; includes community <strong>free forever.</strong></p>
       </div>
     </div>
 
@@ -1128,6 +1160,10 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       <p class="capture-sub reveal reveal-delay-2">Get a working preview &mdash; 5 capabilities, the brain template, and the quick-start guide. No credit card. See for yourself what it's like to have AI that actually does the work.</p>
       <form id="previewForm" class="reveal reveal-delay-3" style="max-width:480px;margin:0 auto" onsubmit="handlePreviewCapture(event)">
         <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
+          <input type="text" id="previewFirstName" required placeholder="First name" style="flex:1;min-width:130px;padding:.9rem 1.2rem;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .2s">
+          <input type="text" id="previewLastName" required placeholder="Last name" style="flex:1;min-width:130px;padding:.9rem 1.2rem;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .2s">
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.75rem">
           <input type="email" id="previewEmail" required placeholder="Your best email" style="flex:1;min-width:220px;padding:.9rem 1.2rem;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .2s">
           <button type="submit" id="previewBtn" class="price-btn primary" style="margin:0;font-size:1.05rem;padding:.9rem 2rem;width:auto;display:inline-flex;white-space:nowrap;border:none;cursor:pointer">Get the Free Preview &rarr;</button>
         </div>
@@ -1165,8 +1201,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <div class="faq-a"><p>No. 29 of 35 capabilities are universal &mdash; research, content, email, lead tracking, invoicing, SOPs, project management, competitor analysis, financial intelligence, contract review, and more. The 6 real estate capabilities are a bonus. Any industry. Any business.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">What's the difference between the Full System and Blueprint Only?</button>
-        <div class="faq-a"><p><strong>The Full System (intro $1,497, regular $3,497)</strong> is the complete experience &mdash; your AI on your computer AND your phone via Telegram, plus a <strong>1-hour private Zoom consultation</strong> with the creator. He'll brain dump your business, tailor the system to your operation, and answer anything about how he runs his own companies with this exact setup. Most buyers choose this. <strong>Blueprint Only (intro $497, regular $997)</strong> is the desktop-only version &mdash; same 35 capabilities, same brain architecture, same power. You just don't get the mobile agent, the consultation, or the hands-on setup help.</p></div>
+        <button class="faq-q">What's the difference between the tiers?</button>
+        <div class="faq-a"><p><strong>The Full System (intro $1,497, regular $3,497)</strong> is everything &mdash; desktop AI + mobile via Telegram + <strong>free updates for life</strong> + the <strong>entire AIOS Blueprint Community free forever</strong> (The Lab, Skill Drops, Community Chat, Office Hours, Start Here guide) + a <strong>1-hour private Zoom consultation</strong>. Most buyers choose this. <strong>Blueprint Only (intro $497, regular $997)</strong> is desktop-only &mdash; same 35 capabilities, same brain, same power. No mobile, no free updates, no community included (available separately at $47/mo). <strong>Community Only ($47/mo)</strong> is for people who want access to The Lab and Community Chat without purchasing the AI agent &mdash; watch builds, connect with other operators, learn the approach.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What kind of results should I expect?</button>
@@ -1178,11 +1214,11 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What if AI changes in 6 months?</button>
-        <div class="faq-a"><p>You own everything. It runs on your computer. Even if Claude evolves (it will &mdash; it'll get better), the architecture transfers. You're not renting software that can be shut down. You own the infrastructure.</p></div>
+        <div class="faq-a"><p>You own everything. It runs on your computer. Even if Claude evolves (it will &mdash; it'll get better), the architecture transfers. <strong>Full System buyers get free updates for life</strong> &mdash; every new version, every new skill, every improvement. As AI gets more powerful, your system gets more powerful. You're not renting software that can be shut down. You own the infrastructure, and it keeps getting better.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What if I need help?</button>
-        <div class="faq-a"><p>Step-by-step installation guide. 7-day First Week Checklist. Email support@aiosblueprint.com &mdash; we respond within 24 hours.</p></div>
+        <div class="faq-a"><p>Step-by-step installation guide. 7-day First Week Checklist. Full System buyers get the <strong>AIOS Blueprint Community</strong> &mdash; including Office Hours with the creator &mdash; free forever. Everyone has email support at support@aiosblueprint.com (24-hour response). You won't be stuck.</p></div>
       </div>
     </div>
   </div>
@@ -1197,6 +1233,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <div class="final-buttons reveal reveal-delay-3">
       <a href="/api/checkout?tier=2" class="btn-primary">Get the Full System &mdash; $1,497</a>
       <a href="/api/checkout?tier=1" class="btn-secondary">Blueprint Only &mdash; $497</a>
+      <a href="https://buy.stripe.com/5kQaEW3S1fF29HtbN70gw05" class="btn-secondary" style="border-color:var(--green);color:var(--green)">Community Only &mdash; $47/mo</a>
     </div>
     <p class="reveal reveal-delay-4" style="margin-top:1.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)">Launch pricing &bull; 30-day money-back guarantee &bull; support@aiosblueprint.com</p>
   </div>
@@ -1237,9 +1274,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // Email capture for free preview
 async function handlePreviewCapture(e) {
   e.preventDefault();
+  const firstName = document.getElementById('previewFirstName').value.trim();
+  const lastName = document.getElementById('previewLastName').value.trim();
   const email = document.getElementById('previewEmail').value.trim();
   const btn = document.getElementById('previewBtn');
   const errEl = document.getElementById('previewError');
+
+  if (!firstName || !lastName) {
+    errEl.textContent = 'Please enter your first and last name.';
+    errEl.style.display = 'block';
+    return;
+  }
 
   if (!email || !email.includes('@')) {
     errEl.textContent = 'Please enter a valid email address.';
@@ -1251,11 +1296,13 @@ async function handlePreviewCapture(e) {
   btn.disabled = true;
   errEl.style.display = 'none';
 
+  const name = `${firstName} ${lastName}`;
+
   try {
     const res = await fetch('/api/capture-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email, name })
     });
     const data = await res.json();
 

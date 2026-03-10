@@ -6,12 +6,22 @@
     },
     "api/cron/drip.js": {
       "maxDuration": 30
+    },
+    "api/cron/sales-digest.js": {
+      "maxDuration": 30
+    },
+    "api/estimate.js": {
+      "maxDuration": 30
     }
   },
   "crons": [
     {
       "path": "/api/cron/drip",
       "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/cron/sales-digest",
+      "schedule": "0 23 * * *"
     }
   ],
   "headers": [

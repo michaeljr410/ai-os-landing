@@ -6,11 +6,19 @@ module.exports = async (req, res) => {
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { source, tier } = req.query;
+    const { source, tier, key } = req.query;
     const validSources = ['cookout', 'devon', 'preview'];
 
     if (!source || !validSources.includes(source)) {
       return res.status(400).json({ error: 'Invalid source' });
+    }
+
+    // Require access key for non-preview sources (prevents unauthorized Tier 2 downloads)
+    if (source !== 'preview') {
+      const accessKey = (process.env.FREE_ACCESS_KEY || '').trim();
+      if (!accessKey || key !== accessKey) {
+        return res.status(403).json({ error: 'Invalid or missing access key' });
+      }
     }
 
     // Determine tier: cookout/devon get Tier 2 (full system), preview gets preview

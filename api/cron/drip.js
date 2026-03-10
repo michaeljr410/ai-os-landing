@@ -26,11 +26,9 @@ module.exports = async (req, res) => {
 
   // Verify cron authorization (Vercel sends CRON_SECRET as Bearer token)
   const cronSecret = (process.env.CRON_SECRET || '').trim();
-  if (cronSecret) {
-    const auth = req.headers.authorization;
-    if (auth !== `Bearer ${cronSecret}`) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
+  const auth = req.headers.authorization;
+  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const stripe = new Stripe((process.env.STRIPE_SECRET_KEY || '').trim());

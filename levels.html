@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not All AI Is Created Equal — AI OS Blueprint</title>
+<meta name="description" content="There are 3 levels of AI. Chat. Co-pilots. Full autonomous agents. See the difference — and why it matters for your business.">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiosblueprint.com/levels">
+<meta property="og:title" content="Not All AI Is Created Equal — AI OS Blueprint">
+<meta property="og:description" content="There are 3 levels of AI. Chat. Co-pilots. Full autonomous agents. See the difference — and why it matters for your business.">
+<meta property="og:image" content="https://aiosblueprint.com/images/og-levels.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Not All AI Is Created Equal — AI OS Blueprint">
+<meta name="twitter:description" content="There are 3 levels of AI. Chat. Co-pilots. Full autonomous agents. See the difference — and why it matters for your business.">
+<meta name="twitter:image" content="https://aiosblueprint.com/images/og-levels.jpg">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '613174518439333');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=613174518439333&ev=PageView&noscript=1"/></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --bg-card-hover:#141c2b;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.12);
+  --gold-glow:rgba(238,181,68,.25);
+  --red:#ff4757;
+  --red-dim:rgba(255,71,87,.12);
+  --green:#2ed573;
+  --green-dim:rgba(46,213,115,.12);
+  --l1:#8a95a8;
+  --l1-dim:rgba(138,149,168,.12);
+  --l1-glow:rgba(138,149,168,.2);
+  --l2:#eeb544;
+  --l2-dim:rgba(238,181,68,.12);
+  --l2-glow:rgba(238,181,68,.25);
+  --l3:#00e5ff;
+  --l3-dim:rgba(0,229,255,.12);
+  --l3-glow:rgba(0,229,255,.25);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--bg)}
+
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:.06;
+}
+
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+
+/* --- NAV --- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.25rem 2rem;
+  background:rgba(6,8,13,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-logo{
+  font-family:var(--font-mono);font-weight:500;font-size:.85rem;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--text-muted)}
+.nav-cta{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:400;
+  padding:.6rem 1.5rem;
+  border:1px solid var(--accent);color:var(--accent);
+  background:transparent;text-decoration:none;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:all .25s ease;cursor:pointer;
+}
+.nav-cta:hover{background:var(--accent);color:var(--bg)}
+
+/* --- SCROLL PROGRESS --- */
+.scroll-progress{
+  position:fixed;right:2rem;top:50%;transform:translateY(-50%);
+  z-index:90;display:flex;flex-direction:column;gap:1.25rem;
+}
+.progress-dot{
+  width:10px;height:10px;border-radius:50%;
+  border:2px solid var(--border-bright);
+  background:transparent;
+  transition:all .4s ease;
+  cursor:pointer;
+}
+.progress-dot.active-1{border-color:var(--l1);background:var(--l1);box-shadow:0 0 12px var(--l1-glow)}
+.progress-dot.active-2{border-color:var(--l2);background:var(--l2);box-shadow:0 0 12px var(--l2-glow)}
+.progress-dot.active-3{border-color:var(--l3);background:var(--l3);box-shadow:0 0 12px var(--l3-glow)}
+
+/* --- REVEAL --- */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+.reveal-d5{transition-delay:.5s}
+.reveal-d6{transition-delay:.6s}
+
+/* --- HERO --- */
+.hero-levels{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:8rem 2rem 6rem;position:relative;
+}
+.hero-levels::after{
+  content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+  opacity:.1;pointer-events:none;filter:blur(100px);
+}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:2rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-tag::after{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-h1{
+  font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:400;line-height:1.05;margin-bottom:1.5rem;
+  letter-spacing:-.02em;
+}
+.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{
+  font-size:1.2rem;color:var(--text-secondary);line-height:1.7;
+  margin-bottom:3rem;
+}
+
+.level-pills{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.level-pill{
+  font-family:var(--font-mono);font-size:.72rem;font-weight:400;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.6rem 1.5rem;
+  border:1px solid var(--border);
+  background:transparent;
+  transition:all .6s ease;
+}
+.level-pill.l1{color:var(--l1);border-color:var(--l1-dim)}
+.level-pill.l2{color:var(--l2);border-color:var(--l2-dim)}
+.level-pill.l3{color:var(--l3);border-color:var(--l3-dim);box-shadow:0 0 20px var(--l3-glow)}
+
+.pill-arrow{color:var(--text-muted);font-size:1rem;display:flex;align-items:center}
+
+/* --- SECTION SHARED --- */
+section{padding:6rem 0;position:relative}
+.section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;
+}
+.section-tag::before{content:'';width:24px;height:1px}
+.section-tag.l1{color:var(--l1)}.section-tag.l1::before{background:var(--l1)}
+.section-tag.l2{color:var(--l2)}.section-tag.l2::before{background:var(--l2)}
+.section-tag.l3{color:var(--l3)}.section-tag.l3::before{background:var(--l3)}
+.section-tag.gap{color:var(--red)}.section-tag.gap::before{background:var(--red)}
+
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:400;line-height:1.15;margin-bottom:1rem;letter-spacing:-.01em;
+}
+.section-title em{font-style:italic}
+.section-title .l1-em{color:var(--l1)}
+.section-title .l2-em{color:var(--l2)}
+.section-title .l3-em{color:var(--l3)}
+.section-title .red-em{color:var(--red)}
+
+.section-desc{
+  font-size:1.05rem;color:var(--text-secondary);max-width:640px;
+  line-height:1.7;margin-bottom:2.5rem;
+}
+
+.tool-names{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);
+  letter-spacing:.04em;margin-bottom:2rem;
+}
+
+.cap-list{
+  list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.4rem .5rem;
+  margin-bottom:3rem;
+}
+.cap-list li{
+  font-size:.88rem;color:var(--text-secondary);
+  display:flex;align-items:center;gap:.5rem;
+  padding:.35rem 0;
+}
+.cap-list li::before{
+  content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.cap-list.l1 li::before{background:var(--l1)}
+.cap-list.l2 li::before{background:var(--l2)}
+
+/* --- CHAT MOCKUP (Level 1) --- */
+.chat-mockup{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;max-width:520px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.chat-header{
+  padding:.7rem 1.25rem;background:var(--bg-elevated);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.6rem;
+}
+.chat-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--l1);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:.6rem;font-weight:700;color:var(--bg);
+}
+.chat-header-name{font-size:.82rem;color:var(--text);font-weight:500}
+.chat-body{padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.chat-msg{
+  max-width:88%;padding:.7rem 1rem;border-radius:14px;
+  font-size:.82rem;line-height:1.6;
+}
+.chat-msg.user{
+  align-self:flex-end;
+  background:#2b5278;color:var(--text);
+  border-bottom-right-radius:4px;
+}
+.chat-msg.ai{
+  align-self:flex-start;
+  background:var(--bg-elevated);color:var(--text-secondary);
+  border:1px solid var(--border);border-bottom-left-radius:4px;
+}
+.chat-msg.ai strong{color:var(--text);font-weight:600}
+.chat-msg-anim{opacity:0;transform:translateY(10px);transition:all .5s ease}
+.chat-msg-anim.show{opacity:1;transform:translateY(0)}
+
+/* --- "BUT THEN WHAT" --- */
+.manual-steps{
+  margin-top:2.5rem;padding:2rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;
+}
+.manual-steps h3{
+  font-family:var(--font-display);font-size:1.4rem;font-weight:400;
+  margin-bottom:1.5rem;color:var(--text);
+}
+.manual-steps h3 em{font-style:italic;color:var(--l1)}
+.step-chain{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.step-item{
+  font-family:var(--font-mono);font-size:.7rem;
+  padding:.4rem .8rem;
+  background:var(--bg-elevated);border:1px solid var(--border);
+  color:var(--text-secondary);letter-spacing:.03em;
+  display:flex;align-items:center;gap:.4rem;
+}
+.step-item .manual-tag{
+  font-size:.55rem;color:var(--red);text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.step-arrow{color:var(--text-muted);font-size:.8rem}
+
+/* --- VERDICT --- */
+.verdict{
+  margin-top:2.5rem;padding:1.5rem 2rem;
+  border-left:3px solid;
+  background:var(--bg-card);
+}
+.verdict.l1{border-color:var(--l1)}
+.verdict.l2{border-color:var(--l2)}
+.verdict p{
+  font-family:var(--font-display);font-size:1.2rem;font-weight:400;
+  font-style:italic;color:var(--text);line-height:1.5;
+}
+
+/* --- WORKFLOW MOCKUP (Level 2) --- */
+.workflow-mockup{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;max-width:520px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);padding:2rem;
+}
+.wf-step{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:.85rem 0;
+  position:relative;
+}
+.wf-step:not(:last-child)::after{
+  content:'';position:absolute;left:13px;top:2.6rem;bottom:0;
+  width:1px;background:var(--border);
+}
+.wf-dot{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--text-muted);
+  transition:all .5s ease;
+  background:var(--bg);
+}
+.wf-dot.done{border-color:var(--l2);color:var(--l2);background:var(--l2-dim)}
+.wf-dot.waiting{border-color:var(--gold);color:var(--gold);animation:pulse-gold 2s infinite}
+.wf-dot.locked{border-color:var(--border);color:var(--text-muted);opacity:.4}
+@keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 var(--l2-glow)}50%{box-shadow:0 0 0 6px transparent}}
+.wf-label{font-size:.88rem;color:var(--text);padding-top:.2rem}
+.wf-label.dim{color:var(--text-muted)}
+.wf-label small{display:block;font-size:.75rem;color:var(--text-muted);margin-top:.15rem}
+
+/* --- WALLS --- */
+.walls{
+  margin-top:2.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+.wall-card{
+  padding:1.25rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;
+}
+.wall-card .wall-icon{
+  font-size:1.2rem;margin-bottom:.5rem;display:block;
+}
+.wall-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.6}
+.wall-card strong{color:var(--text);font-weight:600}
+
+/* --- THE GAP --- */
+.the-gap{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--bg-elevated);
+  position:relative;overflow:hidden;
+}
+.the-gap::before{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(255,71,87,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.gap-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  margin-top:2.5rem;
+}
+.gap-card{
+  padding:1.75rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;
+  transition:border-color .3s ease;
+}
+.gap-card:hover{border-color:var(--red-dim)}
+.gap-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--red-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-bottom:1rem;
+}
+.gap-card p{font-size:.92rem;color:var(--text-secondary);line-height:1.6}
+.gap-card strong{color:var(--text);font-weight:600}
+
+/* --- PHONE MOCKUP (Level 3) --- */
+.phone-section{position:relative;padding:6rem 0 8rem}
+.phone-layout{
+  display:flex;align-items:center;justify-content:center;
+  gap:3rem;position:relative;min-height:620px;
+}
+.phone-frame{
+  width:280px;height:560px;flex-shrink:0;
+  border:3px solid var(--border-bright);
+  border-radius:40px;
+  background:var(--bg-card);
+  position:relative;overflow:hidden;
+  box-shadow:0 0 80px var(--l3-glow),0 30px 80px rgba(0,0,0,.5);
+  z-index:2;
+}
+.phone-notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:120px;height:26px;
+  background:var(--bg);
+  border-radius:0 0 18px 18px;
+  z-index:10;
+}
+.phone-home{
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  width:100px;height:4px;border-radius:2px;
+  background:var(--border-bright);
+}
+.phone-screen{
+  padding:36px 12px 24px;
+  height:100%;
+  display:flex;flex-direction:column;
+}
+.tg-header{
+  padding:.5rem .75rem;
+  display:flex;align-items:center;gap:.5rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:.75rem;
+}
+.tg-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:.55rem;font-weight:700;color:var(--bg);
+}
+.tg-info{flex:1}
+.tg-name{font-size:.72rem;font-weight:600;color:var(--text)}
+.tg-status{font-size:.55rem;color:var(--green);font-family:var(--font-mono)}
+.tg-chat{flex:1;display:flex;flex-direction:column;gap:.5rem;padding:.5rem 0}
+.tg-msg{
+  max-width:88%;padding:.5rem .75rem;border-radius:12px;
+  font-size:.68rem;line-height:1.55;
+}
+.tg-msg.user{
+  align-self:flex-end;
+  background:#2b5278;color:var(--text);
+  border-bottom-right-radius:4px;
+}
+.tg-msg.bot{
+  align-self:flex-start;
+  background:var(--bg-elevated);color:var(--text-secondary);
+  border:1px solid var(--border);border-bottom-left-radius:4px;
+}
+.tg-typing{
+  align-self:flex-start;
+  font-size:.6rem;color:var(--text-muted);
+  font-family:var(--font-mono);
+  padding:.4rem .75rem;
+}
+.typing-dots span{
+  display:inline-block;animation:typeDot 1.4s infinite;
+  opacity:.3;
+}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+@keyframes typeDot{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+/* --- ACTION CARDS (float around phone) --- */
+.action-cards{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  pointer-events:none;z-index:1;
+}
+.action-card{
+  position:absolute;
+  padding:.65rem 1rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.72rem;font-family:var(--font-mono);
+  color:var(--text-secondary);
+  white-space:nowrap;
+  opacity:0;
+  transform:translateX(20px);
+  transition:all .6s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.action-card.show{opacity:1;transform:translateX(0)}
+.action-card .check{color:var(--green);margin-right:.3rem}
+.action-card .arrow{color:var(--gold);margin-right:.3rem}
+.action-card .service{color:var(--text-muted);font-size:.6rem}
+
+.ac-1{top:5%;right:calc(50% + 180px)}
+.ac-2{top:20%;left:calc(50% + 180px)}
+.ac-3{top:38%;right:calc(50% + 190px)}
+.ac-4{top:55%;left:calc(50% + 170px)}
+.ac-5{top:72%;right:calc(50% + 175px)}
+.ac-6{bottom:8%;left:calc(50% + 160px)}
+
+/* --- KEY DIFF --- */
+.key-diff{
+  text-align:center;margin-top:4rem;
+}
+.key-diff-terms{
+  display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;
+  margin-bottom:1.5rem;
+}
+.kd-term{
+  font-family:var(--font-mono);font-size:.85rem;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.6rem 1.5rem;
+  border:1px solid var(--l3-dim);
+  color:var(--l3);
+  background:var(--l3-dim);
+}
+.kd-plus{color:var(--text-muted);font-size:1.2rem;display:flex;align-items:center}
+.key-diff p{
+  font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.6rem);
+  font-style:italic;color:var(--text);
+  max-width:600px;margin:0 auto;line-height:1.5;
+}
+
+/* --- USE CASES --- */
+.use-cases{border-top:1px solid var(--border)}
+.uc-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+.uc-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+.uc-card:hover{border-color:var(--border-bright)}
+.uc-card.open{border-color:var(--accent)}
+.uc-header{
+  padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.uc-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--bg-elevated);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.uc-title{font-size:.92rem;font-weight:600;color:var(--text);flex:1}
+.uc-chevron{
+  color:var(--text-muted);font-size:.8rem;
+  transition:transform .3s ease;
+}
+.uc-card.open .uc-chevron{transform:rotate(180deg)}
+
+.uc-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s cubic-bezier(.16,1,.3,1);
+}
+.uc-card.open .uc-body{max-height:600px}
+.uc-body-inner{padding:0 1.5rem 1.5rem}
+
+.uc-level{
+  padding:.75rem 1rem;
+  border-left:3px solid;
+  margin-bottom:.75rem;
+  background:var(--bg-elevated);
+  border-radius:0 6px 6px 0;
+}
+.uc-level.uc-l1{border-color:var(--l1)}
+.uc-level.uc-l2{border-color:var(--l2)}
+.uc-level.uc-l3{border-color:var(--l3);background:var(--l3-dim)}
+.uc-level-tag{
+  font-family:var(--font-mono);font-size:.6rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.uc-l1 .uc-level-tag{color:var(--l1)}
+.uc-l2 .uc-level-tag{color:var(--l2)}
+.uc-l3 .uc-level-tag{color:var(--l3)}
+.uc-level p{font-size:.8rem;color:var(--text-secondary);line-height:1.6}
+.uc-l3 p{color:var(--text)}
+
+/* --- FORMULA --- */
+.formula-section{border-top:1px solid var(--border)}
+.formula-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  margin-bottom:2.5rem;
+}
+.formula-card{
+  padding:2rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;text-align:center;
+  transition:all .3s ease;
+}
+.formula-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.formula-label{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+}
+.formula-card h3{
+  font-family:var(--font-display);font-size:1.4rem;font-weight:400;
+  margin-bottom:.75rem;color:var(--text);
+}
+.formula-card p{font-size:.85rem;color:var(--text-secondary);line-height:1.6}
+.formula-note{
+  text-align:center;
+  font-family:var(--font-display);font-size:1.3rem;font-style:italic;
+  color:var(--text-secondary);
+}
+.formula-note strong{color:var(--text)}
+
+/* --- META MOMENT --- */
+.meta-section{
+  border-top:1px solid var(--border);
+  background:var(--bg-elevated);
+}
+.meta-card{
+  max-width:700px;margin:0 auto;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+}
+.meta-bar{
+  padding:.6rem 1rem;background:var(--bg);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.4rem;
+}
+.meta-dot{width:8px;height:8px;border-radius:50%}
+.meta-dot.r{background:#ff5f57}.meta-dot.y{background:#febc2e}.meta-dot.g{background:#28c840}
+.meta-bar-title{
+  margin-left:.5rem;color:var(--text-muted);
+  font-family:var(--font-mono);font-size:.65rem;
+}
+.meta-body{padding:2rem}
+.meta-body .meta-main{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:400;
+  color:var(--text);line-height:1.4;margin-bottom:1.25rem;
+}
+.meta-body .meta-detail{
+  font-family:var(--font-mono);font-size:.72rem;
+  color:var(--text-secondary);line-height:1.8;
+  margin-bottom:1.5rem;
+}
+.meta-sig{
+  font-family:var(--font-display);font-size:1rem;font-style:italic;
+  color:var(--text-muted);
+}
+
+/* --- FINAL CTA --- */
+.final-cta{
+  text-align:center;
+  padding:8rem 2rem;
+}
+.final-cta h2{
+  font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);
+  font-weight:400;line-height:1.1;margin-bottom:1.5rem;
+}
+.final-cta h2 em{font-style:italic;color:var(--accent)}
+.cta-buttons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1rem 2.5rem;
+  background:var(--accent);color:var(--bg);
+  font-family:var(--font-body);font-weight:600;font-size:.95rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .3s ease;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1rem 2.5rem;
+  background:transparent;color:var(--text);
+  font-family:var(--font-body);font-weight:500;font-size:.95rem;
+  border:1px solid var(--border-bright);
+  cursor:pointer;text-decoration:none;
+  transition:all .3s ease;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.cta-note{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  letter-spacing:.03em;
+}
+
+/* --- FOOTER --- */
+footer{
+  padding:2rem;text-align:center;
+  border-top:1px solid var(--border);
+}
+footer p{font-size:.78rem;color:var(--text-muted)}
+footer a{color:var(--text-secondary);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--accent)}
+
+/* --- RESPONSIVE --- */
+@media(max-width:768px){
+  .scroll-progress{display:none}
+  .hero-h1{font-size:clamp(2.2rem,8vw,3.2rem)}
+  .cap-list{grid-template-columns:1fr}
+  .walls{grid-template-columns:1fr}
+  .gap-grid{grid-template-columns:1fr}
+  .uc-grid{grid-template-columns:1fr}
+  .formula-grid{grid-template-columns:1fr}
+  .phone-layout{flex-direction:column;min-height:auto;padding:0 1rem}
+  .phone-frame{width:240px;height:480px}
+  .action-cards{position:relative;display:flex;flex-direction:column;gap:.5rem;margin-top:2rem;padding:0 1rem}
+  .action-card{position:relative !important;top:auto !important;left:auto !important;right:auto !important;bottom:auto !important;opacity:0;transform:translateY(10px) !important;white-space:normal}
+  .action-card.show{transform:translateY(0) !important}
+  .manual-steps{padding:1.25rem}
+  .step-chain{gap:.3rem}
+  .step-item{font-size:.6rem;padding:.3rem .5rem}
+  nav{padding:1rem 1.25rem}
+  .nav-logo{font-size:.72rem}
+  .nav-cta{font-size:.65rem;padding:.45rem 1rem}
+  section{padding:4rem 0}
+  .container{padding:0 1.25rem}
+}
+
+@media(max-width:480px){
+  .level-pills{gap:.5rem}
+  .level-pill{font-size:.6rem;padding:.4rem 1rem}
+  .pill-arrow{font-size:.7rem}
+  .chat-mockup,.workflow-mockup{max-width:100%}
+  .phone-frame{width:220px;height:440px}
+  .tg-msg{font-size:.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">AI OS <span>Blueprint</span></a>
+  <a href="/#pricing" class="nav-cta">Get The Blueprint &rarr;</a>
+</nav>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress">
+  <div class="progress-dot" data-level="1" title="Level 1"></div>
+  <div class="progress-dot" data-level="2" title="Level 2"></div>
+  <div class="progress-dot" data-level="3" title="Level 3"></div>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero-levels">
+  <div class="hero-content">
+    <div class="hero-tag reveal">The Three Levels</div>
+    <h1 class="hero-h1 reveal reveal-d1">Not all AI is <em>created equal.</em></h1>
+    <p class="hero-sub reveal reveal-d2">There are three levels. Most people are stuck on Level 1. Here&rsquo;s what they&rsquo;re missing.</p>
+    <div class="level-pills reveal reveal-d3">
+      <div class="level-pill l1">Chat AI</div>
+      <span class="pill-arrow">&rarr;</span>
+      <div class="level-pill l2">Co-Pilots</div>
+      <span class="pill-arrow">&rarr;</span>
+      <div class="level-pill l3">Full Agent</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LEVEL 1 ==================== -->
+<section id="level-1" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-tag l1 reveal">Level 1</div>
+    <h2 class="section-title reveal reveal-d1">Chat AI &mdash; <em class="l1-em">The Smart Text Box</em></h2>
+    <div class="tool-names reveal reveal-d2">ChatGPT &middot; Gemini &middot; Claude</div>
+
+    <p class="section-desc reveal reveal-d2">Impressive? Absolutely. These tools write, analyze, generate images, and create artifacts. They&rsquo;re genuinely powerful. But there&rsquo;s a wall.</p>
+
+    <ul class="cap-list l1 reveal reveal-d3">
+      <li>Write emails, reports, SOPs, and code</li>
+      <li>Generate images (ChatGPT, Gemini)</li>
+      <li>Create artifacts and live previews</li>
+      <li>Search the web with citations</li>
+      <li>Analyze uploaded documents and data</li>
+      <li>Execute Python in a sandbox</li>
+    </ul>
+
+    <!-- CHAT MOCKUP -->
+    <div class="chat-mockup reveal reveal-d3" id="chat-mockup">
+      <div class="chat-header">
+        <div class="chat-avatar">AI</div>
+        <div class="chat-header-name">Chat AI</div>
+      </div>
+      <div class="chat-body">
+        <div class="chat-msg user chat-msg-anim" data-delay="0">Write a follow-up email for a buyer interested in the Atlas</div>
+        <div class="chat-msg ai chat-msg-anim" data-delay="800">
+          <strong>Subject: Your Volkswagen Atlas &mdash; Next Steps</strong><br><br>
+          Hi [Name],<br><br>
+          Thanks for your interest in the 2023 Volkswagen Atlas. It&rsquo;s a great vehicle &mdash; low miles, clean title, and priced below market at $28,500.<br><br>
+          Would you be available for a quick call this week to go over the details and payment options?<br><br>
+          Looking forward to hearing from you.
+        </div>
+      </div>
+    </div>
+
+    <!-- BUT THEN WHAT -->
+    <div class="manual-steps reveal reveal-d4">
+      <h3>But then <em>what?</em></h3>
+      <div class="step-chain">
+        <span class="step-item">Copy the response <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Paste into Gmail <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Click send <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Open your CRM <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Log the activity <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Set a reminder <span class="manual-tag">manual</span></span>
+        <span class="step-arrow">&rarr;</span>
+        <span class="step-item">Repeat for the next lead <span class="manual-tag">manual</span></span>
+      </div>
+    </div>
+
+    <div class="verdict l1 reveal reveal-d4">
+      <p>Brilliant writing. Zero execution. You&rsquo;re still the one doing everything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LEVEL 2 ==================== -->
+<section id="level-2" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-tag l2 reveal">Level 2</div>
+    <h2 class="section-title reveal reveal-d1">Semi-Agentic AI &mdash; <em class="l2-em">Getting Closer</em></h2>
+    <div class="tool-names reveal reveal-d2">Perplexity Computer &middot; Claude Cowork &middot; Manus</div>
+
+    <p class="section-desc reveal reveal-d2">These tools can actually do things &mdash; browse the web, execute multi-step tasks, connect to services. Real progress. But they hit walls that matter.</p>
+
+    <ul class="cap-list l2 reveal reveal-d3">
+      <li>Browse the web autonomously</li>
+      <li>Execute multi-step task workflows</li>
+      <li>Access local files (Cowork) or cloud VMs</li>
+      <li>Connect to 400+ apps (Perplexity Computer)</li>
+      <li>Schedule recurring tasks (Cowork)</li>
+      <li>Run in the background while disconnected</li>
+    </ul>
+
+    <!-- WORKFLOW MOCKUP -->
+    <div class="workflow-mockup reveal reveal-d3" id="workflow-mockup">
+      <div class="wf-step">
+        <div class="wf-dot" data-step="1">&check;</div>
+        <div class="wf-label">Break task into steps <small>Planning phase</small></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot" data-step="2">&check;</div>
+        <div class="wf-label">Research and browse the web <small>Data collection</small></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot" data-step="3">&check;</div>
+        <div class="wf-label">Generate document <small>Output creation</small></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot waiting" data-step="4">&#9646;&#9646;</div>
+        <div class="wf-label">Waiting for your approval&hellip; <small>You must review and confirm</small></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot locked" data-step="5">&ndash;</div>
+        <div class="wf-label dim">Send via integration <small>Blocked until approved</small></div>
+      </div>
+    </div>
+
+    <!-- THE WALLS -->
+    <div class="walls reveal reveal-d4">
+      <div class="wall-card">
+        <span class="wall-icon">&#128065;</span>
+        <p><strong>No persistent memory</strong> &mdash; Cowork starts fresh every session. Re-explain your business every time.</p>
+      </div>
+      <div class="wall-card">
+        <span class="wall-icon">&#9729;</span>
+        <p><strong>Cloud sandbox</strong> &mdash; Manus and Perplexity can&rsquo;t touch your actual files. They run in their own world.</p>
+      </div>
+      <div class="wall-card">
+        <span class="wall-icon">&#9995;</span>
+        <p><strong>Approval gates</strong> &mdash; You&rsquo;re still the project manager, reviewing and clicking &ldquo;approve&rdquo; at every step.</p>
+      </div>
+      <div class="wall-card">
+        <span class="wall-icon">&#9888;</span>
+        <p><strong>Reliability</strong> &mdash; In real-world testing, Manus completed ~15% of complex tasks without help.</p>
+      </div>
+    </div>
+
+    <div class="verdict l2 reveal reveal-d4">
+      <p>Real progress. But you&rsquo;re still the project manager.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE GAP ==================== -->
+<section class="the-gap" id="the-gap">
+  <div class="container">
+    <div class="section-tag gap reveal">The Gap</div>
+    <h2 class="section-title reveal reveal-d1">Here&rsquo;s where they all <em class="red-em">stop.</em></h2>
+    <p class="section-desc reveal reveal-d2">Every tool above &mdash; even the best ones &mdash; hits the same four walls. These are the things no Level 1 or Level 2 tool can do.</p>
+
+    <div class="gap-grid">
+      <div class="gap-card reveal reveal-d1">
+        <div class="gap-icon">&#10006;</div>
+        <p><strong>None of them know your business permanently.</strong> Your goals, your SOPs, your contacts, your deal history &mdash; gone when the session ends.</p>
+      </div>
+      <div class="gap-card reveal reveal-d2">
+        <div class="gap-icon">&#10006;</div>
+        <p><strong>None of them work while you sleep.</strong> No scheduled tasks running at 3 AM. No morning briefing waiting when you wake up.</p>
+      </div>
+      <div class="gap-card reveal reveal-d3">
+        <div class="gap-icon">&#10006;</div>
+        <p><strong>None of them coordinate multiple agents.</strong> No team of AI working in parallel on your research, content, and pipeline simultaneously.</p>
+      </div>
+      <div class="gap-card reveal reveal-d4">
+        <div class="gap-icon">&#10006;</div>
+        <p><strong>None of them can complete a full workflow.</strong> Send a contract, update your CRM, email all parties, and text you &mdash; in one move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LEVEL 3 ==================== -->
+<section id="level-3" class="phone-section">
+  <div class="container">
+    <div class="section-tag l3 reveal">Level 3</div>
+    <h2 class="section-title reveal reveal-d1">Full Autonomous Agent &mdash; <em class="l3-em">AI That Does The Work</em></h2>
+    <p class="section-desc reveal reveal-d2">The AI OS Blueprint. Not a chat window. Not a co-pilot. A system that knows your business, accesses your tools, and acts without you.</p>
+
+    <!-- PHONE + ACTION CARDS -->
+    <div class="phone-layout reveal reveal-d3" id="phone-area">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="tg-header">
+            <div class="tg-avatar">AI</div>
+            <div class="tg-info">
+              <div class="tg-name">AI Agent</div>
+              <div class="tg-status">&#9679; online</div>
+            </div>
+          </div>
+          <div class="tg-chat" id="tg-chat">
+            <div class="tg-msg user">Handle the new lead from the website</div>
+            <div class="tg-typing" id="tg-typing">
+              <span class="typing-dots"><span>.</span><span>.</span><span>.</span></span> typing
+            </div>
+            <div class="tg-msg bot" id="tg-response" style="display:none">On it. Running the full workflow. I&rsquo;ll text you when they respond.</div>
+          </div>
+        </div>
+        <div class="phone-home"></div>
+      </div>
+
+      <div class="action-cards" id="action-cards">
+        <div class="action-card ac-1" data-delay="0"><span class="check">&#10003;</span> Lead qualified &mdash; Score: 8.4/10</div>
+        <div class="action-card ac-2" data-delay="400"><span class="check">&#10003;</span> CRM record created <span class="service">&middot; Pipedrive</span></div>
+        <div class="action-card ac-3" data-delay="800"><span class="check">&#10003;</span> Personalized email sent <span class="service">&middot; Gmail</span></div>
+        <div class="action-card ac-4" data-delay="1200"><span class="check">&#10003;</span> Follow-up scheduled <span class="service">&middot; 2-day, 5-day</span></div>
+        <div class="action-card ac-5" data-delay="1600"><span class="check">&#10003;</span> Brief saved to brain/</div>
+        <div class="action-card ac-6" data-delay="2000"><span class="arrow">&rarr;</span> You&rsquo;ll be texted when they reply</div>
+      </div>
+    </div>
+
+    <!-- KEY DIFFERENTIATOR -->
+    <div class="key-diff reveal reveal-d4">
+      <div class="key-diff-terms">
+        <div class="kd-term">Context</div>
+        <span class="kd-plus">+</span>
+        <div class="kd-term">Access</div>
+        <span class="kd-plus">+</span>
+        <div class="kd-term">Autonomy</div>
+      </div>
+      <p>It knows your business. It accesses your systems. It acts without you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USE CASES ==================== -->
+<section class="use-cases">
+  <div class="container">
+    <div class="section-tag l3 reveal">See It In Action</div>
+    <h2 class="section-title reveal reveal-d1">Pick any task. See what each level <em class="l3-em">actually delivers.</em></h2>
+    <p class="section-desc reveal reveal-d2">Ten real business scenarios. Three levels of AI. The difference is not incremental &mdash; it&rsquo;s categorical.</p>
+
+    <div class="uc-grid">
+      <!-- UC 1 -->
+      <div class="uc-card reveal" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#9993;</div>
+          <div class="uc-title">New Lead Comes In</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Writes a follow-up email template. You copy it, paste it into Gmail, send it, then manually log it in your CRM.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Browses the lead&rsquo;s LinkedIn, drafts a personalized email. You review, approve, and send it yourself.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Qualifies the lead against your criteria, enriches their profile, logs everything in your CRM, sends a personalized email, schedules a 2-day and 5-day follow-up sequence, and texts you when they respond.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 2 -->
+      <div class="uc-card reveal reveal-d1" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128235;</div>
+          <div class="uc-title">Inbox Management</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Summarizes a long email thread if you paste it in. You still read, respond to, and manage every email yourself.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Connects to Gmail, categorizes messages, drafts responses you review and approve one by one.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Reads your entire inbox at 7 AM, categorizes everything, drafts and sends routine responses, flags urgent items to your phone, archives noise, and updates your CRM with any deal-related correspondence &mdash; before you wake up.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 3 -->
+      <div class="uc-card reveal" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#127912;</div>
+          <div class="uc-title">Content Creation</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Writes a caption or blog post. You copy it, find images yourself, format for each platform manually, and post one at a time.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Generates copy and suggests image prompts. May schedule posts through an integration. Still one piece at a time.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Writes copy in your brand voice, generates images, creates video clips with subtitles, pairs visuals with copy, formats for Instagram, TikTok, YouTube, and Facebook, schedules everything, and posts. A week of content in one session.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 4 -->
+      <div class="uc-card reveal reveal-d1" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128200;</div>
+          <div class="uc-title">Deal Analysis</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Explains what comps are. Writes a deal memo template if you describe the deal.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Searches for comparable sales online, creates a basic analysis document you download.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Pulls comps, runs your underwriting formula, calculates scoring, creates a one-pager and deal memo, generates marketing materials, builds a deal-specific landing page, deploys it, and updates your pipeline.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 5 -->
+      <div class="uc-card reveal" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128172;</div>
+          <div class="uc-title">Client Support</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Drafts a response if you paste the customer&rsquo;s message. You send it and update your support system manually.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Reads a ticket, suggests a response with knowledge base articles. You review and send.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Reads the full ticket history and client context from your CRM, drafts a response using your SOPs, sends it, logs the resolution, triggers a satisfaction check in 48 hours, and alerts you only if escalation is needed.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 6 -->
+      <div class="uc-card reveal reveal-d1" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128197;</div>
+          <div class="uc-title">Meeting Prep</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Writes generic talking points if you describe who you&rsquo;re meeting. You look up everything else yourself.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Searches the web for the person&rsquo;s background, creates a brief. You save or print it before the call.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Pulls the contact from your CRM, checks recent emails, reviews deal history, compiles talking points, formats a one-page brief, and sends it to you 30 minutes before the call.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 7 -->
+      <div class="uc-card reveal" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128203;</div>
+          <div class="uc-title">Project Management</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Creates a project plan or task list if you describe the project. You track everything manually.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Connects to Asana or Notion, creates tasks, may update statuses. Still needs your daily check-in.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Checks all active projects every morning, flags what&rsquo;s slipping, updates statuses based on completed work, creates a daily progress report, and alerts you only when something needs a decision.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 8 -->
+      <div class="uc-card reveal reveal-d1" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128196;</div>
+          <div class="uc-title">Document Generation</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Writes a contract template with placeholder fields. You fill it in, format it, and figure out e-signatures yourself.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Fills in a template with data you provide, generates a PDF. You send it through your own e-signature service.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Pulls deal data from your CRM, fills 317+ fields across 5 documents, creates addendums, sends everything via Dropbox Sign, tracks signature status, texts and emails all parties, and updates your CRM when signed.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 9 -->
+      <div class="uc-card reveal" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#128270;</div>
+          <div class="uc-title">Market Research</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Summarizes what it knows. May be outdated. You verify everything yourself.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Searches in real-time, compiles findings into a report. Good starting point but surface-level.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Scrapes competitor sites, analyzes pricing and positioning, pulls data from multiple sources, creates a comprehensive intel report with strategic recommendations, saves it to your knowledge base, and flags threats to your active deals.</p></div>
+        </div></div>
+      </div>
+
+      <!-- UC 10 -->
+      <div class="uc-card reveal reveal-d1" onclick="toggleUC(this)">
+        <div class="uc-header">
+          <div class="uc-icon">&#9889;</div>
+          <div class="uc-title">The VA Test &mdash; 4 Roles at Once</div>
+          <div class="uc-chevron">&#9660;</div>
+        </div>
+        <div class="uc-body"><div class="uc-body-inner">
+          <div class="uc-level uc-l1"><div class="uc-level-tag">Level 1 &mdash; Chat</div><p>Plays one role at a time. Switch contexts and it loses the thread. No memory between tasks.</p></div>
+          <div class="uc-level uc-l2"><div class="uc-level-tag">Level 2 &mdash; Co-Pilot</div><p>Handles a task sequence with some autonomy. Still single-threaded &mdash; one role, then the next.</p></div>
+          <div class="uc-level uc-l3"><div class="uc-level-tag">Level 3 &mdash; Full Agent</div><p>Spawns 4 parallel agents &mdash; inbox, content, CRM, and research &mdash; all running simultaneously, coordinating through a shared task list. $265K/year in salaries. One system.</p></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FORMULA ==================== -->
+<section class="formula-section">
+  <div class="container">
+    <div class="section-tag l3 reveal" style="justify-content:center">The Formula</div>
+    <h2 class="section-title reveal reveal-d1" style="text-align:center">Three things. <em class="l3-em">All three required.</em></h2>
+    <p class="section-desc reveal reveal-d2" style="text-align:center;margin:0 auto 3rem">Remove any one of these and you collapse back to Level 2.</p>
+
+    <div class="formula-grid">
+      <div class="formula-card reveal">
+        <div class="formula-label">Context</div>
+        <h3>It knows you.</h3>
+        <p>Goals, contacts, SOPs, projects, deal history. Permanently. Not just this session &mdash; every session, forever.</p>
+      </div>
+      <div class="formula-card reveal reveal-d1">
+        <div class="formula-label">Access</div>
+        <h3>It reaches your systems.</h3>
+        <p>Email, CRM, files, databases, deployment infrastructure. It doesn&rsquo;t just draft. It sends.</p>
+      </div>
+      <div class="formula-card reveal reveal-d2">
+        <div class="formula-label">Autonomy</div>
+        <h3>It works without you.</h3>
+        <p>Scheduled tasks, background execution, proactive monitoring. You sleep. It doesn&rsquo;t.</p>
+      </div>
+    </div>
+
+    <p class="formula-note reveal reveal-d3"><strong>Remove any one</strong> &mdash; you&rsquo;re back to Level 2.</p>
+  </div>
+</section>
+
+<!-- ==================== META MOMENT ==================== -->
+<section class="meta-section">
+  <div class="container">
+    <div class="meta-card reveal">
+      <div class="meta-bar">
+        <div class="meta-dot r"></div>
+        <div class="meta-dot y"></div>
+        <div class="meta-dot g"></div>
+        <span class="meta-bar-title">terminal &mdash; aiosblueprint.com/levels</span>
+      </div>
+      <div class="meta-body">
+        <p class="meta-main">This page &mdash; the research, the copy, the code, the animations, the deployment &mdash; was built by my AI agent.</p>
+        <p class="meta-detail">I described what I wanted. It researched three levels of AI across 20+ tools, wrote 10 use case comparisons, coded every animation, and deployed to production. That&rsquo;s not Level 1. That&rsquo;s not Level 2.</p>
+        <p class="meta-sig">&mdash; Mike Davis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta">
+  <h2 class="reveal">Ready to go from Level 1 to <em>Level 3?</em></h2>
+  <div class="cta-buttons reveal reveal-d1">
+    <a href="/#pricing" class="btn-primary">Get The Blueprint &rarr;</a>
+    <a href="/compress" class="btn-ghost">See Time Savings &rarr;</a>
+  </div>
+  <p class="cta-note reveal reveal-d2">One-time purchase &middot; Install in 30 minutes &middot; Yours forever</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>AI OS Blueprint&trade; &middot; Made by Mike Davis &middot; 2026 &nbsp;&middot;&nbsp; <a href="/">Home</a> &nbsp;&middot;&nbsp; <a href="/compress">Compress</a> &nbsp;&middot;&nbsp; <a href="/levels">Levels</a></p>
+</footer>
+
+<script>
+// --- Scroll Reveal ---
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// --- Scroll Progress Dots ---
+const dots = document.querySelectorAll('.progress-dot');
+const sections = {
+  1: document.getElementById('level-1'),
+  2: document.getElementById('level-2'),
+  3: document.getElementById('level-3')
+};
+
+function updateDots() {
+  const scrollY = window.scrollY + window.innerHeight / 2;
+  dots.forEach(d => {
+    d.className = 'progress-dot';
+  });
+  if (sections[3] && scrollY >= sections[3].offsetTop) {
+    dots[2].classList.add('active-3');
+    dots[1].classList.add('active-2');
+    dots[0].classList.add('active-1');
+  } else if (sections[2] && scrollY >= sections[2].offsetTop) {
+    dots[1].classList.add('active-2');
+    dots[0].classList.add('active-1');
+  } else if (sections[1] && scrollY >= sections[1].offsetTop) {
+    dots[0].classList.add('active-1');
+  }
+}
+window.addEventListener('scroll', updateDots, {passive: true});
+dots.forEach((d, i) => {
+  d.addEventListener('click', () => {
+    const s = sections[i + 1];
+    if (s) s.scrollIntoView({behavior: 'smooth'});
+  });
+});
+
+// --- Chat Mockup Animation ---
+const chatObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const msgs = e.target.querySelectorAll('.chat-msg-anim');
+      msgs.forEach(msg => {
+        const delay = parseInt(msg.dataset.delay) || 0;
+        setTimeout(() => msg.classList.add('show'), delay);
+      });
+      chatObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+const chatMockup = document.getElementById('chat-mockup');
+if (chatMockup) chatObs.observe(chatMockup);
+
+// --- Workflow Mockup Animation ---
+const wfObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const steps = e.target.querySelectorAll('.wf-dot[data-step]');
+      steps.forEach((dot, i) => {
+        const step = parseInt(dot.dataset.step);
+        if (step <= 3) {
+          setTimeout(() => dot.classList.add('done'), i * 500);
+        }
+      });
+      wfObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+const wfMockup = document.getElementById('workflow-mockup');
+if (wfMockup) wfObs.observe(wfMockup);
+
+// --- Phone + Action Cards Animation ---
+const phoneObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      // Show typing, then response
+      const typing = document.getElementById('tg-typing');
+      const response = document.getElementById('tg-response');
+      setTimeout(() => {
+        if (typing) typing.style.display = 'none';
+        if (response) response.style.display = 'block';
+      }, 1500);
+
+      // Show action cards with stagger
+      const cards = e.target.querySelectorAll('.action-card');
+      cards.forEach(card => {
+        const delay = parseInt(card.dataset.delay) || 0;
+        setTimeout(() => card.classList.add('show'), 1800 + delay);
+      });
+
+      phoneObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.2});
+const phoneArea = document.getElementById('phone-area');
+if (phoneArea) phoneObs.observe(phoneArea);
+
+// --- Use Case Accordion ---
+function toggleUC(card) {
+  const wasOpen = card.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.uc-card.open').forEach(c => {
+    c.classList.remove('open');
+  });
+
+  // Open clicked (if it wasn't already open)
+  if (!wasOpen) {
+    card.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>

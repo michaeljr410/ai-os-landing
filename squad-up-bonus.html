@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Squad Up Bonus — Network Autopilot Skill | AI OS Blueprint</title>
+<meta name="description" content="Free bonus for Squad Up Summit attendees. An AI skill that auto-follows-up with every person you meet — personalized iMessages pulled from your actual conversation.">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiosblueprint.com/squad-up-bonus">
+<meta property="og:title" content="Network Autopilot — Free Squad Up Summit Bonus">
+<meta property="og:description" content="An AI skill that auto-follows-up with every person you meet at networking events. Personalized iMessages pulled from your actual conversation. Free with the AI OS Blueprint.">
+<meta property="og:image" content="https://aiosblueprint.com/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Network Autopilot — Free Squad Up Summit Bonus">
+<meta name="twitter:description" content="Your AI agent follows up with everyone you meet. Personalized. From your real number. Free bonus.">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '613174518439333');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=613174518439333&ev=PageView&noscript=1"/></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --bg-card-hover:#141c2b;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.1);
+  --gold-glow:rgba(238,181,68,.25);
+  --red:#ff4757;
+  --green:#2ed573;
+  --green-dim:rgba(46,213,115,.1);
+  --green-glow:rgba(46,213,115,.25);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* noise */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+/* ── LAYOUT ── */
+.page{max-width:1120px;margin:0 auto;padding:0 32px}
+
+/* ── NAV ── */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 0;border-bottom:1px solid var(--border);
+  margin-bottom:64px;
+}
+.nav-brand{
+  font-family:var(--font-mono);font-size:13px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);
+  text-decoration:none;transition:color .2s;
+}
+.nav-brand:hover{color:var(--accent)}
+.nav-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:100px;
+  border:1px solid rgba(238,181,68,.2);
+  background:var(--gold-dim);
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--gold);
+}
+.nav-badge::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 6px var(--gold);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+/* ── HERO ── */
+.hero{
+  text-align:center;
+  padding:40px 0 80px;
+  position:relative;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:200px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-bright),transparent);
+}
+.hero-eyebrow{
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:24px;
+  animation:fadeUp .8s ease both;
+}
+.hero h1{
+  font-family:var(--font-display);font-size:clamp(42px,6vw,72px);
+  font-weight:400;line-height:1.0;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:12px;
+  animation:fadeUp .8s ease .1s both;
+}
+.hero h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--gold),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(16px,2vw,19px);color:var(--text-secondary);
+  line-height:1.6;max-width:620px;margin:20px auto 36px;
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-sub strong{color:var(--text);font-weight:600}
+
+.hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent),#0099b3);
+  color:var(--bg);font-weight:600;font-size:15px;
+  text-decoration:none;transition:all .3s;
+  box-shadow:0 0 30px rgba(0,229,255,.15);
+  animation:fadeUp .8s ease .3s both;
+}
+.hero-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 50px rgba(0,229,255,.3);
+}
+
+/* ── STAT BAR ── */
+.stat-bar{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border-radius:12px;overflow:hidden;
+  margin:80px 0;
+  animation:fadeUp .8s ease .4s both;
+}
+.stat-item{
+  background:var(--bg-card);padding:32px;text-align:center;
+  transition:background .3s;
+}
+.stat-item:hover{background:var(--bg-card-hover)}
+.stat-num{
+  font-family:var(--font-display);font-size:48px;color:var(--accent);
+  line-height:1;margin-bottom:4px;
+}
+.stat-label{
+  font-size:13px;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+/* ── FLOW SECTION ── */
+.flow-section{padding:80px 0}
+.flow-header{text-align:center;margin-bottom:60px}
+.flow-header h2{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,42px);
+  font-weight:400;margin-bottom:12px;
+}
+.flow-header p{
+  font-size:16px;color:var(--text-secondary);max-width:500px;margin:0 auto;
+}
+
+/* ── FLOW GRID ── */
+.flow-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:0;
+  position:relative;
+}
+
+/* zone columns */
+.zone{display:flex;flex-direction:column;gap:16px}
+.zone-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:8px;padding:0 8px;
+}
+.zone-tag{
+  font-family:var(--font-mono);font-size:11px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;border-radius:5px;
+}
+.zone-tag.you{
+  color:var(--green);background:var(--green-dim);
+  border:1px solid rgba(46,213,115,.15);
+}
+.zone-tag.ai{
+  color:var(--accent);background:var(--accent-dim);
+  border:1px solid rgba(0,229,255,.15);
+}
+.zone-line{flex:1;height:1px;background:var(--border)}
+
+/* center divider */
+.flow-divider{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 32px;position:relative;
+}
+.flow-thread{
+  width:2px;flex:1;
+  background:linear-gradient(180deg,var(--green),var(--accent) 40%,var(--accent));
+  opacity:.3;border-radius:1px;position:relative;
+}
+.flow-thread::before{
+  content:'';position:absolute;left:-4px;width:10px;height:100%;
+  background:linear-gradient(180deg,rgba(46,213,115,.15),rgba(0,229,255,.15));
+  filter:blur(6px);
+}
+.handoff-pill{
+  flex-shrink:0;
+  padding:12px 20px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(238,181,68,.06));
+  border:1px solid rgba(0,229,255,.15);
+  text-align:center;margin:16px 0;
+  white-space:nowrap;
+}
+.handoff-pill .icon{font-size:20px;display:block;margin-bottom:4px}
+.handoff-pill .label{
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  line-height:1.4;
+}
+.handoff-pill .label span{display:block;color:var(--text-muted);font-size:9px;margin-top:2px}
+
+/* step card */
+.step-card{
+  padding:20px 24px;border-radius:12px;
+  background:var(--bg-card);border:1px solid var(--border);
+  transition:all .4s ease;cursor:default;
+  position:relative;overflow:hidden;
+}
+.step-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  border-radius:0 2px 2px 0;opacity:0;transition:opacity .3s;
+}
+.step-card.you-card::before{background:var(--green)}
+.step-card.ai-card::before{background:var(--accent)}
+.step-card:hover{
+  background:var(--bg-card-hover);
+  border-color:var(--border-bright);
+  transform:translateY(-2px);
+}
+.step-card:hover::before{opacity:1}
+
+.step-num{
+  font-family:var(--font-mono);font-size:10px;
+  color:var(--text-muted);letter-spacing:.05em;
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.step-num .dot{
+  width:6px;height:6px;border-radius:50%;
+}
+.you-card .step-num .dot{background:var(--green)}
+.ai-card .step-num .dot{background:var(--accent)}
+
+.step-icon{font-size:24px;margin-bottom:10px;display:block}
+.step-title{
+  font-family:var(--font-display);font-size:20px;font-weight:400;
+  color:var(--text);margin-bottom:6px;line-height:1.2;
+}
+.step-desc{
+  font-size:14px;color:var(--text-secondary);line-height:1.55;
+}
+.step-desc .hl{color:var(--accent);font-weight:500}
+.step-desc .gl{color:var(--green);font-weight:500}
+
+/* ── DEMO SECTION ── */
+.demo-section{
+  padding:80px 0;border-top:1px solid var(--border);
+  margin-top:80px;
+}
+.demo-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  margin-top:48px;
+}
+.demo-card{
+  padding:28px;border-radius:14px;
+  background:var(--bg-card);border:1px solid var(--border);
+  transition:all .3s;
+}
+.demo-card:hover{
+  border-color:var(--border-bright);
+  background:var(--bg-card-hover);
+}
+.demo-card-label{
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.demo-card-label::before{
+  content:'';width:8px;height:8px;border-radius:50%;
+}
+.demo-card.input .demo-card-label::before{background:var(--gold)}
+.demo-card.output .demo-card-label::before{background:var(--green)}
+
+.imessage-bubble{
+  background:#1a7aff;color:#fff;
+  padding:14px 18px;border-radius:18px 18px 4px 18px;
+  font-size:15px;line-height:1.55;max-width:380px;
+  position:relative;
+}
+.imessage-meta{
+  margin-top:8px;font-size:12px;color:var(--text-muted);
+  display:flex;align-items:center;gap:6px;
+}
+
+.brain-file{
+  font-family:var(--font-mono);font-size:12px;line-height:1.7;
+  color:var(--text-secondary);
+}
+.brain-file .heading{color:var(--gold);font-weight:500}
+.brain-file .value{color:var(--text)}
+.brain-file .dim{color:var(--text-muted)}
+
+/* ── TECH STACK ── */
+.tech-section{
+  padding:48px 0;border-top:1px solid var(--border);
+  margin-top:60px;text-align:center;
+}
+.tech-section h3{
+  font-family:var(--font-mono);font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:20px;
+}
+.tech-row{
+  display:flex;justify-content:center;gap:32px;flex-wrap:wrap;
+}
+.tech-pill{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:8px;
+  background:var(--bg-card);border:1px solid var(--border);
+  font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);
+  transition:all .3s;
+}
+.tech-pill:hover{border-color:var(--border-bright);color:var(--text)}
+.tech-pill .tech-dot{width:6px;height:6px;border-radius:50%}
+.td-1{background:var(--accent)}
+.td-2{background:var(--gold)}
+.td-3{background:var(--green)}
+.td-4{background:var(--red)}
+
+/* ── CTA BOTTOM ── */
+.cta-section{
+  padding:80px 0 60px;text-align:center;
+}
+.cta-section h2{
+  font-family:var(--font-display);font-size:clamp(32px,5vw,52px);
+  font-weight:400;margin-bottom:12px;
+}
+.cta-section h2 em{
+  font-style:italic;color:var(--accent);
+}
+.cta-section p{
+  font-size:17px;color:var(--text-secondary);
+  max-width:520px;margin:0 auto 32px;line-height:1.6;
+}
+.cta-section p strong{color:var(--text);font-weight:600}
+
+/* ── FOOTER ── */
+.footer{
+  padding:32px 0;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:40px;
+}
+.footer-left{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-muted);
+  letter-spacing:.05em;
+}
+.footer-right{display:flex;gap:16px}
+.footer-link{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-muted);
+  text-decoration:none;transition:color .2s;
+}
+.footer-link:hover{color:var(--accent)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1}50%{opacity:.4}
+}
+
+.fade-in{animation:fadeUp .7s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
+.d7{animation-delay:.7s}.d8{animation-delay:.8s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .page{padding:0 20px}
+  .flow-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .flow-divider{
+    flex-direction:row;padding:16px 0;
+  }
+  .flow-thread{width:100%;height:2px;flex:1}
+  .handoff-pill{margin:0 16px}
+  .stat-bar{grid-template-columns:1fr}
+  .demo-grid{grid-template-columns:1fr}
+  .nav{flex-direction:column;gap:12px}
+  .footer{flex-direction:column;gap:12px;text-align:center}
+  .zone-header{justify-content:center}
+  .step-card:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">AI OS Blueprint</a>
+    <span class="nav-badge">Squad Up Summit Bonus</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Free with every AI OS Blueprint install</div>
+    <h1>Network on<br><em>Autopilot.</em></h1>
+    <p class="hero-sub">
+      Walk into any event. Talk to people. Your <strong>AI agent</strong> writes and sends personalized follow-ups to everyone you met — pulled from the actual conversation — before you get to the parking lot.
+    </p>
+    <a href="/" class="hero-cta">Get the Full Blueprint →</a>
+  </section>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Steps for you</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Steps your AI handles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Contacts that fall through</div>
+    </div>
+  </div>
+
+  <!-- FLOW SECTION -->
+  <section class="flow-section">
+    <div class="flow-header">
+      <h2>How it works</h2>
+      <p>Eight steps. You only do three. Your AI agent does the rest automatically.</p>
+    </div>
+
+    <div class="flow-grid">
+
+      <!-- LEFT COLUMN: YOU -->
+      <div class="zone">
+        <div class="zone-header">
+          <span class="zone-tag you">You</span>
+          <div class="zone-line"></div>
+        </div>
+
+        <div class="step-card you-card fade-in d1">
+          <div class="step-num"><span class="dot"></span>Step 01</div>
+          <span class="step-icon">🎙️</span>
+          <div class="step-title">Walk in. Plaud records.</div>
+          <div class="step-desc">Your AI wearable captures every conversation — passively, no tapping, no awkwardness. You just wear it.</div>
+        </div>
+
+        <div class="step-card you-card fade-in d2">
+          <div class="step-num"><span class="dot"></span>Step 02</div>
+          <span class="step-icon">🤝</span>
+          <div class="step-title">Have real conversations.</div>
+          <div class="step-desc">Be present. No scribbling notes. No typing reminders into your phone. Just <span class="gl">connect</span>.</div>
+        </div>
+
+        <div class="step-card you-card fade-in d3">
+          <div class="step-num"><span class="dot"></span>Step 03</div>
+          <span class="step-icon">📱</span>
+          <div class="step-title">Scan their Blinq card.</div>
+          <div class="step-desc">One tap saves their digital business card. That's your <span class="gl">only job</span> — talk and scan.</div>
+        </div>
+      </div>
+
+      <!-- CENTER DIVIDER -->
+      <div class="flow-divider">
+        <div class="flow-thread"></div>
+        <div class="handoff-pill">
+          <span class="icon">⚡</span>
+          <div class="label">
+            You're done.
+            <span>AI takes over from here.</span>
+          </div>
+        </div>
+        <div class="flow-thread"></div>
+      </div>
+
+      <!-- RIGHT COLUMN: AI -->
+      <div class="zone">
+        <div class="zone-header">
+          <span class="zone-tag ai">AI Agent</span>
+          <div class="zone-line"></div>
+        </div>
+
+        <div class="step-card ai-card fade-in d4">
+          <div class="step-num"><span class="dot"></span>Step 04</div>
+          <span class="step-icon">🔗</span>
+          <div class="step-title">Auto-match contact → conversation</div>
+          <div class="step-desc">AI cross-references <span class="hl">Blinq contacts</span> against <span class="hl">Plaud transcript timestamps</span> to pair each person with what you actually discussed.</div>
+        </div>
+
+        <div class="step-card ai-card fade-in d5">
+          <div class="step-num"><span class="dot"></span>Step 05</div>
+          <span class="step-icon">🧠</span>
+          <div class="step-title">AI reads the conversation</div>
+          <div class="step-desc">Extracts key topics, interests, commitments — <span class="hl">all from the real convo</span>. Not guessing. Reading.</div>
+        </div>
+
+        <div class="step-card ai-card fade-in d6">
+          <div class="step-num"><span class="dot"></span>Step 06</div>
+          <span class="step-icon">✍️</span>
+          <div class="step-title">Writes a personalized follow-up</div>
+          <div class="step-desc">In <span class="hl">your voice</span>, referencing your conversation. Not a template — a message only you could've written.</div>
+        </div>
+
+        <div class="step-card ai-card fade-in d7">
+          <div class="step-num"><span class="dot"></span>Step 07</div>
+          <span class="step-icon">💬</span>
+          <div class="step-title">Sends an iMessage from your number</div>
+          <div class="step-desc">Sends from <span class="hl">your real phone number</span>. Includes a Calendly or offer link. They see it as you, because it is.</div>
+        </div>
+
+        <div class="step-card ai-card fade-in d8">
+          <div class="step-num"><span class="dot"></span>Step 08</div>
+          <span class="step-icon">📂</span>
+          <div class="step-title">Logs everything to your CRM</div>
+          <div class="step-desc">Contact + convo intel + follow-up status pushed to <span class="hl">Pipedrive</span> and your AI brain. Nothing falls through.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DEMO: REAL OUTPUT -->
+  <section class="demo-section">
+    <div class="flow-header">
+      <h2>Real output from a real test</h2>
+      <p>This isn't a mockup. This is what the system actually produced.</p>
+    </div>
+
+    <div class="demo-grid">
+      <!-- iMessage -->
+      <div class="demo-card output">
+        <div class="demo-card-label">Auto-generated iMessage</div>
+        <div class="imessage-bubble">
+          Hey Devon, good connecting at the event. Since you're looking to expand Apex into vehicle financing, let's chop it up about how the T.O.P. Method translates from commercial to vehicles. Here's my Calendly if you want to lock something in: calendly.com/mikedavis/30min<br><br>— Mike
+        </div>
+        <div class="imessage-meta">
+          <span>✅ Delivered</span>
+          <span>·</span>
+          <span>283 characters</span>
+          <span>·</span>
+          <span>Written by AI in your voice</span>
+        </div>
+      </div>
+
+      <!-- Brain File -->
+      <div class="demo-card input">
+        <div class="demo-card-label">Auto-generated brain file</div>
+        <div class="brain-file">
+          <div><span class="heading"># Devon Williams</span></div>
+          <div class="dim">Met: Squad Up Summit — 2026-03-15</div>
+          <div><span class="dim">Company:</span> <span class="value">Apex Ventures</span></div>
+          <div><span class="dim">Title:</span> <span class="value">Managing Partner</span></div>
+          <br>
+          <div><span class="heading">## Key Topics</span></div>
+          <div class="value">creative finance, vehicle financing, T.O.P. Method</div>
+          <br>
+          <div><span class="heading">## What They Care About</span></div>
+          <div class="value">Expanding into vehicles, learning Mike's methodology</div>
+          <br>
+          <div><span class="heading">## Next Steps</span></div>
+          <div class="value">Schedule follow-up call, discuss vehicle finance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="tech-section">
+    <h3>Powered by</h3>
+    <div class="tech-row">
+      <div class="tech-pill"><span class="tech-dot td-1"></span>Claude Opus 4.6</div>
+      <div class="tech-pill"><span class="tech-dot td-2"></span>Plaud NotePin</div>
+      <div class="tech-pill"><span class="tech-dot td-3"></span>Blinq</div>
+      <div class="tech-pill"><span class="tech-dot td-4"></span>Pipedrive</div>
+      <div class="tech-pill"><span class="tech-dot td-1"></span>BlueBubbles</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>This skill is <em>free</em><br>with the Blueprint.</h2>
+    <p>
+      Get the full <strong>AI OS Blueprint</strong> — 35+ capabilities installed in 30 minutes — and this Network Autopilot skill comes included as a Squad Up Summit bonus.
+    </p>
+    <a href="/" class="hero-cta">Get the AI OS Blueprint →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">Mike Davis · Vivant Investments</div>
+    <div class="footer-right">
+      <a href="https://sellfi.io" class="footer-link" target="_blank">sellfi.io</a>
+      <a href="/" class="footer-link">aiosblueprint.com</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

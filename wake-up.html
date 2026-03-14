@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Job Market Is Collapsing. AI Is Why. — AI OS Blueprint</title>
+<meta name="description" content="92,000 jobs lost in February 2026 alone. 92 million displaced by 2030. The companies aren't hiring — they're installing AI. Here's what you do about it.">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiosblueprint.com/wake-up">
+<meta property="og:title" content="The Job Market Is Collapsing. AI Is Why.">
+<meta property="og:description" content="92,000 jobs lost in February 2026. 92 million by 2030. Companies aren't hiring — they're installing AI. Here's what you do about it.">
+<meta property="og:image" content="https://aiosblueprint.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Job Market Is Collapsing. AI Is Why.">
+<meta name="twitter:description" content="92,000 jobs lost in February 2026. 92 million by 2030. Companies aren't hiring — they're installing AI.">
+<meta name="twitter:image" content="https://aiosblueprint.com/images/og-image.jpg">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '613174518439333');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=613174518439333&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#06080d;
+  --bg-elevated:#0c1019;
+  --bg-card:#0f1520;
+  --bg-card-hover:#141c2b;
+  --surface:#1a2235;
+  --border:#1e2a3d;
+  --border-bright:#2a3a52;
+  --text:#e8edf5;
+  --text-secondary:#8a95a8;
+  --text-muted:#5a6478;
+  --accent:#00e5ff;
+  --accent-dim:rgba(0,229,255,.12);
+  --accent-glow:rgba(0,229,255,.25);
+  --gold:#eeb544;
+  --gold-dim:rgba(238,181,68,.12);
+  --gold-glow:rgba(238,181,68,.25);
+  --red:#ff4757;
+  --red-dim:rgba(255,71,87,.12);
+  --red-glow:rgba(255,71,87,.25);
+  --green:#2ed573;
+  --green-dim:rgba(46,213,115,.12);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--red);color:#fff}
+
+/* --- NOISE OVERLAY --- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+}
+
+/* --- GRID BG --- */
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:.06;
+}
+
+/* --- NAV --- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.25rem 2rem;
+  background:rgba(6,8,13,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-logo{
+  font-family:var(--font-mono);font-weight:500;font-size:.85rem;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--text-muted)}
+.nav-cta{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:400;
+  padding:.6rem 1.5rem;
+  border:1px solid var(--accent);color:var(--accent);
+  background:transparent;text-decoration:none;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:all .25s ease;cursor:pointer;
+}
+.nav-cta:hover{background:var(--accent);color:var(--bg)}
+
+/* --- CONTAINER --- */
+.container{max-width:900px;margin:0 auto;padding:0 2rem}
+
+/* --- HERO --- */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:8rem 2rem 4rem;position:relative;text-align:center;
+}
+.hero::after{
+  content:'';position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,var(--red-glow) 0%,transparent 70%);
+  opacity:.12;pointer-events:none;filter:blur(100px);
+}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--red);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.hero-tag::before{content:'';width:8px;height:8px;background:var(--red);border-radius:50%;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-h1{
+  font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:400;line-height:1.02;margin-bottom:1.5rem;
+  letter-spacing:-.03em;
+}
+.hero-h1 em{font-style:italic;color:var(--red)}
+.hero-h1 .accent{color:var(--accent)}
+.hero-sub{
+  font-size:1.2rem;color:var(--text-secondary);line-height:1.7;
+  max-width:600px;margin:0 auto 2.5rem;
+}
+
+/* --- SCROLL CUE --- */
+.scroll-cue{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--text-muted);font-family:var(--font-mono);font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  animation:float 3s ease-in-out infinite;
+}
+.scroll-cue .arrow{font-size:1.2rem;color:var(--accent)}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* --- TICKER --- */
+.ticker-section{
+  padding:0;overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--bg-elevated);
+}
+.ticker-track{
+  display:flex;
+  animation:ticker 30s linear infinite;
+  width:max-content;
+}
+.ticker-item{
+  flex-shrink:0;
+  padding:1.2rem 3rem;
+  font-family:var(--font-mono);font-size:.8rem;
+  color:var(--red);
+  white-space:nowrap;
+  display:flex;align-items:center;gap:.75rem;
+  border-right:1px solid var(--border);
+}
+.ticker-item .num{color:var(--text);font-weight:700;font-size:1rem}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* --- STAT CARDS --- */
+.stats-section{padding:6rem 2rem}
+.stats-section .section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--red);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.stats-section .section-tag::before{content:'';width:24px;height:1px;background:var(--red)}
+.stats-section .section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.1;text-align:center;
+  margin-bottom:4rem;letter-spacing:-.02em;
+}
+.stats-section .section-title em{font-style:italic;color:var(--red)}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:1.5rem;
+  max-width:1000px;
+  margin:0 auto;
+}
+.stat-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+  transition:all .3s ease;
+}
+.stat-card:hover{
+  border-color:var(--red);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px var(--red-dim);
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--red);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.stat-card:hover::before{transform:scaleX(1)}
+.stat-number{
+  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,3.5rem);
+  color:var(--red);line-height:1;margin-bottom:.5rem;
+  font-weight:400;
+}
+.stat-number .unit{font-size:.5em;color:var(--text-muted)}
+.stat-label{
+  font-size:.95rem;color:var(--text-secondary);line-height:1.5;
+  margin-bottom:.75rem;
+}
+.stat-source{
+  font-family:var(--font-mono);font-size:.65rem;
+  color:var(--text-muted);letter-spacing:.03em;
+}
+
+/* --- QUOTE BLOCKS --- */
+.quotes-section{
+  padding:6rem 2rem;
+  background:var(--bg-elevated);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.quote-stack{
+  max-width:800px;
+  margin:0 auto;
+  display:flex;flex-direction:column;gap:3rem;
+}
+.quote-card{
+  padding:2.5rem;
+  border-left:3px solid var(--red);
+  background:var(--bg-card);
+  position:relative;
+}
+.quote-card::after{
+  content:'\201C';
+  position:absolute;top:-.5rem;right:1.5rem;
+  font-family:var(--font-display);font-size:6rem;
+  color:var(--red);opacity:.08;line-height:1;
+}
+.quote-text{
+  font-family:var(--font-display);font-size:clamp(1.3rem,3vw,1.6rem);
+  font-style:italic;line-height:1.5;margin-bottom:1rem;
+  color:var(--text);
+}
+.quote-text strong{color:var(--red);font-weight:400}
+.quote-author{
+  font-family:var(--font-mono);font-size:.75rem;
+  color:var(--text-muted);letter-spacing:.03em;
+}
+.quote-author span{color:var(--accent)}
+
+/* --- TIMELINE --- */
+.timeline-section{padding:6rem 2rem}
+.timeline-section .section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.timeline-section .section-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.timeline-section .section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.1;text-align:center;
+  margin-bottom:4rem;letter-spacing:-.02em;
+}
+.timeline-section .section-title em{font-style:italic;color:var(--accent)}
+
+.timeline{
+  max-width:700px;
+  margin:0 auto;
+  position:relative;
+  padding-left:3rem;
+}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--accent),var(--red));
+}
+.timeline-item{
+  position:relative;
+  padding:0 0 3rem 2rem;
+}
+.timeline-item::before{
+  content:'';position:absolute;left:-3rem;top:.4rem;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--bg);
+  border:2px solid var(--accent);
+  margin-left:-6px;
+  z-index:2;
+}
+.timeline-item.danger::before{border-color:var(--red);box-shadow:0 0 12px var(--red-glow)}
+.timeline-item.now::before{
+  border-color:var(--red);background:var(--red);
+  box-shadow:0 0 16px var(--red-glow);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+.timeline-year{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:700;
+  color:var(--accent);letter-spacing:.08em;
+  margin-bottom:.25rem;
+}
+.timeline-item.danger .timeline-year{color:var(--red)}
+.timeline-item.now .timeline-year{color:var(--red)}
+.timeline-text{
+  font-size:1rem;color:var(--text-secondary);line-height:1.6;
+}
+.timeline-text strong{color:var(--text);font-weight:600}
+
+/* --- BAR CHART --- */
+.chart-section{
+  padding:6rem 2rem;
+  background:var(--bg-elevated);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.chart-section .section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--red);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.chart-section .section-tag::before{content:'';width:24px;height:1px;background:var(--red)}
+.chart-section .section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.1;text-align:center;
+  margin-bottom:4rem;letter-spacing:-.02em;
+}
+.chart-section .section-title em{font-style:italic;color:var(--red)}
+
+.bar-chart{
+  max-width:700px;
+  margin:0 auto;
+  display:flex;flex-direction:column;gap:1.5rem;
+}
+.bar-row{display:flex;flex-direction:column;gap:.4rem}
+.bar-label{
+  font-size:.85rem;color:var(--text-secondary);
+  display:flex;justify-content:space-between;
+}
+.bar-label .pct{color:var(--red);font-family:var(--font-mono);font-weight:700}
+.bar-track{
+  height:32px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:2px;
+  overflow:hidden;
+  position:relative;
+}
+.bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--red),#ff6b7a);
+  border-radius:2px;
+  width:0;
+  transition:width 1.5s cubic-bezier(.25,.46,.45,.94);
+  position:relative;
+}
+.bar-fill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 50%,transparent 100%);
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* --- CONTRAST SECTION --- */
+.contrast-section{padding:6rem 2rem}
+.contrast-section .section-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1rem;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.contrast-section .section-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.contrast-section .section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.1;text-align:center;
+  margin-bottom:4rem;letter-spacing:-.02em;
+}
+.contrast-section .section-title em{font-style:italic;color:var(--accent)}
+
+.contrast-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+  max-width:900px;margin:0 auto;
+}
+.contrast-col{padding:2rem;border:1px solid var(--border);background:var(--bg-card)}
+.contrast-col.bad{border-top:3px solid var(--red)}
+.contrast-col.good{border-top:3px solid var(--green)}
+.contrast-header{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.contrast-col.bad .contrast-header{color:var(--red)}
+.contrast-col.good .contrast-header{color:var(--green)}
+.contrast-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.contrast-list li{
+  font-size:.9rem;color:var(--text-secondary);line-height:1.5;
+  padding-left:1.5rem;position:relative;
+}
+.contrast-col.bad .contrast-list li::before{
+  content:'\2716';position:absolute;left:0;color:var(--red);font-size:.75rem;top:2px;
+}
+.contrast-col.good .contrast-list li::before{
+  content:'\2714';position:absolute;left:0;color:var(--green);font-size:.75rem;top:2px;
+}
+
+/* --- CTA --- */
+.cta-section{
+  padding:8rem 2rem;
+  text-align:center;
+  position:relative;
+}
+.cta-section::before{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:800px;height:500px;
+  background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+  opacity:.1;pointer-events:none;filter:blur(100px);
+}
+.cta-content{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.cta-tag{
+  font-family:var(--font-mono);font-size:.7rem;font-weight:400;
+  color:var(--accent);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.cta-tag::before{content:'';width:24px;height:1px;background:var(--accent)}
+.cta-h2{
+  font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:400;line-height:1.1;margin-bottom:1.5rem;
+  letter-spacing:-.02em;
+}
+.cta-h2 em{font-style:italic;color:var(--accent)}
+.cta-sub{
+  font-size:1.1rem;color:var(--text-secondary);line-height:1.7;
+  max-width:550px;margin:0 auto 2.5rem;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1.1rem 2.5rem;
+  background:var(--accent);color:var(--bg);
+  font-family:var(--font-body);font-weight:600;font-size:1rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .3s ease;position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .5s ease;
+}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+
+.cta-footnote{
+  font-family:var(--font-mono);font-size:.7rem;
+  color:var(--text-muted);margin-top:1.5rem;
+  letter-spacing:.03em;
+}
+
+/* --- FOOTER --- */
+footer{
+  padding:2rem;
+  text-align:center;
+  border-top:1px solid var(--border);
+  font-family:var(--font-mono);font-size:.7rem;
+  color:var(--text-muted);letter-spacing:.03em;
+}
+footer a{color:var(--accent);text-decoration:none}
+
+/* --- SCROLL ANIMATIONS --- */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* --- COUNTER ANIMATION --- */
+.counter{
+  display:inline-block;
+}
+
+/* --- RESPONSIVE --- */
+@media(max-width:768px){
+  .hero{padding:7rem 1.5rem 4rem}
+  .hero-h1{font-size:clamp(2.2rem,8vw,3.5rem)}
+  .stat-grid{grid-template-columns:1fr}
+  .contrast-grid{grid-template-columns:1fr}
+  .timeline{padding-left:2.5rem}
+  .timeline::before{left:.5rem}
+  .timeline-item::before{left:-2.5rem}
+  .ticker-item{padding:1rem 2rem;font-size:.7rem}
+  nav{padding:1rem 1.5rem}
+  .scroll-cue{display:none}
+}
+
+@media(max-width:480px){
+  .hero-h1{font-size:2rem}
+  .stat-number{font-size:2.5rem}
+  .quote-text{font-size:1.15rem}
+  .cta-h2{font-size:2rem}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">AI OS <span>Blueprint</span></a>
+  <a href="/" class="nav-cta">Get the Blueprint &rarr;</a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Live data &mdash; March 2026</div>
+    <h1 class="hero-h1">The job market isn't<br><em>slowing down.</em><br>It's being <em>replaced.</em></h1>
+    <p class="hero-sub">Companies aren't hiring people anymore. They're installing AI agents that work 24/7, never call in sick, and cost a fraction of a salary. The numbers don't lie.</p>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll to see the data</span>
+    <span class="arrow">&darr;</span>
+  </div>
+</section>
+
+<!-- ==================== TICKER ==================== -->
+<section class="ticker-section" aria-label="Job loss statistics ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="num">-92,000</span> jobs lost &mdash; Feb 2026</div>
+    <div class="ticker-item"><span class="num">4.4%</span> unemployment rate</div>
+    <div class="ticker-item"><span class="num">63%</span> of companies cut entry-level roles</div>
+    <div class="ticker-item"><span class="num">92M</span> jobs displaced by 2030</div>
+    <div class="ticker-item"><span class="num">59%</span> of layoffs are AI-driven</div>
+    <div class="ticker-item"><span class="num">1 in 6</span> employers replacing humans with AI</div>
+    <div class="ticker-item"><span class="num">-14%</span> job finding rate in AI-exposed fields</div>
+    <div class="ticker-item"><span class="num">80%</span> paralegal tasks automatable</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item"><span class="num">-92,000</span> jobs lost &mdash; Feb 2026</div>
+    <div class="ticker-item"><span class="num">4.4%</span> unemployment rate</div>
+    <div class="ticker-item"><span class="num">63%</span> of companies cut entry-level roles</div>
+    <div class="ticker-item"><span class="num">92M</span> jobs displaced by 2030</div>
+    <div class="ticker-item"><span class="num">59%</span> of layoffs are AI-driven</div>
+    <div class="ticker-item"><span class="num">1 in 6</span> employers replacing humans with AI</div>
+    <div class="ticker-item"><span class="num">-14%</span> job finding rate in AI-exposed fields</div>
+    <div class="ticker-item"><span class="num">80%</span> paralegal tasks automatable</div>
+  </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="section-tag reveal">The numbers are real</div>
+    <h2 class="section-title reveal reveal-delay-1">This isn't a prediction.<br>It's <em>already happening.</em></h2>
+    <div class="stat-grid">
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-number"><span class="counter" data-target="92" data-suffix="K">0</span></div>
+        <div class="stat-label">Jobs eliminated in a single month &mdash; February 2026 alone.</div>
+        <div class="stat-source">Bureau of Labor Statistics &mdash; March 2026</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-number"><span class="counter" data-target="63" data-suffix="%">0</span></div>
+        <div class="stat-label">Of companies report cutting entry-level white-collar positions due to AI.</div>
+        <div class="stat-source">Hult International Business School &mdash; 2026</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-number"><span class="counter" data-target="92" data-suffix="M">0</span></div>
+        <div class="stat-label">Jobs will be displaced globally by 2030 according to the World Economic Forum.</div>
+        <div class="stat-source">WEF Future of Jobs Report &mdash; 2025</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-4">
+        <div class="stat-number"><span class="counter" data-target="59" data-suffix="%">0</span></div>
+        <div class="stat-label">Of companies framing layoffs as "AI-driven" because it plays better with stakeholders.</div>
+        <div class="stat-source">Bloomberg Business Analysis &mdash; 2026</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-number"><span class="counter" data-target="37" data-suffix="%">0</span></div>
+        <div class="stat-label">Customer service roles cut. Only 15% of companies created new AI-related positions.</div>
+        <div class="stat-source">Industry Workforce Report &mdash; 2026</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-number">1 in 6</div>
+        <div class="stat-label">Employers plan to replace human employees with AI this year. Not "someday." This year.</div>
+        <div class="stat-source">Resume Builder Employer Survey &mdash; 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== QUOTES ==================== -->
+<section class="quotes-section">
+  <div class="container">
+    <div class="section-tag reveal" style="color:var(--red)">From the people building AI</div>
+    <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:3rem">They're not warning you.<br>They're <em>telling</em> you.</h2>
+    <div class="quote-stack">
+      <div class="quote-card reveal">
+        <p class="quote-text">"<strong>Every single white-collar task</strong> will be automated in the next 12 to 18 months."</p>
+        <div class="quote-author"><span>Mustafa Suleyman</span> &mdash; CEO of Microsoft AI, Co-founder of DeepMind</div>
+      </div>
+      <div class="quote-card reveal reveal-delay-1">
+        <p class="quote-text">"AI could <strong>wipe out half of entry-level white-collar jobs</strong> within five years."</p>
+        <div class="quote-author"><span>Dario Amodei</span> &mdash; CEO of Anthropic (makers of Claude)</div>
+      </div>
+      <div class="quote-card reveal reveal-delay-2">
+        <p class="quote-text">"We're in a <strong>low-hire, low-fire</strong> environment. The jobs that disappear aren't being replaced &mdash; they're being automated."</p>
+        <div class="quote-author"><span>Nela Richardson</span> &mdash; Chief Economist, ADP Research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BAR CHART ==================== -->
+<section class="chart-section">
+  <div class="container">
+    <div class="section-tag reveal">Automation risk by role</div>
+    <h2 class="section-title reveal reveal-delay-1">Some jobs are <em>already gone.</em></h2>
+    <div class="bar-chart">
+      <div class="bar-row reveal">
+        <div class="bar-label"><span>Data Entry & Processing</span><span class="pct">85%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="bar-row reveal reveal-delay-1">
+        <div class="bar-label"><span>Paralegal & Legal Research</span><span class="pct">80%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="bar-row reveal reveal-delay-2">
+        <div class="bar-label"><span>Customer Service & Support</span><span class="pct">75%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
+      </div>
+      <div class="bar-row reveal reveal-delay-3">
+        <div class="bar-label"><span>Bookkeeping & Accounting</span><span class="pct">72%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
+      </div>
+      <div class="bar-row reveal reveal-delay-4">
+        <div class="bar-label"><span>Content Writing & Copywriting</span><span class="pct">68%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="68"></div></div>
+      </div>
+      <div class="bar-row reveal reveal-delay-5">
+        <div class="bar-label"><span>Marketing & Social Media</span><span class="pct">60%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TIMELINE ==================== -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-tag reveal">The acceleration is exponential</div>
+    <h2 class="section-title reveal reveal-delay-1">The window to adapt is <em>closing fast.</em></h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-text">ChatGPT launches. Most people think it's a toy. <strong>The smart ones started building.</strong></div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-text">Companies begin internal AI pilots. <strong>Job finding rates in AI-exposed fields drop 14%.</strong></div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-text"><strong>4.5% of total job losses</strong> directly attributed to AI. Companies stop backfilling roles.</div>
+      </div>
+      <div class="timeline-item danger reveal">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-text"><strong>63% of companies</strong> cut entry-level white-collar roles. AI agents go mainstream. Layoffs accelerate.</div>
+      </div>
+      <div class="timeline-item now reveal">
+        <div class="timeline-year">2026 &mdash; NOW</div>
+        <div class="timeline-text"><strong>92,000 jobs gone in February alone.</strong> Microsoft AI CEO says all white-collar tasks automated in 12&ndash;18 months. You are here.</div>
+      </div>
+      <div class="timeline-item danger reveal">
+        <div class="timeline-year">2027&ndash;2030</div>
+        <div class="timeline-text"><strong>92 million jobs displaced globally.</strong> The people who have agents thrive. The people who don't are competing for what's left.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTRAST ==================== -->
+<section class="contrast-section">
+  <div class="container">
+    <div class="section-tag reveal">Two paths. One choice.</div>
+    <h2 class="section-title reveal reveal-delay-1">Without an AI agent vs. <em>with one.</em></h2>
+    <div class="contrast-grid">
+      <div class="contrast-col bad reveal">
+        <div class="contrast-header">&#x26A0; Without an AI Agent</div>
+        <ul class="contrast-list">
+          <li>Competing against AI-powered candidates for fewer roles</li>
+          <li>Sending 200 applications to get 3 interviews</li>
+          <li>Doing everything manually while competitors automate</li>
+          <li>Watching your industry shrink and not knowing what to do</li>
+          <li>Reacting to change instead of driving it</li>
+          <li>One income stream, one employer, one point of failure</li>
+        </ul>
+      </div>
+      <div class="contrast-col good reveal reveal-delay-1">
+        <div class="contrast-header">&#x2713; With an AI Agent</div>
+        <ul class="contrast-list">
+          <li>A 24/7 employee that researches, builds, writes, and deploys</li>
+          <li>Launch businesses, products, and income streams in hours</li>
+          <li>Automate the work that used to take your whole day</li>
+          <li>35 capabilities working for you right out of the box</li>
+          <li>Be the person who <strong>uses</strong> AI, not the one replaced by it</li>
+          <li>One install. Yours forever. No subscription.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="cta-tag reveal">The solution exists</div>
+    <h2 class="cta-h2 reveal reveal-delay-1">Stop waiting.<br>Get your <em>AI agent</em> today.</h2>
+    <p class="cta-sub reveal reveal-delay-2">The AI OS Blueprint gives you a fully autonomous AI agent &mdash; installed in 30 minutes. It researches, builds, deploys, and manages. While everyone else is panicking about the job market, you'll be running circles around them.</p>
+    <a href="/" class="btn-primary reveal reveal-delay-3">Get the AI OS Blueprint &rarr;</a>
+    <p class="cta-footnote reveal reveal-delay-4">35 capabilities &bull; One install &bull; Yours forever &bull; No subscription</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 AI OS Blueprint &mdash; <a href="/">aiosblueprint.com</a></p>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// --- Scroll Reveal ---
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      // Trigger bar fills
+      const bars = entry.target.querySelectorAll('.bar-fill');
+      bars.forEach(bar => {
+        const w = bar.getAttribute('data-width');
+        if (w) bar.style.width = w + '%';
+      });
+
+      // Trigger counters
+      const counters = entry.target.querySelectorAll('.counter');
+      counters.forEach(c => {
+        if (c.dataset.counted) return;
+        c.dataset.counted = 'true';
+        const target = parseInt(c.dataset.target);
+        const suffix = c.dataset.suffix || '';
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          c.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => revealObserver.observe(el));
+
+// --- Also trigger bar fills that are direct children of reveal elements ---
+const barRows = document.querySelectorAll('.bar-row');
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bar = entry.target.querySelector('.bar-fill');
+      if (bar) {
+        const w = bar.getAttribute('data-width');
+        if (w) setTimeout(() => { bar.style.width = w + '%'; }, 300);
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+barRows.forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>

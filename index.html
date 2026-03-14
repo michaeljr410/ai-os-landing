@@ -631,6 +631,37 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 .countdown-expired{font-family:var(--font-mono);font-size:.85rem;color:#eeb544;letter-spacing:.05em}
 .countdown-bar.final-bar{margin:0 auto 1.5rem;background:transparent;border:1px solid rgba(0,229,255,.15);box-shadow:0 0 40px rgba(0,229,255,.08)}
 
+/* --- ROUTE CTAs --- */
+.route-cta{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.75rem 1.75rem;
+  background:transparent;
+  font-family:var(--font-mono);font-size:.78rem;font-weight:400;
+  letter-spacing:.05em;text-decoration:none;
+  transition:all .3s ease;
+  border:1px solid var(--border-bright);
+  color:var(--text-secondary);
+}
+.route-cta:hover{transform:translateY(-2px)}
+.route-cta--gold{
+  color:var(--gold);
+  border-color:var(--gold);
+  background:var(--gold-dim);
+}
+.route-cta--gold:hover{
+  background:rgba(238,181,68,.18);
+  box-shadow:0 6px 24px var(--gold-glow);
+  border-color:var(--gold);color:var(--gold);
+}
+.route-cta--ghost{
+  color:var(--text-secondary);
+  border-color:var(--border-bright);
+}
+.route-cta--ghost:hover{
+  border-color:var(--accent);color:var(--accent);
+}
+.route-cta--sm{padding:.65rem 1.5rem;font-size:.75rem}
+
 /* --- RESPONSIVE --- */
 @media(max-width:968px){
   .hero-inner{grid-template-columns:1fr;gap:3rem}
@@ -660,6 +691,8 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .countdown-group{min-width:42px}
   .countdown-colon{font-size:1.2rem}
   .countdown-bar{padding:1rem 1.25rem;opacity:1 !important;transform:none !important;transition-delay:0s !important}
+  .route-cta{width:100%;justify-content:center;font-size:.75rem;padding:.85rem 1.5rem}
+  .route-cta--sm{width:100%;font-size:.75rem}
 }
 </style>
 </head>
@@ -840,6 +873,13 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
         <p style="margin-top:2rem;font-size:1.1rem;color:var(--text);line-height:1.7"><strong>This is the Full System.</strong> Your AI OS on your computer is powerful. Your AI OS in your pocket &mdash; with a private consultation to set it all up &mdash; is a different level entirely. This is the piece that makes people say <em style="color:var(--accent)">&ldquo;holy shit&rdquo;</em> when they see it.</p>
       </div>
     </div>
+
+    <!-- WAKE UP CTA -->
+    <div class="reveal" style="text-align:center;margin-top:2.5rem">
+      <a href="/wake-up" class="route-cta route-cta--gold">
+        Why this matters more in 2026 than ever &rarr;
+      </a>
+    </div>
   </div>
 </section>
 
@@ -872,7 +912,7 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 
     <!-- LEVELS EXPLAINER CTA -->
     <div class="reveal reveal-delay-4" style="text-align:center;margin-top:2rem">
-      <a href="/levels" style="display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.75rem;background:transparent;color:var(--text-secondary);border:1px solid var(--border-bright);font-family:var(--font-mono);font-size:.78rem;font-weight:400;letter-spacing:.05em;text-decoration:none;transition:all .3s ease" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.color='';this.style.transform='none'">
+      <a href="/levels" class="route-cta route-cta--gold">
         Not sure what an AI agent actually is? See the 3 levels &rarr;
       </a>
     </div>
@@ -931,6 +971,13 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       </div>
 
       <p class="reveal" style="text-align:center;margin-top:1rem;font-size:.85rem;color:var(--text-muted)">Salaries sourced from Indeed, ZipRecruiter, and Glassdoor &mdash; U.S. national averages, 2025&ndash;2026.</p>
+
+      <!-- WAKE UP CTA -->
+      <div class="reveal reveal-delay-4" style="text-align:center;margin-top:2rem">
+        <a href="/wake-up" class="route-cta route-cta--gold">
+          Think the job market is fine? See what the data says &rarr;
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1222,8 +1269,9 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 
       <!-- CROSS-LINK CTAs -->
       <div class="reveal reveal-delay-4" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem">
-        <a href="/compress" style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.5rem;background:transparent;color:var(--text-secondary);border:1px solid var(--border-bright);font-family:var(--font-mono);font-size:.75rem;font-weight:400;letter-spacing:.04em;text-decoration:none;transition:all .3s ease" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.color='';this.style.transform='none'">See Real Time Savings &rarr;</a>
-        <a href="/levels" style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.5rem;background:transparent;color:var(--text-secondary);border:1px solid var(--border-bright);font-family:var(--font-mono);font-size:.75rem;font-weight:400;letter-spacing:.04em;text-decoration:none;transition:all .3s ease" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.color='';this.style.transform='none'">See the 3 Levels of AI &rarr;</a>
+        <a href="/compress" class="route-cta route-cta--ghost">See Real Time Savings &rarr;</a>
+        <a href="/levels" class="route-cta route-cta--gold route-cta--sm">See the 3 Levels of AI &rarr;</a>
+        <a href="/wake-up" class="route-cta route-cta--gold route-cta--sm">The 2026 Job Market Crisis &rarr;</a>
       </div>
     </div>
   </div>

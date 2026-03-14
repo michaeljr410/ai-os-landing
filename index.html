@@ -619,6 +619,18 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
 .reveal-delay-3{transition-delay:.3s}
 .reveal-delay-4{transition-delay:.4s}
 
+/* --- COUNTDOWN TIMER --- */
+.countdown-bar{display:flex;flex-direction:column;align-items:center;gap:.6rem;margin:0 auto 2.5rem;padding:1.25rem 2rem;max-width:520px;background:#0f1520;border:1px solid #1e2a3d;border-radius:0;box-shadow:0 0 30px rgba(0,229,255,.06)}
+.countdown-message{font-family:var(--font-mono);font-size:.7rem;color:var(--text-secondary);letter-spacing:.15em;text-transform:uppercase}
+.countdown-timer{display:flex;align-items:center;gap:.15rem}
+.countdown-group{display:flex;flex-direction:column;align-items:center;min-width:52px}
+.countdown-digit{font-family:var(--font-mono);font-size:1.75rem;font-weight:700;color:var(--accent);line-height:1;letter-spacing:.05em}
+.countdown-label{font-family:var(--font-mono);font-size:.55rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem}
+.countdown-colon{font-family:var(--font-mono);font-size:1.5rem;color:#eeb544;font-weight:700;align-self:flex-start;margin-top:.05rem;animation:cdPulse 1s ease-in-out infinite}
+@keyframes cdPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.countdown-expired{font-family:var(--font-mono);font-size:.85rem;color:#eeb544;letter-spacing:.05em}
+.countdown-bar.final-bar{margin:0 auto 1.5rem;background:transparent;border:1px solid rgba(0,229,255,.15);box-shadow:0 0 40px rgba(0,229,255,.08)}
+
 /* --- RESPONSIVE --- */
 @media(max-width:968px){
   .hero-inner{grid-template-columns:1fr;gap:3rem}
@@ -644,6 +656,10 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   .btn-primary,.btn-secondary{width:100%;justify-content:center}
   .final-buttons{flex-direction:column;align-items:center}
   .math-grid{grid-template-columns:1fr}
+  .countdown-digit{font-size:1.35rem}
+  .countdown-group{min-width:42px}
+  .countdown-colon{font-size:1.2rem}
+  .countdown-bar{padding:1rem 1.25rem;opacity:1 !important;transform:none !important;transition-delay:0s !important}
 }
 </style>
 </head>
@@ -668,6 +684,18 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
       <div class="hero-buttons reveal reveal-delay-3">
         <a href="#how-it-works" class="btn-primary">See How It Works &rarr;</a>
         <a href="#pricing" class="btn-secondary">See Pricing &amp; Options &rarr;</a>
+      </div>
+      <div class="countdown-bar reveal reveal-delay-3" id="countdown-hero-wrap" style="margin:1.25rem 0 0;background:transparent;border:none;box-shadow:none;padding:.75rem 0;max-width:none">
+        <span class="countdown-message">Launch pricing ends after Squad Up Summit</span>
+        <div class="countdown-timer" id="countdown-hero">
+          <div class="countdown-group"><span class="countdown-digit" data-days>00</span><span class="countdown-label">Days</span></div>
+          <span class="countdown-colon">:</span>
+          <div class="countdown-group"><span class="countdown-digit" data-hours>00</span><span class="countdown-label">Hrs</span></div>
+          <span class="countdown-colon">:</span>
+          <div class="countdown-group"><span class="countdown-digit" data-mins>00</span><span class="countdown-label">Min</span></div>
+          <span class="countdown-colon">:</span>
+          <div class="countdown-group"><span class="countdown-digit" data-secs>00</span><span class="countdown-label">Sec</span></div>
+        </div>
       </div>
       <!-- Unhide this section and add Loom embed URL when video is recorded -->
       <div id="vsl-container" class="vsl-container hidden" style="display:none">
@@ -1088,7 +1116,20 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
   <div class="container">
     <div class="section-tag reveal" style="justify-content:center">Intro Pricing</div>
     <h2 class="section-title reveal reveal-delay-1" style="text-align:center">Launch pricing. <em>Won't last.</em></h2>
-    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 3.5rem">Intro prices for early adopters only. The AI agent is a one-time payment &mdash; yours forever. Or join the community to watch, learn, and connect before committing.</p>
+    <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto 2rem">Intro prices for early adopters only. The AI agent is a one-time payment &mdash; yours forever. Or join the community to watch, learn, and connect before committing.</p>
+
+    <div class="countdown-bar reveal reveal-delay-2" id="countdown-pricing-wrap">
+      <span class="countdown-message">Launch pricing ends in</span>
+      <div class="countdown-timer" id="countdown-pricing">
+        <div class="countdown-group"><span class="countdown-digit" data-days>00</span><span class="countdown-label">Days</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-hours>00</span><span class="countdown-label">Hrs</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-mins>00</span><span class="countdown-label">Min</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-secs>00</span><span class="countdown-label">Sec</span></div>
+      </div>
+    </div>
 
     <div class="pricing-grid">
       <div class="price-card featured reveal">
@@ -1244,12 +1285,26 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
     <div class="section-tag reveal" style="justify-content:center">Ready?</div>
     <h2 class="section-title reveal reveal-delay-1">Stop being the bottleneck.<br>Start <em>operating.</em></h2>
     <p class="section-desc reveal reveal-delay-2">One AI operating system. 35 capabilities. A brain that gets smarter every day. Installed in 30 minutes. This is how business runs now.</p>
+
+    <div class="countdown-bar final-bar reveal reveal-delay-2" id="countdown-cta-wrap">
+      <span class="countdown-message">These prices disappear in</span>
+      <div class="countdown-timer" id="countdown-cta">
+        <div class="countdown-group"><span class="countdown-digit" data-days>00</span><span class="countdown-label">Days</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-hours>00</span><span class="countdown-label">Hrs</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-mins>00</span><span class="countdown-label">Min</span></div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-group"><span class="countdown-digit" data-secs>00</span><span class="countdown-label">Sec</span></div>
+      </div>
+    </div>
+
     <div class="final-buttons reveal reveal-delay-3">
       <a href="/api/checkout?tier=2" class="btn-primary">Get the Full System &mdash; $1,497</a>
       <a href="/api/checkout?tier=1" class="btn-secondary">Blueprint Only &mdash; $497</a>
       <a href="https://buy.stripe.com/5kQaEW3S1fF29HtbN70gw05" class="btn-secondary" style="border-color:var(--green);color:var(--green)">Community Only &mdash; $47/mo</a>
     </div>
-    <p class="reveal reveal-delay-4" style="margin-top:1.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)">Launch pricing &bull; 30-day money-back guarantee &bull; support@aiosblueprint.com</p>
+    <p class="reveal reveal-delay-4" style="margin-top:1.5rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)">Launch pricing ends March 15 &bull; 30-day money-back guarantee &bull; support@aiosblueprint.com</p>
   </div>
 </section>
 
@@ -1334,7 +1389,47 @@ async function handlePreviewCapture(e) {
     errEl.style.display = 'block';
   }
 }
+
+// Countdown timer — launch pricing ends March 15, 2026 11:59 PM PT
+(function() {
+  var END = new Date('2026-03-16T06:59:59Z').getTime(); // March 15 11:59:59 PM PT = March 16 06:59:59 UTC
+  var timers = document.querySelectorAll('.countdown-timer');
+  var wraps = [document.getElementById('countdown-hero-wrap'), document.getElementById('countdown-pricing-wrap'), document.getElementById('countdown-cta-wrap')];
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function tick() {
+    var now = Date.now();
+    var diff = END - now;
+
+    if (diff <= 0) {
+      timers.forEach(function(t) { t.style.display = 'none'; });
+      wraps.forEach(function(w) {
+        if (!w) return;
+        var msg = w.querySelector('.countdown-message');
+        if (msg) { msg.textContent = 'Launch pricing has ended'; msg.style.color = '#eeb544'; }
+      });
+      return;
+    }
+
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+
+    timers.forEach(function(t) {
+      t.querySelector('[data-days]').textContent = pad(d);
+      t.querySelector('[data-hours]').textContent = pad(h);
+      t.querySelector('[data-mins]').textContent = pad(m);
+      t.querySelector('[data-secs]').textContent = pad(s);
+    });
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
 
+<script src="/js/referral-tracking.js"></script>
 </body>
 </html>

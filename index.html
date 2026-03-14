@@ -457,6 +457,7 @@ section{padding:7rem 0;position:relative}
   display:flex;align-items:flex-start;gap:.75rem;line-height:1.5;
 }
 .price-features li::before{content:'\2713';color:var(--accent);font-weight:700;flex-shrink:0}
+.price-features li.excluded::before{content:'\2716';color:var(--red);font-weight:400}
 .price-btn{
   display:block;width:100%;padding:1rem;text-align:center;
   font-family:var(--font-body);font-weight:600;font-size:.95rem;
@@ -1210,10 +1211,10 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li>Persistent brain &mdash; your AI remembers everything</li>
           <li>Slash commands &mdash; one word triggers complete workflows</li>
           <li>Magic Install + First Week Checklist + Extension guide</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No mobile agent</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No free updates for life</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No community access (add for $47/mo)</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No private consultation</li>
+          <li class="excluded" style="color:var(--text-muted)">No mobile agent</li>
+          <li class="excluded" style="color:var(--text-muted)">No free updates for life</li>
+          <li class="excluded" style="color:var(--text-muted)">No community access (add for $47/mo)</li>
+          <li class="excluded" style="color:var(--text-muted)">No private consultation</li>
         </ul>
         <a href="/api/checkout?tier=1" class="price-btn secondary">Blueprint Only &mdash; <span style="text-decoration:line-through;opacity:.6;font-weight:400">$997</span> $497</a>
         <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; 30-day money-back guarantee</p>
@@ -1228,9 +1229,9 @@ footer p{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);l
           <li><strong>The Lab</strong> &mdash; watch real AI systems being built in public, with breakdowns</li>
           <li><strong>Community Chat</strong> &mdash; connect with other builders, share wins, get help</li>
           <li>New content weekly &mdash; build logs, experiments, lessons learned</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No AI agent (desktop or mobile)</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No Skill Drops or Office Hours</li>
-          <li style="color:var(--text-muted)"><span style="opacity:.4">&#10005;</span> No Start Here guide</li>
+          <li class="excluded" style="color:var(--text-muted)">No AI agent (desktop or mobile)</li>
+          <li class="excluded" style="color:var(--text-muted)">No Skill Drops or Office Hours</li>
+          <li class="excluded" style="color:var(--text-muted)">No Start Here guide</li>
         </ul>
         <a href="https://buy.stripe.com/5kQaEW3S1fF29HtbN70gw05" class="price-btn secondary" style="border-color:var(--green);color:var(--green)">Join the Community &mdash; $47/mo</a>
         <p style="text-align:center;margin-top:.75rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text-muted);letter-spacing:.03em">&#128274; Secure checkout via Stripe &bull; Cancel anytime</p>
